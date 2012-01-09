@@ -76,14 +76,9 @@ static WOS7* sharedInstance;
         //allow scrollToTop on status bar tap
         [appList setScrollsToTop:NO];
         
-        UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
-        swipe.direction = 1;
-        [mainView addGestureRecognizer:swipe];
-        [swipe release];
-        swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
-        swipe.direction = 2;
-        [mainView addGestureRecognizer:swipe];
-        [swipe release];
+		UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPan:)];
+		[mainView addGestureRecognizer:pan];
+		[pan release];
         
         [self updateTiles];
         [window addSubview:mainView];
@@ -168,40 +163,88 @@ static WOS7* sharedInstance;
 	[super dealloc];
 }
 
--(void)didSwipe:(UISwipeGestureRecognizer *)recognizer{
-    if(recognizer.direction==1 && !toggled)[self toggle];
-    else if(recognizer.direction==2 && toggled)[self toggle];
+-(void)didPan:(UIPanGestureRecognizer *)recognizer{
+    CGPoint d = [recognizer translationInView:recognizer.view];
+    [recognizer setTranslation:CGPointZero inView:recognizer.view];
+	float scale = 0;
+ 
+    if (tileScrollView.frame.origin.x + d.x >= -254 && tileScrollView.frame.origin.x + d.x <= 0) {
+		scale = tileScrollView.frame.origin.x / -254;
+		tileScrollView.center = CGPointMake(tileScrollView.center.x + d.x, tileScrollView.center.y);
+		appList.center = CGPointMake(appList.center.x + d.x, appList.center.y);
+		toggleInterface.center = CGPointMake(toggleInterface.center.x + d.x, toggleInterface.center.y);
+	    toggleInterface.transform = CGAffineTransformMakeRotation(scale*-1*M_PI);
+		[[mainView viewWithTag:100] setAlpha:(1 - (scale*.40))];
+	}
+
+	if (recognizer.state == UIGestureRecognizerStateEnded)
+	    {
+	        CGPoint vel = [recognizer velocityInView:recognizer.view];
+			scale = tileScrollView.frame.origin.x / -254;
+
+	        if (vel.x < -50 && scale > .40) 
+	        { 
+				[self toggleLeft];
+	        } 
+	        else if (vel.x > 50 && scale < .60)
+	        {
+				[self toggleRight];
+	        }
+	        else if (scale < .5)
+	        {
+				[self toggleLeft];
+	        }
+			else
+			{
+				[self toggleRight];
+			}
+	    }
 }
 
 -(void)toggle{
+	if (toggled) {
+		[self toggleLeft];
+	} else {
+		[self toggleRight];
+	}
+}
+
+-(void)toggleLeft{
+	[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:.3];
+    
+	tileScrollView.frame = CGRectMake(-254,0,320,480);
+	appList.frame = CGRectMake(66,0,254,480);
+	toggleInterface.center = CGPointMake(0 + 33,toggleInterface.center.y);
+	toggleInterface.transform = CGAffineTransformMakeRotation(M_PI);
+
+	//fade background
+	[[mainView viewWithTag:100] setAlpha:.60];
+	//allow scrollToTop on status bar tap
+	[tileScrollView setScrollsToTop:NO];
+	[appList setScrollsToTop:YES];
+	
+	toggled = NO;
+}
+
+-(void)toggleRight{
     [[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:.5];
-    if(toggled){
-        tileScrollView.frame = CGRectMake(-254,0,320,480);
-        appList.frame = CGRectMake(66,0,254,480);
-        toggleInterface.frame = CGRectMake(0,60,66,66);
-        toggleInterface.transform = CGAffineTransformMakeRotation(M_PI);
+    [UIView setAnimationDuration:.3];
 
-        //fade background
-        [[mainView viewWithTag:100] setAlpha:.60];
-        //allow scrollToTop on status bar tap
-        [tileScrollView setScrollsToTop:NO];
-        [appList setScrollsToTop:YES];
-    }else{
-        tileScrollView.frame = CGRectMake(0,0,320,480);
-        appList.frame = CGRectMake(320,0,254,480);
-        toggleInterface.frame = CGRectMake(254,60,66,66);
-        toggleInterface.transform = CGAffineTransformMakeRotation(0);
+	tileScrollView.frame = CGRectMake(0,0,320,480);
+    appList.frame = CGRectMake(320,0,254,480);
+	toggleInterface.center = CGPointMake(254 + 33,toggleInterface.center.y);
+    toggleInterface.transform = CGAffineTransformMakeRotation(0);
 
-        //fade background
-        [[mainView viewWithTag:100] setAlpha:1];
-        //allow scrollToTop on status bar tap
-        [tileScrollView setScrollsToTop:YES];
-        [appList setScrollsToTop:NO];
-    }
-    [UIView commitAnimations];
-    toggled^=1;
+    //fade background
+    [[mainView viewWithTag:100] setAlpha:1];
+    //allow scrollToTop on status bar tap
+    [tileScrollView setScrollsToTop:NO];
+    [appList setScrollsToTop:YES];
+
+	toggled = YES;
 }
 
 -(void)didHold:(id)sender{
