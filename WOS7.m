@@ -178,7 +178,9 @@ static WOS7* sharedInstance;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.5];
     if(toggled){
-        mainView.frame = CGRectMake(-254,0,574,480);
+        tileScrollView.frame = CGRectMake(-254,0,320,480);
+        appList.frame = CGRectMake(66,0,254,480);
+        toggleInterface.frame = CGRectMake(0,60,66,66);
         toggleInterface.transform = CGAffineTransformMakeRotation(M_PI);
 
         //fade background
@@ -187,7 +189,9 @@ static WOS7* sharedInstance;
         [tileScrollView setScrollsToTop:NO];
         [appList setScrollsToTop:YES];
     }else{
-        mainView.frame = CGRectMake(0,0,574,480);
+        tileScrollView.frame = CGRectMake(0,0,320,480);
+        appList.frame = CGRectMake(320,0,254,480);
+        toggleInterface.frame = CGRectMake(254,60,66,66);
         toggleInterface.transform = CGAffineTransformMakeRotation(0);
 
         //fade background
