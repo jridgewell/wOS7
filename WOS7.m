@@ -41,6 +41,7 @@ static WOS7* sharedInstance;
         if([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Library/wOS7/Background.png"])
         {
             UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,480)];
+            bgView.tag = 100;
             bgView.image = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Background.png"];
             [mainView insertSubview:bgView atIndex:0];
             [bgView release];
@@ -180,6 +181,8 @@ static WOS7* sharedInstance;
         mainView.frame = CGRectMake(-254,0,574,480);
         toggleInterface.transform = CGAffineTransformMakeRotation(M_PI);
 
+        //fade background
+        [[mainView viewWithTag:100] setAlpha:.60];
         //allow scrollToTop on status bar tap
         [tileScrollView setScrollsToTop:NO];
         [appList setScrollsToTop:YES];
@@ -187,6 +190,8 @@ static WOS7* sharedInstance;
         mainView.frame = CGRectMake(0,0,574,480);
         toggleInterface.transform = CGAffineTransformMakeRotation(0);
 
+        //fade background
+        [[mainView viewWithTag:100] setAlpha:1];
         //allow scrollToTop on status bar tap
         [tileScrollView setScrollsToTop:YES];
         [appList setScrollsToTop:NO];
