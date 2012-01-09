@@ -72,6 +72,8 @@ static WOS7* sharedInstance;
         appList.showsVerticalScrollIndicator = NO;
         tileScrollView.showsVerticalScrollIndicator = NO;
         
+        //allow scrollToTop on status bar tap
+        [appList setScrollsToTop:NO];
         
         UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
         swipe.direction = 1;
@@ -177,9 +179,17 @@ static WOS7* sharedInstance;
     if(toggled){
         mainView.frame = CGRectMake(-254,0,574,480);
         toggleInterface.transform = CGAffineTransformMakeRotation(M_PI);
+
+        //allow scrollToTop on status bar tap
+        [tileScrollView setScrollsToTop:NO];
+        [appList setScrollsToTop:YES];
     }else{
         mainView.frame = CGRectMake(0,0,574,480);
         toggleInterface.transform = CGAffineTransformMakeRotation(0);
+
+        //allow scrollToTop on status bar tap
+        [tileScrollView setScrollsToTop:YES];
+        [appList setScrollsToTop:NO];
     }
     [UIView commitAnimations];
     toggled^=1;
