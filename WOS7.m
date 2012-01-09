@@ -47,11 +47,16 @@ static WOS7* sharedInstance;
         }
         
         //add listapps to the applist
+		int y = 0;
         for(int i = 0; i<(int)applications.count; i++){
-            WOS7ListApp *listApp = [[WOS7ListApp alloc] initWithFrame:CGRectMake(0,46*i+75,254,40) index:i];
-            [appList addSubview:listApp];
-            [listApp release];
-            [appList setContentSize:CGSizeMake(254, 46*(i+1)+75)];
+			NSString *leafIdentifier = [[[[WOS7 sharedInstance] applications] objectAtIndex:i] leafIdentifier];
+			if (![leafIdentifier isEqualToString:@"com.apple.fieldtest"] && ![leafIdentifier isEqualToString:@"com.apple.purplebuddy"]) {
+				WOS7ListApp *listApp = [[WOS7ListApp alloc] initWithFrame:CGRectMake(0,46*y+75,254,40) index:i];
+				[appList addSubview:listApp];
+				[listApp release];
+				[appList setContentSize:CGSizeMake(254, 46*(y+1)+75)];
+				y++;
+			}
         }
         
         
