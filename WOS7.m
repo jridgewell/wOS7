@@ -1,20 +1,20 @@
 /*
  
- OS7, Windows Phone 7 Theme
+ wOS7, Windows Phone 7 Theme
  
  Wyndwarrior, 2011. Designed for DreamBoard
  
  */
 
-#import "OS7.h"
+#import "WOS7.h"
 
-@implementation OS7
+@implementation WOS7
 @synthesize applications, mainView;
-static OS7* sharedInstance;
+static WOS7* sharedInstance;
 
 -(void)updateBadge:(NSString *)leafId{
 	for(id subView in tileScrollView.subviews)
-        if([subView isKindOfClass:[OS7Tile class]] && [[subView leafIdentifier] isEqualToString:leafId])
+        if([subView isKindOfClass:[WOS7Tile class]] && [[subView leafIdentifier] isEqualToString:leafId])
             [subView updateBadge];
 }
 
@@ -38,17 +38,17 @@ static OS7* sharedInstance;
         [mainView addSubview:tileScrollView];
         
         //add background
-        if([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Library/OS7/Background.png"])
+        if([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Library/wOS7/Background.png"])
         {
             UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,480)];
-            bgView.image = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/OS7/Background.png"];
+            bgView.image = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Background.png"];
             [mainView insertSubview:bgView atIndex:0];
             [bgView release];
         }
         
         //add listapps to the applist
         for(int i = 0; i<(int)applications.count; i++){
-            OS7ListApp *listApp = [[OS7ListApp alloc] initWithFrame:CGRectMake(0,46*i+75,254,40) index:i];
+            WOS7ListApp *listApp = [[WOS7ListApp alloc] initWithFrame:CGRectMake(0,46*i+75,254,40) index:i];
             [appList addSubview:listApp];
             [listApp release];
             [appList setContentSize:CGSizeMake(254, 46*(i+1)+75)];
@@ -58,7 +58,7 @@ static OS7* sharedInstance;
         //add the arrow
         toggleInterface = [[UIButton alloc] initWithFrame:CGRectMake(254,60,66,66)];
         [toggleInterface addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
-        [toggleInterface setImage:[UIImage imageWithContentsOfFile:@"/var/mobile/Library/OS7/Images/Arrow.png"] forState:UIControlStateNormal];
+        [toggleInterface setImage:[UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Images/Arrow.png"] forState:UIControlStateNormal];
         [mainView addSubview:toggleInterface];
         [toggleInterface release];
         toggled = YES;
@@ -85,11 +85,11 @@ static OS7* sharedInstance;
 
 -(void)updateTiles{
     
-    NSArray *tilesArray = [[NSArray alloc] initWithContentsOfFile:@"/var/mobile/Library/OS7/Tiles.plist"];
+    NSArray *tilesArray = [[NSArray alloc] initWithContentsOfFile:@"/var/mobile/Library/wOS7/Tiles.plist"];
     
     //remove old tiles
     for(id app in tileScrollView.subviews)
-        if([app isKindOfClass:[OS7Tile class]] && ![tilesArray containsObject:[app leafIdentifier]])
+        if([app isKindOfClass:[WOS7Tile class]] && ![tilesArray containsObject:[app leafIdentifier]])
             [app removeFromSuperview];
     
     int i = 0, j = 0;
@@ -98,8 +98,8 @@ static OS7* sharedInstance;
         
         //see if this tile is large
         BOOL isLarge = NO;
-        if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/Info.plist", bundleId]]){
-            NSDictionary *info = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/Info.plist", bundleId]];
+        if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/Info.plist", bundleId]]){
+            NSDictionary *info = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/Info.plist", bundleId]];
             if([[info allKeys] containsObject:@"isLargeTile"])
                 isLarge = [[info valueForKey:@"isLargeTile"] isEqualToString:@"YES"];
             [info release];
@@ -107,7 +107,7 @@ static OS7* sharedInstance;
         
         //find our tile, if it's there
         for (id app in tileScrollView.subviews)
-            if([app isKindOfClass:[OS7Tile class]] && [[app leafIdentifier] isEqualToString:bundleId]){
+            if([app isKindOfClass:[WOS7Tile class]] && [[app leafIdentifier] isEqualToString:bundleId]){
                 
                 if(isLarge && j%2!=0)j++;
                 
@@ -124,13 +124,13 @@ static OS7* sharedInstance;
             }
         
         //we didn't find our tile, so let's add it.
-        OS7Tile *tile = nil;
+        WOS7Tile *tile = nil;
         
         //find the corresponding SBApplication
         for(int i = 0; i<(int)applications.count; i++)
             if([[[applications objectAtIndex:i] leafIdentifier] isEqualToString:bundleId]){
                 if(isLarge && j%2!=0)j++;
-                tile = [[OS7Tile alloc] initWithFrame:CGRectMake(j%2==0?13:136,123*(j/2)+75,isLarge?238:115,115) appIndex:i];
+                tile = [[WOS7Tile alloc] initWithFrame:CGRectMake(j%2==0?13:136,123*(j/2)+75,isLarge?238:115,115) appIndex:i];
                 break;
             }
         
@@ -181,12 +181,12 @@ static OS7* sharedInstance;
 }
 
 -(void)didHold:(id)sender{
-    if([sender isKindOfClass:[OS7Tile class]]){
+    if([sender isKindOfClass:[WOS7Tile class]]){
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Unpin", @"Move Up", @"Move Down",nil];
         [actionSheet showInView:window];
         [actionSheet release];
-    }else if([sender isKindOfClass:[OS7ListApp class]]){
-        NSArray *tilesArray = [[NSArray alloc] initWithContentsOfFile:@"/var/mobile/Library/OS7/Tiles.plist"];
+    }else if([sender isKindOfClass:[WOS7ListApp class]]){
+        NSArray *tilesArray = [[NSArray alloc] initWithContentsOfFile:@"/var/mobile/Library/wOS7/Tiles.plist"];
         if(![tilesArray containsObject:[[applications objectAtIndex:[sender tag]] leafIdentifier]]){
             UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Pin to Start Menu",nil];
             [actionSheet showInView:window];
@@ -199,7 +199,7 @@ static OS7* sharedInstance;
 {
     NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
     NSString *leafIdentifier = [actionSheet title];
-    NSMutableArray *ray = [[NSMutableArray alloc] initWithContentsOfFile:@"/var/mobile/Library/OS7/Tiles.plist"];
+    NSMutableArray *ray = [[NSMutableArray alloc] initWithContentsOfFile:@"/var/mobile/Library/wOS7/Tiles.plist"];
     if([title isEqualToString:@"Unpin"])[ray removeObject:leafIdentifier];
     else if([title isEqualToString:@"Move Up"]){
         int i = [ray indexOfObject:leafIdentifier];
@@ -214,7 +214,7 @@ static OS7* sharedInstance;
     }else if([title isEqualToString:@"Pin to Start Menu"])
         [ray addObject:leafIdentifier];
 
-    [ray writeToFile:@"/var/mobile/Library/OS7/Tiles.plist" atomically:YES];
+    [ray writeToFile:@"/var/mobile/Library/wOS7/Tiles.plist" atomically:YES];
     [ray release];
     
     [self updateTiles];
@@ -223,7 +223,7 @@ static OS7* sharedInstance;
 }
 
 
-+(OS7*)sharedInstance{
++(WOS7*)sharedInstance{
     return sharedInstance;
 }
 

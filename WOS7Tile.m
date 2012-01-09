@@ -1,14 +1,14 @@
 /*
  
- OS7, Windows Phone 7 Theme
+ wOS7, Windows Phone 7 Theme
  
  Wyndwarrior, 2011. Designed for DreamBoard
  
  */
 
-#import "OS7Tile.h"
+#import "WOS7Tile.h"
 
-@implementation OS7Tile
+@implementation WOS7Tile
 
 @synthesize leafIdentifier;
 
@@ -16,29 +16,29 @@
 	self = [super initWithFrame:frame];
     if(self)
     {
-        id app = [[[OS7 sharedInstance] applications] objectAtIndex:index];
+        id app = [[[WOS7 sharedInstance] applications] objectAtIndex:index];
         appIndex = index;
         self.leafIdentifier = [app leafIdentifier];
         
         
         //background image
         UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, frame.size.width, frame.size.height)];
-        bgImageView.image = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/OS7/Images/Background.png"];
+        bgImageView.image = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Images/Background.png"];
         [self addSubview:bgImageView];
         [bgImageView release];
         
         //check if tile has an info.plist
-        if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/Info.plist", leafIdentifier]]){
+        if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/Info.plist", leafIdentifier]]){
             //load our plist
-            NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/Info.plist", leafIdentifier]];
+            NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/Info.plist", leafIdentifier]];
             
             //check if uses html
             if([dict objectForKey:@"usesHTML"] && [[dict objectForKey:@"usesHTML"] isEqualToString:@"YES"]){
-                if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/%@", leafIdentifier, [dict objectForKey:@"widgetFile"]]]){
+                if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/%@", leafIdentifier, [dict objectForKey:@"widgetFile"]]]){
                     
                     //load the html
                     UIWebDocumentView *webView = [[UIWebDocumentView alloc] initWithFrame:CGRectMake(0,0,frame.size.width, frame.size.height)];
-                    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/%@", leafIdentifier, [dict objectForKey:@"widgetFile"]]]]];
+                    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/%@", leafIdentifier, [dict objectForKey:@"widgetFile"]]]]];
                     [webView setBackgroundColor:[UIColor clearColor]];
                     [webView setDrawsBackground:NO];
                     [self addSubview:webView];
@@ -49,7 +49,7 @@
             {
                 //otherwise load the tile image
                 tileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, frame.size.width, frame.size.height)];
-                tileImageView.image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/Tile.png", leafIdentifier]];
+                tileImageView.image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/Tile.png", leafIdentifier]];
                 [self addSubview:tileImageView];
                 [tileImageView release];
             }
@@ -77,15 +77,15 @@
             //if this is an app store app, it will have a large itunesartwork
             if([[splited objectAtIndex:1] isEqualToString:@"private"]){
                 tileImageView.frame = CGRectMake(-17.5,-17.5, 150, 150);
-                tileImageView.image = [OS7 maskImage:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@iTunesArtwork", [[[app application] path] substringWithRange:NSMakeRange(0, 70)]]] withMask:[UIImage imageWithContentsOfFile:@"/var/mobile/Library/OS7/Images/BigIconMask.png"]];
+                tileImageView.image = [WOS7 maskImage:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@iTunesArtwork", [[[app application] path] substringWithRange:NSMakeRange(0, 70)]]] withMask:[UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Images/BigIconMask.png"]];
                 [self addSubview:tileImageView];
             }
             else{
-                tileImageView.image = [OS7 maskImage:[app getIconImage:2] withMask:[UIImage imageWithContentsOfFile:@"/var/mobile/Library/OS7/Images/IconMask.png"]];
+                tileImageView.image = [WOS7 maskImage:[app getIconImage:2] withMask:[UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Images/IconMask.png"]];
                 [self addSubview:tileImageView];
                 
                 UIImageView *over = [[UIImageView alloc] initWithFrame:CGRectMake(27.5,27.5, 60, 60)];
-                over.image = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/OS7/Images/IconOverlay.png"];
+                over.image = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Images/IconOverlay.png"];
                 [self addSubview:over];
                 [over release];
             }
@@ -104,7 +104,7 @@
         UIButton *launchButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [launchButton addTarget:self action:@selector(launch) forControlEvents:UIControlEventTouchUpInside];
         if(frame.size.width==115)
-            [launchButton setImage:[UIImage imageWithContentsOfFile:@"/var/mobile/Library/OS7/Images/TileOverlay.png"] forState:UIControlStateNormal];
+            [launchButton setImage:[UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Images/TileOverlay.png"] forState:UIControlStateNormal];
         self.tag = index;
         UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didHold:)];    
         [launchButton addGestureRecognizer:recognizer];
@@ -121,7 +121,7 @@
 
 - (void)didHold:(UILongPressGestureRecognizer *)sender { 
     NSLog(@"Recieved Hold:%d", sender.state);
-    if (sender.state == 1)[[OS7 sharedInstance] didHold:self];
+    if (sender.state == 1)[[WOS7 sharedInstance] didHold:self];
 }
 
 -(void)dealloc{
@@ -130,10 +130,10 @@
 }
 
 -(void)updateBadge{
-    int num = (int)[[[[OS7 sharedInstance] applications] objectAtIndex:appIndex] badgeValue];
+    int num = (int)[[[[WOS7 sharedInstance] applications] objectAtIndex:appIndex] badgeValue];
 	if(num == 0 && !badgeLabel) return;
 	if(!badgeLabel){
-        NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/Info.plist", leafIdentifier]];
+        NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/Info.plist", leafIdentifier]];
 		if(dict && [dict objectForKey:@"badgeX"]){
 			badgeLabel = [[UILabel alloc] initWithFrame:CGRectMake([[dict objectForKey:@"badgeX"] intValue],[[dict objectForKey:@"badgeY"] intValue],110,[[dict valueForKey:@"badgeHeight"] intValue])];
 			badgeLabel.font = [UIFont systemFontOfSize:[[dict objectForKey:@"badgeFontSize"] intValue]];
@@ -147,22 +147,22 @@
 		badgeLabel.text = [NSString stringWithFormat:@"%d", num];
 		badgeLabel.backgroundColor = [UIColor clearColor];
 		if(tileImageView && dict && [dict objectForKey:@"badgeX"])
-			tileImageView.image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/TileWithBadge.png", leafIdentifier]];
+			tileImageView.image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/TileWithBadge.png", leafIdentifier]];
 		[self addSubview:badgeLabel];
         [dict release];
 	}else if(num == 0){
 		[badgeLabel removeFromSuperview];
 		[badgeLabel release];
-        NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/Info.plist", leafIdentifier]];
+        NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/Info.plist", leafIdentifier]];
 		if(tileImageView && dict && [dict objectForKey:@"badgeX"])
-			tileImageView.image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/Tile.png", leafIdentifier]];
+			tileImageView.image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/Tile.png", leafIdentifier]];
 		badgeLabel = nil;
         [dict release];
 	}else badgeLabel.text = [NSString stringWithFormat:@"%d", num];
 }
 
 -(void)launch{
-    [[[[OS7 sharedInstance] applications] objectAtIndex:appIndex] launch];
+    [[[[WOS7 sharedInstance] applications] objectAtIndex:appIndex] launch];
 }
 
 @end

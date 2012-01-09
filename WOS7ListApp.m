@@ -1,37 +1,37 @@
 /*
  
- OS7, Windows Phone 7 Theme
+ wOS7, Windows Phone 7 Theme
  
  Wyndwarrior, 2011. Designed for DreamBoard
  
  */
 
-#import "OS7ListApp.h"
+#import "WOS7ListApp.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-@implementation OS7ListApp
+@implementation WOS7ListApp
 
 -(id)initWithFrame:(CGRect)frame index:(int)index{
 	self = [super initWithFrame:frame];
 	
     if(self){
-        id app = [[[OS7 sharedInstance] applications] objectAtIndex:index];
+        id app = [[[WOS7 sharedInstance] applications] objectAtIndex:index];
         NSString *leafIdentifier = [app leafIdentifier];
         NSString *name = [app displayName];
         
         UIImageView *background = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 40, 40)];
-        background.image = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/OS7/Images/Background.png"];
+        background.image = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Images/Background.png"];
         [self addSubview:background];
         [background release];
         
         UIImageView *imgView;
-        if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/MiniTile.png", leafIdentifier]]){
+        if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/MiniTile.png", leafIdentifier]]){
             imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 40, 40)];
-            imgView.image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/OS7/Tiles/%@/MiniTile.png", leafIdentifier]];
+            imgView.image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/MiniTile.png", leafIdentifier]];
         }else{
             imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-5,-5, 49, 49)];
-            imgView.image = [OS7 maskImage:[app getIconImage:2] withMask:[UIImage imageWithContentsOfFile:@"/var/mobile/Library/OS7/Images/IconMask.png"]];
+            imgView.image = [WOS7 maskImage:[app getIconImage:2] withMask:[UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Images/IconMask.png"]];
         }
         [self addSubview:imgView];
         [imgView release];
@@ -60,11 +60,11 @@
 }
 
 - (void)didHold:(UILongPressGestureRecognizer *)sender { 
-    if (sender.state ==1)[[OS7 sharedInstance] didHold:self];
+    if (sender.state ==1)[[WOS7 sharedInstance] didHold:self];
 }
 
 -(void)launch:(id)sender{
-    [[[[OS7 sharedInstance] applications] objectAtIndex:[sender tag]] launch];
+    [[[[WOS7 sharedInstance] applications] objectAtIndex:[sender tag]] launch];
 }
 
 @end
