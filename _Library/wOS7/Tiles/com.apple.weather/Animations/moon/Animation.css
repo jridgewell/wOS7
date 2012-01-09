@@ -1,0 +1,29 @@
+ALIEN1974
+Modmyi.com
+DUSK EVOLUTION
+Moonlight Animation CSS
+
+body {
+	margin: 0;
+}
+
+@-webkit-keyframes moonlight_animation {
+	0% {opacity: 0.0;}
+	50% {opacity: 1.0;}
+	100% {opacity: 0.0;}
+}
+
+#moonlight {
+	position: absolute;
+	left: 0px;
+    top: -20px;
+	width: 400px;
+	height: 400px;
+	background-color: transparent;
+	opacity: 0.0;
+	-webkit-animation-name: moonlight_animation;
+    -webkit-animation-duration: 20s;
+	-webkit-animation-iteration-count: infinite;	    
+    -webkit-animation-delay: 7s;
+
+}

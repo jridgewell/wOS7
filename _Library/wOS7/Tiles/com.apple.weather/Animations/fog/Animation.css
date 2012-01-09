@@ -1,0 +1,22 @@
+ALIEN1974
+Modmyi.com
+DUSK EVOLUTION
+Fog Animation CSS
+
+body {margin: 0;
+}
+@-webkit-keyframes fog_animation {
+  0% {-webkit-transform:translateX(-10px);}
+  50% {-webkit-transform:translateX(-685px);}
+  100% {-webkit-transform:translateX(-10px);}
+}
+#Fog {position: absolute;
+  -webkit-transform:translateX(-10px);
+   top: 20px;
+   width: 1000px;
+   height: 361px;
+  -webkit-animation-name: fog_animation;
+  -webkit-animation-duration: 60s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-delay: 1s;
+}

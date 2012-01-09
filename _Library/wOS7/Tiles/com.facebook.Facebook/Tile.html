@@ -1,0 +1,118 @@
+<html><head>
+<meta name="viewport" content="width=230, user-scalable=no" />
+<script type="text/javascript">
+// find your facebook rss from this link http://www.facebook.com/notifications.php
+// select the via RSS link at the top.
+// copy the link and paste it here!
+
+var facebookFeed = "https://www.facebook.com/feeds/notifications.php?id=751382170&viewer=751382170&key=AWiKvSn6qsg3CJAv&format=rss20";
+var refresh = 30;
+
+</script>
+<script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAA86tLhCZ7WS4Bf-ClrloFwRSkSsJNw-sDCFMTqhQg2ReLIdHHIxTFo5hMGuauf99gOakGW6PUIq2Q2w"></script>
+<script type="text/javascript" src="scripts/gfeedfetcher.js"></script>
+<script type="text/javascript" src="scripts/gajaxticker.js"></script>
+<script type='text/javascript' src='fscan.js'></script>
+    
+<meta http-equiv="refresh" content="60">
+
+<style>
+* { position: absolute; padding: 0px; margin: 0px; }
+div#msg {margin-top:8px;left: 122px;width: 110px;height: 100px;overflow: hidden;color:#ffffff;text-decoration:none;font-family:Helvetica;font-size:11px;line-height:14px;}
+.fade{-webkit-animation-name:fade_animation;-webkit-animation-duration:10s;-webkit-animation-iteration-count:5;width:38px;height:38px;opacity:0}
+@-webkit-keyframes fade_animation{0%{opacity:0}5%{opacity:0}15%{opacity:1}65%{opacity:1}75%{opacity:0}100%{opacity:0}}
+</style>
+
+<script>
+var direction = 0;
+var refresh = 30;
+formatrssmessage = function (feedslice, showoptions, itemcontainer, linktarget)
+{
+	return feedslice[0].title;
+}
+
+function scrollWindow()
+{
+	var update = document.getElementById("msg");
+	if (direction == 0)
+		update.scrollTop++;
+	else
+		update.scrollTop--;
+	
+	if (update.scrollTop + update.clientHeight >= update.scrollHeight)
+	{
+		direction = 1;
+		setTimeout(scrollWindow, 5000);
+	}
+	else if (update.scrollTop <= 0)
+	{
+		direction = 0;
+		setTimeout(scrollWindow, 5000);
+	}
+	else
+	{
+		setTimeout(scrollWindow, 100);
+	}
+}
+
+function checkScroll()
+{
+	var update = document.getElementById("msg");
+
+	if (update.scrollHeight > update.clientHeight)
+		setTimeout(scrollWindow, 5000);
+}
+
+window.onload = onLoad;
+
+function onLoad(){
+	for(var i = 0; i<9; i++){
+		document.getElementById("holder").innerHTML += "<img class='fade' src='" + i + ".png' style = 'position:absolute;top:" + ((i%3)*39) + "px;left:" + ((i/3)*39-(i%3)*13) + "px;z-index:" + i + ";-webkit-animation-delay:" + (Math.random()*20) +"s;' />";
+	}
+}
+</script>
+
+<script>window.onload = onLoad;
+function onLoad() {
+    for (var i = 0; i < 9; i++) {
+        var r = Math.random() * 10;
+        document.getElementById("holder").innerHTML += "<img id ='box" + i + "' class='fade' src='" + array[Math.floor(Math.random() * array.length)] + "' style = 'position:absolute;top:" + ((i % 3) * 39) + "px;left:" + ((i / 3) * 39 - (i % 3) * 13) + "px;z-index:" + i + ";-webkit-animation-delay:" + r + "s;' />";
+        setTimeout("updateTile(" + i + ")", r * 1000+10000);
+
+    }
+}
+
+function updateTile(num) {
+    document.getElementById("box" + num).src = array[Math.floor(Math.random() * array.length)];
+    setTimeout("updateTile(" + num + ")", 10000);
+}
+</script><title>Facebook Live Tile</title></head><body bgcolor="627aad"><div id="holder"></div>
+
+<script type="text/javascript">
+			var cssfeed = new gfeedrssticker("msg", "", refresh * 1000, "_new");
+			cssfeed.old_initscroller = cssfeed._initscroller;
+			cssfeed._rotatemessage = function() {
+				if (this.messagepointer == 0)
+					location.reload();
+
+				var feedslice = this.feeds.slice(this.messagepointer, this.messagepointer+this.itemsperpage)
+				this.tickerdiv.innerHTML = feedslice[0].title;
+				this.messagepointer = (this.messagepointer+this.itemsperpage >= this.feeds.length) ? 0 : this.messagepointer+this.itemsperpage
+				var si = this;
+				setTimeout(function() { si._rotatemessage(); }, this.delay);
+
+				checkScroll();
+			}
+			cssfeed._initscroller = function(feeds) {
+				cssfeed.old_initscroller(feeds);
+				checkScroll();
+			}
+
+			cssfeed.addFeed("fb", facebookFeed);
+			cssfeed.setentrycontainer("div");
+			cssfeed.filterfeed(100, "date");
+			cssfeed.entries_per_page(1);
+			cssfeed.init();
+		</script>
+		</body>
+		</html>

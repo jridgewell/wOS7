@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>usesHTML</key>
+	<string>NO</string>
+	<key>badgeX</key>
+	<string>72</string>
+	<key>badgeY</key>
+	<string>26</string>
+	<key>badgeFontSize</key>
+	<string>43</string>
+	<key>badgeHeight</key>
+	<string>54</string>
+	<key>isSMSTile</key>
+	<string>YES</string>
+</dict>
+</plist>

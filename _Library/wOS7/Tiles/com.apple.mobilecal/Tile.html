@@ -1,0 +1,79 @@
+<html>
+<head>
+	<base href="Library/"/>
+	<meta name="viewport" content="width=115, user-scalable=no" />
+	<script type="text/javascript" src="wydget.js"></script>
+    <title>CalendarWidget</title>
+	<style>
+	div div {
+		height: 58px;
+		width: 115px;
+		z-index: 1;
+		font-family: Helvetica;
+		font-size: 20;
+		color: white;
+	}
+	div div * {
+		display: -webkit-box;
+		-webkit-box-align: center;
+		-webkit-box-pack: center;
+		height: 100%;
+		text-align: center;
+		width: 100%;
+	}
+	#img {
+		z-index: -1;
+	}
+#slider{
+	position:absolute;
+	top:0px;
+	left:0px;
+	-webkit-animation-name: slide_animation;
+	-webkit-animation-duration: 7s;
+	-webkit-animation-iteration-count: infinite;
+}
+@-webkit-keyframes slide_animation {
+	0% {
+		-webkit-transform:translateY(0px);
+	}
+	16% {
+		-webkit-transform:translateY(0px);
+	}
+	33% {
+		-webkit-transform:translateY(-58px);
+	}
+	50% {
+		-webkit-transform:translateY(-58px);
+	}
+	66% {
+		-webkit-transform:translateY(-116px);
+	}
+	82% {
+		-webkit-transform:translateY(-116px);
+	}
+	100% {
+		-webkit-transform:translateY(0px);
+	}
+}
+</style>
+</head>
+<body onLoad="wydgetLoader();">
+	<div id = "img" style = "position:absolute;top:0px;left:0px;z-index:2">
+		<img src = "../overlay.png"/>
+	</div>
+	<div id = "slider">
+		<div>
+			<dateDay></dateDay>
+		</div>
+		<div>
+			<dateMonth style="background:white;color:black;"></dateMonth>
+		</div>
+		<div style="font-size:30;">
+			<dateDate></dateDate>
+		</div>
+		<div style="font-size:30;">
+			<dateYear style="background:white;color:black;"></dateYear>
+		</div>
+	</div>
+</body>
+</html>

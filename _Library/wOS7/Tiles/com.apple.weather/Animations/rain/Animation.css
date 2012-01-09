@@ -1,0 +1,61 @@
+@-webkit-keyframes rain_animation {
+	0% {
+		-webkit-transform:translateY(-2600px);
+		opacity:1;
+	}
+	60% {
+		-webkit-transform:translateY(-400px);
+		opacity:1;
+	}
+	64% {
+		-webkit-transform:translateY(-350px);
+		opacity:0.5;
+	}
+	70%{
+		-webkit-transform:translateY(-300px);
+		opacity:0;
+	}
+	100% {
+		-webkit-transform:translateY(500px);
+		opacity:0;
+	}
+}
+@-webkit-keyframes wiper {
+	0% {
+		-webkit-transform:rotate(-90deg);
+	}
+	60% {
+		-webkit-transform:rotate(-90deg);
+	}
+	68% {
+		-webkit-transform:rotate(90deg);
+	}
+	75% {
+		-webkit-transform:rotate(-90deg);
+	}
+	100% {
+		-webkit-transform:rotate(-90deg);
+	}
+}
+#Rain {
+	-webkit-transform:translateY(-2600px);
+	top: 20px;
+	width: 361px;
+	height: 2588px;
+	-webkit-animation-timing-function:linear;
+	-webkit-animation-name: rain_animation;
+	-webkit-animation-duration: 15s;
+	-webkit-animation-iteration-count: infinite;
+}
+#Wiper {
+	-webkit-transform:rotate(-90deg);
+	position:absolute;
+	top:-10px;
+	left:150px;
+	z-index:1;
+	-webkit-transform-origin-x: 10;
+	-webkit-transform-origin-y: 0;
+	-webkit-animation-name: wiper;
+	-webkit-animation-duration: 15s;
+	-webkit-animation-iteration-count: infinite;
+}

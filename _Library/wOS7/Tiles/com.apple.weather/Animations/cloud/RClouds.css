@@ -1,0 +1,19 @@
+ALIEN1974
+Modmyi.com
+DUSK EVOLUTION
+Clouds Animation CSS
+
+body {margin: 0;}
+@-webkit-keyframes clouds_animation {
+ 0% {-webkit-transform:translateX(335px);}
+ 100% {-webkit-transform:translateX(-800px);}
+}
+#Clouds {position: absolute;
+-webkit-transform:translateX(335px);
+   top: 20px;
+   width: 808px;
+   height: 361px;
+-webkit-animation-name: clouds_animation;
+-webkit-animation-duration: 45s;
+-webkit-animation-iteration-count: infinite;
+-webkit-animation-delay: 5s;

@@ -1,0 +1,45 @@
+* { position: absolute; padding: 0px; margin: 0px; }
+
+body {
+	height: 115px;
+	width: 240px;
+}
+
+div#msg {
+	margin-top:8px;
+	left: 122px;
+	width: 110px;
+	height: 100px;
+	overflow: hidden;
+	color:#ffffff;
+	text-decoration:none;
+	font-family:Helvetica;
+	font-size:11px;
+	line-height:16px;
+}
+
+.fade{
+	-webkit-animation-name: fade_animation;
+	-webkit-animation-duration: 20s;
+	-webkit-animation-iteration-count: infinite;
+	width:	38px;
+	height: 38px;
+	opacity:0;
+}
+
+@-webkit-keyframes fade_animation {
+	0% {
+		opacity:0;
+	}
+	25% {
+		opacity:1;
+	}
+	50% {
+		opacity:1;
+	}
+	75% {
+		opacity:0;
+	}
+	100% {
+		opacity:0;
+	}

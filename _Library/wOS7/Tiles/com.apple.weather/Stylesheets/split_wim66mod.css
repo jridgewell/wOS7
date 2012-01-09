@@ -1,0 +1,55 @@
+/* Edited by wim66 Modmyi */
+
+#WeatherContainer{
+    background-color: rgba(0,0,0,0);
+}
+
+#TextContainer{ 							/* Other */
+    font-size:18px;
+    font-family: Helvetica;
+    font-weight: regular;
+    color:white;
+}
+
+#city{										/* Weather City Position */
+	position: absolute; top: 287px; right: 0px; down: 0px; left: 2px; width: 320px; height: 461px;
+	font-family: Helvetica; 
+	color: white;
+	font-size: 22px;
+	font-weight: regular;
+	text-shadow: 2px 2px 2px #000000;
+}
+
+#temp{										/* Weather Temperature Position */
+	position: absolute; top:315px; right: 0px; down: 0px; left: 30px; width: 320px; height: 461px;
+	font-family: Helvetica; 
+	color: white;
+	font-size: 20px;
+	font-weight: regular;
+	text-shadow: 2px 2px 2px #000000;
+}
+
+#desc{										/* Weather info Position */
+	position: absolute; top: 345px; right: 0px; down: 0px; left: 2px; width: 320px; height: 461px;
+	text-align: left;
+	font-family: Helvetica; 
+	color: white;
+	font-size: 18px;
+	font-weight: regular;
+	text-shadow: 2px 2px 2px #000000;
+}
+
+#TextContainer p{
+	margin:0;
+}
+
+#weatherIcon{
+
+	position: absolute; top: 275px; right: 0px; down: 0px; left: 110px; width: 320px; height: 461px;
+
+	height:100px;
+
+	width:100px;
+
+
+}

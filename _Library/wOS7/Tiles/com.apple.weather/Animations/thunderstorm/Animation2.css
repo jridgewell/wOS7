@@ -1,0 +1,28 @@
+ALIEN1974
+Modmyi.com
+DUSK EVOLUTION
+Thunder Animation CSS
+
+body {
+	margin: 0;
+}
+
+@-webkit-keyframes thunder2_animation {
+	0% {opacity: 10.0;}
+	30% {opacity: .0;}
+	100% {opacity: 0.0;}
+}
+
+#thunder2 {
+	position: absolute;
+	left: 0px;
+    top: 0px;
+	width: 400px;
+	height: 400px;
+	background-color: transparent;
+	opacity: 0.0;
+	-webkit-animation-name: thunder2_animation;
+    -webkit-animation-duration: 0.2s;
+	-webkit-animation-iteration-count: infinite;
+-webkit-animation-delay: 2.0s;
+}

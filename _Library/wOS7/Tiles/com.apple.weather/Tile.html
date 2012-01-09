@@ -1,0 +1,18 @@
+<html>
+<head>
+	<base href="Library/"/>
+	<meta name="viewport" content="width=115, user-scalable=no" />
+	<script type="text/javascript" src="wydget.js"></script>
+    <style>
+	.wIcon{
+		width:80px;
+		height:80px;
+	}
+	</style>
+    <title>WeatherWidget</title>
+</head>
+<body onLoad="wydgetLoader();">
+	<div style ="position:absolute;top:15px;left:15px;"><weatherIcon id = "icon"></weatherIcon></div>
+	<div style = "position:absolute;top:-140px;left:-110px;z-index:2;-webkit-transform:scale(.5);"><iframe src="../Widget.html" width="320" height="480" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true"></iframe></div></div>
+</body>
+</html>

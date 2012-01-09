@@ -1,0 +1,19 @@
+ALIEN1974
+Modmyi.com
+DUSK EVOLUTION
+Snow Animation CSS
+
+body {margin: 0;}
+@-webkit-keyframes snow_animation {
+ 0% {-webkit-transform:translateY(-2550px);}
+ 100% {-webkit-transform:translateY(400px);}
+}
+#Snow {
+-webkit-transform:translateY(-2600px);
+top: 20px;
+   width: 361px;
+   height: 2588px;
+-webkit-animation-name: snow_animation;
+-webkit-animation-duration: 60s;
+-webkit-animation-iteration-count: infinite;
+-webkit-animation-delay: 1s;
