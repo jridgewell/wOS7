@@ -4,13 +4,5 @@
 <dict>
 	<key>usesHTML</key>
 	<string>NO</string>
-	<key>badgeX</key>
-	<string>78</string>
-	<key>badgeY</key>
-	<string>4</string>
-	<key>badgeFontSize</key>
-	<string>19</string>
-	<key>badgeHeight</key>
-	<string>54</string>
 </dict>
 </plist>
