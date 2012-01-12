@@ -281,7 +281,7 @@ static WOS7* sharedInstance;
     }else if([title isEqualToString:@"Pin to Start Menu"])
         [ray addObject:leafIdentifier];
 
-    [ray writeToFile:@"/var/mobile/Library/wOS7/Tiles.plist" atomically:YES];
+	[ray writeToFile:@"/var/mobile/Library/wOS7/Tiles.plist" atomically:NO];
     [ray release];
     
     [self updateTiles];
