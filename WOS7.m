@@ -1,5 +1,7 @@
 #import "WOS7.h"
 
+#define BACKGROUND_FADE .30
+
 @implementation WOS7
 @synthesize applications, mainView;
 static WOS7* sharedInstance;
@@ -166,7 +168,7 @@ static WOS7* sharedInstance;
 		appList.center = CGPointMake(appList.center.x + d.x, appList.center.y);
 		toggleInterface.center = CGPointMake(toggleInterface.center.x + d.x, toggleInterface.center.y);
 	    toggleInterface.transform = CGAffineTransformMakeRotation(scale*-1*M_PI);
-		[[mainView viewWithTag:100] setAlpha:(1 - (scale*.40))];
+		[[mainView viewWithTag:100] setAlpha:(1 - (scale * (1 - BACKGROUND_FADE)))];
 	}
 
 	if (recognizer.state == UIGestureRecognizerStateEnded)
@@ -212,7 +214,7 @@ static WOS7* sharedInstance;
 	toggleInterface.transform = CGAffineTransformMakeRotation(M_PI);
 
 	//fade background
-	[[mainView viewWithTag:100] setAlpha:.60];
+	[[mainView viewWithTag:100] setAlpha:BACKGROUND_FADE];
 	//allow scrollToTop on status bar tap
 	[tileScrollView setScrollsToTop:NO];
 	[appList setScrollsToTop:YES];
