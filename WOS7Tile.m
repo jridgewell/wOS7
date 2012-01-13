@@ -158,7 +158,7 @@
 }
 
 -(void)launch {
-	[[[[WOS7 sharedInstance] applications] objectAtIndex:appIndex] launch];
+	[(SBApplicationIcon*)[[[WOS7 sharedInstance] applications] objectAtIndex:appIndex] launch];
 }
 
 @end

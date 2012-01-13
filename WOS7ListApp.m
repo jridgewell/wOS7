@@ -58,7 +58,7 @@
 }
 
 -(void)launch: (id)sender {
-	[[[[WOS7 sharedInstance] applications] objectAtIndex:[sender tag]] launch];
+	[(SBApplicationIcon*)[[[WOS7 sharedInstance] applications] objectAtIndex:[sender tag]] launch];
 }
 
 @end
