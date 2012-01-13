@@ -1,5 +1,4 @@
-@interface DreamBoard : NSObject {
-}
+@interface DreamBoard : NSObject {}
 
 @property(nonatomic, readonly)NSMutableArray* appsArray;
 @property(nonatomic, retain)UIWindow* window;

@@ -19,6 +19,7 @@
 
 	BOOL toggled;
 }
+
 @property(nonatomic, readonly)NSMutableArray* applications;
 @property(nonatomic, readonly)UIView* mainView;
 @property(nonatomic, readonly)UIView* subView;
@@ -33,4 +34,5 @@
 -(void)updateTiles;
 -(void)updateBadge: (NSString*)leafId;
 -(void)didHold: (id)sender;
+
 @end
