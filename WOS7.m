@@ -186,13 +186,13 @@ static WOS7* sharedInstance;
 
 	if (recognizer.state == UIGestureRecognizerStateEnded) {
 		CGPoint vel = [recognizer velocityInView:recognizer.view];
-		scale = tileScrollView.frame.origin.x / -254;
+		BOOL leftRight = (tileScrollView.center.x <= 33);
 
-		if (vel.x < -50 && scale > .40) {
+		if (vel.x < -100) {
 			[self toggleLeft];
-		} else if (vel.x > 50 && scale < .60) {
+		} else if (vel.x >= 100) {
 			[self toggleRight];
-		} else if (scale < .5) {
+		} else if (leftRight) {
 			[self toggleLeft];
 		} else {
 			[self toggleRight];
