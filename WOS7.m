@@ -4,13 +4,13 @@
 @synthesize applications, mainView;
 static WOS7* sharedInstance;
 
--(void)updateBadge:(NSString *)leafId{
+-(void)updateBadge: (NSString*)leafId{
 	for(id subView in tileScrollView.subviews)
         if([subView isKindOfClass:[WOS7Tile class]] && [[subView leafIdentifier] isEqualToString:leafId])
             [subView updateBadge];
 }
 
--(id)initWithWindow:(UIWindow *)_window array:(NSMutableArray *)_apps{
+-(id)initWithWindow: (UIWindow*)_window array: (NSMutableArray*)_apps{
 
     self = [super init];
     sharedInstance = self;
@@ -32,7 +32,7 @@ static WOS7* sharedInstance;
         //add background
         if([[NSFileManager defaultManager] fileExistsAtPath:@LIBRARY_DIR"/Background.png"])
         {
-            UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,480)];
+            UIImageView* bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,480)];
             bgView.tag = 100;
             bgView.image = [UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Background.png"];
             [mainView insertSubview:bgView atIndex:0];
@@ -42,9 +42,9 @@ static WOS7* sharedInstance;
         //add listapps to the applist
 		int y = 0;
         for(int i = 0; i<(int)applications.count; i++){
-			NSString *leafIdentifier = [[[[WOS7 sharedInstance] applications] objectAtIndex:i] leafIdentifier];
+			NSString* leafIdentifier = [[[[WOS7 sharedInstance] applications] objectAtIndex:i] leafIdentifier];
 			if (![leafIdentifier isEqualToString:@"com.apple.fieldtest"] && ![leafIdentifier isEqualToString:@"com.apple.purplebuddy"]) {
-				WOS7ListApp *listApp = [[WOS7ListApp alloc] initWithFrame:CGRectMake(0,46*y+75,254,40) index:i];
+				WOS7ListApp* listApp = [[WOS7ListApp alloc] initWithFrame:CGRectMake(0,46*y+75,254,40) index:i];
 				[appList addSubview:listApp];
 				[listApp release];
 				[appList setContentSize:CGSizeMake(254, 46*(y+1)+75)];
@@ -80,7 +80,7 @@ static WOS7* sharedInstance;
 
 -(void)updateTiles{
 
-    NSArray *tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
+    NSArray* tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
 
     //remove old tiles
     for(id app in tileScrollView.subviews)
@@ -89,12 +89,12 @@ static WOS7* sharedInstance;
 
     int i = 0, j = 0;
     for(; i<(int)tilesArray.count; i++){
-        NSString *bundleId = [tilesArray objectAtIndex:i];
+        NSString* bundleId = [tilesArray objectAtIndex:i];
 
         //see if this tile is large
         BOOL isLarge = NO;
         if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/Info.plist", bundleId]]){
-            NSDictionary *info = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/Info.plist", bundleId]];
+            NSDictionary* info = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/Info.plist", bundleId]];
             if([[info allKeys] containsObject:@"isLargeTile"])
                 isLarge = [[info valueForKey:@"isLargeTile"] isEqualToString:@"YES"];
             [info release];
@@ -119,7 +119,7 @@ static WOS7* sharedInstance;
             }
 
         //we didn't find our tile, so let's add it.
-        WOS7Tile *tile = nil;
+        WOS7Tile* tile = nil;
 
         //find the corresponding SBApplication
         for(int i = 0; i<(int)applications.count; i++)
@@ -155,7 +155,7 @@ static WOS7* sharedInstance;
 	[super dealloc];
 }
 
--(void)didPan:(UIPanGestureRecognizer *)recognizer{
+-(void)didPan: (UIPanGestureRecognizer*)recognizer{
     CGPoint d = [recognizer translationInView:recognizer.view];
     [recognizer setTranslation:CGPointZero inView:recognizer.view];
 	float scale = 0;
@@ -239,26 +239,26 @@ static WOS7* sharedInstance;
 	toggled = YES;
 }
 
--(void)didHold:(id)sender{
+-(void)didHold: (id)sender{
     if([sender isKindOfClass:[WOS7Tile class]]){
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Unpin", @"Move Up", @"Move Down",nil];
+        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Unpin", @"Move Up", @"Move Down",nil];
         [actionSheet showInView:window];
         [actionSheet release];
     }else if([sender isKindOfClass:[WOS7ListApp class]]){
-        NSArray *tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
+        NSArray* tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
         if(![tilesArray containsObject:[[applications objectAtIndex:[sender tag]] leafIdentifier]]){
-            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Pin to Start Menu",nil];
+            UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Pin to Start Menu",nil];
             [actionSheet showInView:window];
             [actionSheet release];
         }
     }
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+- (void)actionSheet: (UIActionSheet*)actionSheet didDismissWithButtonIndex: (NSInteger)buttonIndex
 {
-    NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
-    NSString *leafIdentifier = [actionSheet title];
-    NSMutableArray *ray = [[NSMutableArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
+    NSString* title = [actionSheet buttonTitleAtIndex:buttonIndex];
+    NSString* leafIdentifier = [actionSheet title];
+    NSMutableArray* ray = [[NSMutableArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
     if([title isEqualToString:@"Unpin"])[ray removeObject:leafIdentifier];
     else if([title isEqualToString:@"Move Up"]){
         int i = [ray indexOfObject:leafIdentifier];
@@ -286,7 +286,7 @@ static WOS7* sharedInstance;
     return sharedInstance;
 }
 
-+(UIImage*) maskImage:(UIImage *)image withMask:(UIImage *)maskImage{
++(UIImage*) maskImage: (UIImage*)image withMask: (UIImage*)maskImage{
 
 	CGImageRef maskRef = maskImage.CGImage;
 

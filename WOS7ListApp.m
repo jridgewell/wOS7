@@ -4,20 +4,20 @@
 
 @implementation WOS7ListApp
 
--(id)initWithFrame:(CGRect)frame index:(int)index{
+-(id)initWithFrame: (CGRect)frame index: (int)index{
 	self = [super initWithFrame:frame];
 
     if(self){
         id app = [[[WOS7 sharedInstance] applications] objectAtIndex:index];
-        NSString *leafIdentifier = [app leafIdentifier];
-        NSString *name = [app displayName];
+        NSString* leafIdentifier = [app leafIdentifier];
+        NSString* name = [app displayName];
 
-        UIImageView *background = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 40, 40)];
+        UIImageView* background = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 40, 40)];
         background.image = [UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/Background.png"];
         [self addSubview:background];
         [background release];
 
-        UIImageView *imgView;
+        UIImageView* imgView;
         if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/MiniTile.png", leafIdentifier]]){
             imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 40, 40)];
             imgView.image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/MiniTile.png", leafIdentifier]];
@@ -28,7 +28,7 @@
         [self addSubview:imgView];
         [imgView release];
 
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(50,10,204,20)];
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(50,10,204,20)];
         label.font = [UIFont systemFontOfSize:18];
         label.textColor = UIColorFromRGB(0xDDDDDD);
         label.text = name;
@@ -36,11 +36,11 @@
         [self addSubview:label];
         [label release];
 
-        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        UIButton* btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [btn addTarget:self action:@selector(launch:) forControlEvents:UIControlEventTouchUpInside];
         self.tag = index;
         btn.tag = index;
-        UILongPressGestureRecognizer * recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didHold:)];
+        UILongPressGestureRecognizer*  recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didHold:)];
         [btn addGestureRecognizer:recognizer];
         [recognizer release];
         [self addSubview:btn];
@@ -51,11 +51,11 @@
 	return self;
 }
 
-- (void)didHold:(UILongPressGestureRecognizer *)sender {
+- (void)didHold: (UILongPressGestureRecognizer*)sender {
     if (sender.state ==1)[[WOS7 sharedInstance] didHold:self];
 }
 
--(void)launch:(id)sender{
+-(void)launch: (id)sender{
     [[[[WOS7 sharedInstance] applications] objectAtIndex:[sender tag]] launch];
 }
 

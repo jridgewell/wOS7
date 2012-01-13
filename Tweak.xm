@@ -2,10 +2,10 @@
 #import "DreamBoard.h"
 #import "WOS7.h"
 
-WOS7 *wos7;
+WOS7* wos7;
 
 %hook SBApplicationIcon
--(void)setBadge:(NSString*)badge{
+-(void)setBadge: (NSString*)badge{
 	%orig(badge);
     //update badges
 	if(wos7)[wos7 updateBadge:[self leafIdentifier]];
@@ -13,7 +13,7 @@ WOS7 *wos7;
 %end
 
 %hook DreamBoard
--(void)loadTheme:(NSString *)theme{
+-(void)loadTheme: (NSString*)theme{
     if([theme isEqualToString:@"wOS7"] && wos7)return;
 
 

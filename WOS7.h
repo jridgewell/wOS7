@@ -7,28 +7,28 @@
 
 @interface WOS7 : NSObject <UIActionSheetDelegate, UIScrollViewDelegate>
 {
-	UIWindow *window;
-	UIView *mainView;
-	UIScrollView *tileScrollView;
-	UIScrollView *appList;
+	UIWindow* window;
+	UIView* mainView;
+	UIScrollView* tileScrollView;
+	UIScrollView* appList;
 
-	UIButton *toggleInterface;
+	UIButton* toggleInterface;
 
-	NSMutableArray *applications;
+	NSMutableArray* applications;
 
 	BOOL toggled;
 }
-@property(nonatomic, readonly) NSMutableArray *applications;
-@property(nonatomic, readonly) UIView *mainView;
+@property(nonatomic, readonly) NSMutableArray* applications;
+@property(nonatomic, readonly) UIView* mainView;
 
 +(WOS7*)sharedInstance;
-+(UIImage*) maskImage:(UIImage *)image withMask:(UIImage *)maskImage;
++(UIImage*) maskImage: (UIImage*)image withMask: (UIImage*)maskImage;
 
--(id)initWithWindow:(UIWindow *)_window array:(NSMutableArray *)_apps;
+-(id)initWithWindow: (UIWindow*)_window array: (NSMutableArray*)_apps;
 -(void)toggle;
 -(void)toggleLeft;
 -(void)toggleRight;
 -(void)updateTiles;
--(void)updateBadge:(NSString *)leafId;
--(void)didHold:(id)sender;
+-(void)updateBadge: (NSString*)leafId;
+-(void)didHold: (id)sender;
 @end
