@@ -1,10 +1,12 @@
 GO_EASY_ON_ME = 1
+THEOS_BUILD_DIR = build
+
 include /framework/makefiles/common.mk
 
 TWEAK_NAME = WOS7
 WOS7_FILES = Tweak.xm
 WOS7_FRAMEWORKS = Foundation UIKit CoreGraphics QuartzCore
-WOS7_OBJC_FILES = WOS7Tile.m WOS7ListApp.m WOS7.m
+WOS7_OBJC_FILES = $(wildcard *.m)
 
 include /framework/makefiles/tweak.mk
 
