@@ -9,6 +9,7 @@
 {
 	UIWindow* window;
 	UIView* mainView;
+	UIView* subView;
 	UIScrollView* tileScrollView;
 	UIScrollView* appList;
 
@@ -20,6 +21,7 @@
 }
 @property(nonatomic, readonly)NSMutableArray* applications;
 @property(nonatomic, readonly)UIView* mainView;
+@property(nonatomic, readonly)UIView* subView;
 
 +(WOS7*)sharedInstance;
 +(UIImage*)maskImage: (UIImage*)image withMask: (UIImage*)maskImage;

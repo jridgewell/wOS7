@@ -3,13 +3,13 @@
 #define BACKGROUND_FADE .30
 
 @implementation WOS7
-@synthesize applications, mainView;
+@synthesize applications, mainView, subView;
 static WOS7* sharedInstance;
 
 -(void)updateBadge: (NSString*)leafId {
-	for(id subView in tileScrollView.subviews)
-		if ([subView isKindOfClass:[WOS7Tile class]] && [[subView leafIdentifier] isEqualToString:leafId]) {
-			[subView updateBadge];
+	for(id app in tileScrollView.subviews)
+		if ([app isKindOfClass:[WOS7Tile class]] && [[app leafIdentifier] isEqualToString:leafId]) {
+			[app updateBadge];
 		}
 }
 
@@ -24,12 +24,19 @@ static WOS7* sharedInstance;
 
 		//create views
 		tileScrollView =	[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-		mainView =		[[UIView alloc] initWithFrame:CGRectMake(0, 0, 574, 480)];
+		mainView =		[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+		subView =		[[UIView alloc] initWithFrame:CGRectMake(0, 0, 574, 480)];
+
 		mainView.opaque = YES;
 		mainView.backgroundColor = [UIColor blackColor];
+		[subView.layer setOpaque:NO];
+		subView.opaque = NO;
+		subView.backgroundColor = [UIColor clearColor];
+
 		appList =		[[UIScrollView alloc] initWithFrame:CGRectMake(320, 0, 254, 480)];
-		[mainView addSubview:appList];
-		[mainView addSubview:tileScrollView];
+		[subView addSubview:appList];
+		[subView addSubview:tileScrollView];
+		[mainView addSubview:subView];
 
 		//add background
 		if ([[NSFileManager defaultManager] fileExistsAtPath:@LIBRARY_DIR"/Background.png"]) {
@@ -58,7 +65,7 @@ static WOS7* sharedInstance;
 		toggleInterface = [[UIButton alloc] initWithFrame:CGRectMake(254, 60, 66, 66)];
 		[toggleInterface addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
 		[toggleInterface setImage:[UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/Arrow.png"] forState:UIControlStateNormal];
-		[mainView addSubview:toggleInterface];
+		[subView addSubview:toggleInterface];
 		[toggleInterface release];
 		toggled = YES;
 
@@ -70,7 +77,7 @@ static WOS7* sharedInstance;
 		[appList setScrollsToTop:NO];
 
 		UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPan:)];
-		[mainView addGestureRecognizer:pan];
+		[subView addGestureRecognizer:pan];
 		[pan release];
 
 		[self updateTiles];
@@ -164,6 +171,7 @@ static WOS7* sharedInstance;
 -(void)dealloc {
 	[tileScrollView release];
 	[appList release];
+	[subView release];
 	[mainView removeFromSuperview];
 	[mainView release];
 	[[objc_getClass("DreamBoard") sharedInstance] showAllExcept:nil];
@@ -173,20 +181,18 @@ static WOS7* sharedInstance;
 -(void)didPan: (UIPanGestureRecognizer*)recognizer {
 	CGPoint d = [recognizer translationInView:recognizer.view];
 	[recognizer setTranslation:CGPointZero inView:recognizer.view];
-	float scale = 0;
+	float scaleLeftMovement = 0;
 
-	if (tileScrollView.frame.origin.x + d.x >= -254 && tileScrollView.frame.origin.x + d.x <= 0) {
-		scale = tileScrollView.frame.origin.x / -254;
-		tileScrollView.center = CGPointMake(tileScrollView.center.x + d.x, tileScrollView.center.y);
-		appList.center = CGPointMake(appList.center.x + d.x, appList.center.y);
-		toggleInterface.center = CGPointMake(toggleInterface.center.x + d.x, toggleInterface.center.y);
-		toggleInterface.transform = CGAffineTransformMakeRotation(scale * -1 * M_PI);
-		[[mainView viewWithTag:100] setAlpha:(1 - (scale * (1 - BACKGROUND_FADE)))];
+	if (subView.frame.origin.x + d.x >= -254 && subView.frame.origin.x + d.x <= 0) {
+		scaleLeftMovement = subView.frame.origin.x / -254;
+		subView.center = CGPointMake(subView.center.x + d.x, subView.center.y);
+		toggleInterface.transform = CGAffineTransformMakeRotation(scaleLeftMovement * -1 * M_PI);
+		[[mainView viewWithTag:100] setAlpha:(1 - (scaleLeftMovement * (1 - BACKGROUND_FADE)))];
 	}
 
 	if (recognizer.state == UIGestureRecognizerStateEnded) {
 		CGPoint vel = [recognizer velocityInView:recognizer.view];
-		BOOL leftRight = (tileScrollView.center.x <= 33);
+		BOOL leftRight = (subView.center.x <= 160); // ([subView width] / 2) - (254 / 2)
 
 		if (vel.x < -100) {
 			[self toggleLeft];
@@ -211,11 +217,8 @@ static WOS7* sharedInstance;
 -(void)toggleLeft {
 	[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
 	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.3];
-
-	tileScrollView.frame = CGRectMake(-254, 0, 320, 480);
-	appList.frame = CGRectMake(66, 0, 254, 480);
-	toggleInterface.center = CGPointMake(0 + 33, toggleInterface.center.y);
+	[UIView setAnimationDuration:.5];
+	subView.frame = CGRectMake(-254,0,574,480);
 	toggleInterface.transform = CGAffineTransformMakeRotation(M_PI);
 
 	//fade background
@@ -223,6 +226,7 @@ static WOS7* sharedInstance;
 	//allow scrollToTop on status bar tap
 	[tileScrollView setScrollsToTop:NO];
 	[appList setScrollsToTop:YES];
+	[UIView commitAnimations];
 
 	toggled = NO;
 }
@@ -230,11 +234,8 @@ static WOS7* sharedInstance;
 -(void)toggleRight {
 	[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
 	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.3];
-
-	tileScrollView.frame = CGRectMake(0, 0, 320, 480);
-	appList.frame = CGRectMake(320, 0, 254, 480);
-	toggleInterface.center = CGPointMake(254 + 33, toggleInterface.center.y);
+	[UIView setAnimationDuration:.5];
+	subView.frame = CGRectMake(0,0,574,480);
 	toggleInterface.transform = CGAffineTransformMakeRotation(0);
 
 	//fade background
@@ -242,6 +243,7 @@ static WOS7* sharedInstance;
 	//allow scrollToTop on status bar tap
 	[tileScrollView setScrollsToTop:YES];
 	[appList setScrollsToTop:NO];
+	[UIView commitAnimations];
 
 	toggled = YES;
 }
