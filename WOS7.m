@@ -240,8 +240,8 @@ static WOS7* sharedInstance;
 	//fade background
 	[[mainView viewWithTag:100] setAlpha:1];
 	//allow scrollToTop on status bar tap
-	[tileScrollView setScrollsToTop:NO];
-	[appList setScrollsToTop:YES];
+	[tileScrollView setScrollsToTop:YES];
+	[appList setScrollsToTop:NO];
 
 	toggled = YES;
 }
