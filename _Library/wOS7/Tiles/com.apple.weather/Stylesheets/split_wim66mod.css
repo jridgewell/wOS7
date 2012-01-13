@@ -13,7 +13,7 @@
 
 #city{										/* Weather City Position */
 	position: absolute; top: 287px; right: 0px; down: 0px; left: 2px; width: 320px; height: 461px;
-	font-family: Helvetica; 
+	font-family: Helvetica;
 	color: white;
 	font-size: 22px;
 	font-weight: regular;
@@ -22,7 +22,7 @@
 
 #temp{										/* Weather Temperature Position */
 	position: absolute; top:315px; right: 0px; down: 0px; left: 30px; width: 320px; height: 461px;
-	font-family: Helvetica; 
+	font-family: Helvetica;
 	color: white;
 	font-size: 20px;
 	font-weight: regular;
@@ -32,7 +32,7 @@
 #desc{										/* Weather info Position */
 	position: absolute; top: 345px; right: 0px; down: 0px; left: 2px; width: 320px; height: 461px;
 	text-align: left;
-	font-family: Helvetica; 
+	font-family: Helvetica;
 	color: white;
 	font-size: 18px;
 	font-weight: regular;

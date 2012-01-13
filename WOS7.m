@@ -1,11 +1,3 @@
-/*
- 
- wOS7, Windows Phone 7 Theme
- 
- Wyndwarrior, 2011. Designed for DreamBoard
- 
- */
-
 #import "WOS7.h"
 
 @implementation WOS7
@@ -19,7 +11,7 @@ static WOS7* sharedInstance;
 }
 
 -(id)initWithWindow:(UIWindow *)_window array:(NSMutableArray *)_apps{
-    
+
     self = [super init];
     sharedInstance = self;
     if(self)
@@ -27,7 +19,7 @@ static WOS7* sharedInstance;
         [[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:nil];
         window =            _window;
         applications =      _apps;
-        
+
         //create views
         tileScrollView =    [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320,480)];
         mainView =          [[UIView alloc] initWithFrame:CGRectMake(0,0,574,480)];
@@ -36,7 +28,7 @@ static WOS7* sharedInstance;
         appList =           [[UIScrollView alloc] initWithFrame:CGRectMake(320,0,254,480)];
         [mainView addSubview:appList];
         [mainView addSubview:tileScrollView];
-        
+
         //add background
         if([[NSFileManager defaultManager] fileExistsAtPath:@LIBRARY_DIR"/Background.png"])
         {
@@ -46,7 +38,7 @@ static WOS7* sharedInstance;
             [mainView insertSubview:bgView atIndex:0];
             [bgView release];
         }
-        
+
         //add listapps to the applist
 		int y = 0;
         for(int i = 0; i<(int)applications.count; i++){
@@ -59,8 +51,8 @@ static WOS7* sharedInstance;
 				y++;
 			}
         }
-        
-        
+
+
         //add the arrow
         toggleInterface = [[UIButton alloc] initWithFrame:CGRectMake(254,60,66,66)];
         [toggleInterface addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
@@ -68,18 +60,18 @@ static WOS7* sharedInstance;
         [mainView addSubview:toggleInterface];
         [toggleInterface release];
         toggled = YES;
-	
+
         //make sure there are no scrollbars
         appList.showsVerticalScrollIndicator = NO;
         tileScrollView.showsVerticalScrollIndicator = NO;
-        
+
         //allow scrollToTop on status bar tap
         [appList setScrollsToTop:NO];
-        
+
 		UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPan:)];
 		[mainView addGestureRecognizer:pan];
 		[pan release];
-        
+
         [self updateTiles];
         [window addSubview:mainView];
     }
@@ -87,18 +79,18 @@ static WOS7* sharedInstance;
 }
 
 -(void)updateTiles{
-    
+
     NSArray *tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
-    
+
     //remove old tiles
     for(id app in tileScrollView.subviews)
         if([app isKindOfClass:[WOS7Tile class]] && ![tilesArray containsObject:[app leafIdentifier]])
             [app removeFromSuperview];
-    
+
     int i = 0, j = 0;
     for(; i<(int)tilesArray.count; i++){
         NSString *bundleId = [tilesArray objectAtIndex:i];
-        
+
         //see if this tile is large
         BOOL isLarge = NO;
         if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/Info.plist", bundleId]]){
@@ -107,28 +99,28 @@ static WOS7* sharedInstance;
                 isLarge = [[info valueForKey:@"isLargeTile"] isEqualToString:@"YES"];
             [info release];
         }
-        
+
         //find our tile, if it's there
         for (id app in tileScrollView.subviews)
             if([app isKindOfClass:[WOS7Tile class]] && [[app leafIdentifier] isEqualToString:bundleId]){
-                
+
                 if(isLarge && j%2!=0)j++;
-                
+
                 //if we find our tiles, update it's positioning.
                 [UIView beginAnimations:nil context:nil];
                 [UIView setAnimationDuration:.5];
                 [app setFrame:CGRectMake(j%2==0?13:136,123*(j/2)+75,isLarge?238:115,115)];
                 [UIView commitAnimations];
-                
+
                 if(isLarge)j+=2;
                 else j++;
-                
+
                 goto end;
             }
-        
+
         //we didn't find our tile, so let's add it.
         WOS7Tile *tile = nil;
-        
+
         //find the corresponding SBApplication
         for(int i = 0; i<(int)applications.count; i++)
             if([[[applications objectAtIndex:i] leafIdentifier] isEqualToString:bundleId]){
@@ -136,15 +128,15 @@ static WOS7* sharedInstance;
                 tile = [[WOS7Tile alloc] initWithFrame:CGRectMake(j%2==0?13:136,123*(j/2)+75,isLarge?238:115,115) appIndex:i];
                 break;
             }
-        
+
         if(!tile)continue;
-        
+
         [tileScrollView addSubview:tile];
         [tile release];
-        
+
         if(isLarge)j+=2;
         else j++;
-        
+
     end:
         // this is here so that the compiler doesn't yell at me for
         // having a label at the end
@@ -167,7 +159,7 @@ static WOS7* sharedInstance;
     CGPoint d = [recognizer translationInView:recognizer.view];
     [recognizer setTranslation:CGPointZero inView:recognizer.view];
 	float scale = 0;
- 
+
     if (tileScrollView.frame.origin.x + d.x >= -254 && tileScrollView.frame.origin.x + d.x <= 0) {
 		scale = tileScrollView.frame.origin.x / -254;
 		tileScrollView.center = CGPointMake(tileScrollView.center.x + d.x, tileScrollView.center.y);
@@ -178,27 +170,27 @@ static WOS7* sharedInstance;
 	}
 
 	if (recognizer.state == UIGestureRecognizerStateEnded)
-	    {
-	        CGPoint vel = [recognizer velocityInView:recognizer.view];
-			scale = tileScrollView.frame.origin.x / -254;
+	{
+		CGPoint vel = [recognizer velocityInView:recognizer.view];
+		scale = tileScrollView.frame.origin.x / -254;
 
-	        if (vel.x < -50 && scale > .40) 
-	        { 
-				[self toggleLeft];
-	        } 
-	        else if (vel.x > 50 && scale < .60)
-	        {
-				[self toggleRight];
-	        }
-	        else if (scale < .5)
-	        {
-				[self toggleLeft];
-	        }
-			else
-			{
-				[self toggleRight];
-			}
-	    }
+		if (vel.x < -50 && scale > .40)
+		{
+			[self toggleLeft];
+		}
+		else if (vel.x > 50 && scale < .60)
+		{
+			[self toggleRight];
+		}
+		else if (scale < .5)
+		{
+			[self toggleLeft];
+		}
+		else
+		{
+			[self toggleRight];
+		}
+	}
 }
 
 -(void)toggle{
@@ -213,7 +205,7 @@ static WOS7* sharedInstance;
 	[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.3];
-    
+
 	tileScrollView.frame = CGRectMake(-254,0,320,480);
 	appList.frame = CGRectMake(66,0,254,480);
 	toggleInterface.center = CGPointMake(0 + 33,toggleInterface.center.y);
@@ -224,7 +216,7 @@ static WOS7* sharedInstance;
 	//allow scrollToTop on status bar tap
 	[tileScrollView setScrollsToTop:NO];
 	[appList setScrollsToTop:YES];
-	
+
 	toggled = NO;
 }
 
@@ -283,9 +275,9 @@ static WOS7* sharedInstance;
 
 	[ray writeToFile:@LIBRARY_DIR"/Tiles.plist" atomically:NO];
     [ray release];
-    
+
     [self updateTiles];
-    
+
     if([title isEqualToString:@"Pin to Start Menu"] && !toggled)[self toggle];
 }
 
@@ -295,19 +287,19 @@ static WOS7* sharedInstance;
 }
 
 +(UIImage*) maskImage:(UIImage *)image withMask:(UIImage *)maskImage{
-    
-	CGImageRef maskRef = maskImage.CGImage; 
-    
+
+	CGImageRef maskRef = maskImage.CGImage;
+
 	CGImageRef mask = CGImageMaskCreate(CGImageGetWidth(maskRef),
                                         CGImageGetHeight(maskRef),
                                         CGImageGetBitsPerComponent(maskRef),
                                         CGImageGetBitsPerPixel(maskRef),
                                         CGImageGetBytesPerRow(maskRef),
                                         CGImageGetDataProvider(maskRef), NULL, false);
-    
+
 	CGImageRef masked = CGImageCreateWithMask([image CGImage], mask);
 	return [UIImage imageWithCGImage:masked];
-    
+
 }
 
 @end

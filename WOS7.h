@@ -1,11 +1,3 @@
-/*
- 
- wOS7, Windows Phone 7 Theme
- 
- Wyndwarrior, 2011. Designed for DreamBoard
- 
- */
-
 #import <SpringBoard/SpringBoard.h>
 #import "WOS7Tile.h"
 #import "WOS7ListApp.h"
@@ -19,11 +11,11 @@
 	UIView *mainView;
 	UIScrollView *tileScrollView;
 	UIScrollView *appList;
-	
+
 	UIButton *toggleInterface;
-	
+
 	NSMutableArray *applications;
-	
+
 	BOOL toggled;
 }
 @property(nonatomic, readonly) NSMutableArray *applications;

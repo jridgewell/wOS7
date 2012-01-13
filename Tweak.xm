@@ -1,11 +1,3 @@
-/*
- 
- wOS7, Windows Phone 7 Theme
- 
- Wyndwarrior, 2011. Designed for DreamBoard
- 
- */
-
 #import <SpringBoard/SpringBoard.h>
 #import "DreamBoard.h"
 #import "WOS7.h"
@@ -23,8 +15,8 @@ WOS7 *wos7;
 %hook DreamBoard
 -(void)loadTheme:(NSString *)theme{
     if([theme isEqualToString:@"wOS7"] && wos7)return;
-    
-    
+
+
     //there are then two instances to check, switching to and from wOS7
     //check switching from wOS7
     if(wos7!=nil && ![theme isEqualToString:@"wOS7"])
@@ -34,7 +26,7 @@ WOS7 *wos7;
         [self save:@"Default"];
         %orig(theme);
     }
-    
+
     //check switching to wOS7
     else if(wos7==nil && [theme isEqualToString:@"wOS7"])
     {
@@ -44,7 +36,7 @@ WOS7 *wos7;
         [self showAllExcept:nil];
         [self window].userInteractionEnabled = YES;
 	}
-    
+
     //otherwise just do the original method
     else %orig(theme);
 }
@@ -68,7 +60,7 @@ WOS7 *wos7;
     if(wos7)
     {
         CGRect frame = wos7.mainView.frame;
-        
+
         //animate our mainview sliding up
         if(wos7.mainView.frame.origin.y==0)
         {
@@ -78,7 +70,7 @@ WOS7 *wos7;
             [UIView commitAnimations];
             [[objc_getClass("DreamBoard") sharedInstance] showAllExcept:nil];
         }
-        
+
         //otherwise hide it
         else [self hideSwitcher];
     }
@@ -89,7 +81,7 @@ WOS7 *wos7;
     if(wos7)
     {
         CGRect frame = wos7.mainView.frame;
-        
+
         //animate our mainview sliding down
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:.25];

@@ -23,7 +23,7 @@ body {
 	opacity: 0.0;
 	-webkit-animation-name: sunray_animation;
     -webkit-animation-duration: 15s;
-	-webkit-animation-iteration-count: infinite;	    
+	-webkit-animation-iteration-count: infinite;
     -webkit-animation-delay: 7s;
 
 }

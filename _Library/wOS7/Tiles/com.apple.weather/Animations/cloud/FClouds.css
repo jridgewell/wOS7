@@ -18,7 +18,7 @@ body {margin: 0;}
    top: 20px;
    width: 808px;
    height: 361px;
-   opacity: 0.7;       
+   opacity: 0.7;
 -webkit-animation-timing-function:linear;
 -webkit-animation-name: clouds_animation;
 -webkit-animation-duration: 20s;

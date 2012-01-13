@@ -23,7 +23,7 @@ body {
 	opacity: 0.0;
 	-webkit-animation-name: moonlight_animation;
     -webkit-animation-duration: 20s;
-	-webkit-animation-iteration-count: infinite;	    
+	-webkit-animation-iteration-count: infinite;
     -webkit-animation-delay: 7s;
 
 }

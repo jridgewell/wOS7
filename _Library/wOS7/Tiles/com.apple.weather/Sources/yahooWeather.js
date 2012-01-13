@@ -59,13 +59,13 @@ function constructError (string)
 function findChild (element, nodeName)
 {
 	var child;
-	
+
 	for (child = element.firstChild; child != null; child = child.nextSibling)
 	{
 		if (child.nodeName == nodeName)
 			return child;
 	}
-	
+
 	return null;
 }
 
@@ -73,14 +73,14 @@ function findChild (element, nodeName)
 function fetchWeatherData (callback, zip)
 {
 	url="http://weather.yahooapis.com/forecastrss?u=f&p=" //u=Farenheit, because accuWeather sucks
-	
+
 	var xml_request = new XMLHttpRequest();
 	xml_request.onload = function(e) {xml_loaded(e, xml_request, callback);}
 	xml_request.overrideMimeType("text/xml");
 	xml_request.open("GET", url+zip);
 	xml_request.setRequestHeader("Cache-Control", "no-cache");
-	xml_request.send(null); 
-	
+	xml_request.send(null);
+
 	return xml_request;
 }
 
@@ -92,12 +92,12 @@ function xml_loaded (event, request, callback)
 		var effectiveRoot = findChild(findChild(request.responseXML, "rss"), "channel");
 		obj.city = findChild(effectiveRoot, "yweather:location").getAttribute("city");
 		obj.realFeel = findChild(effectiveRoot, "yweather:wind").getAttribute("chill");//Only accounts for windChill
-		
+
 		conditionTag = findChild(findChild(effectiveRoot, "item"), "yweather:condition");
 		obj.temp = conditionTag.getAttribute("temp");
 		obj.icon = conditionTag.getAttribute("code");
-		obj.description = conditionTag.getAttribute("text"); 
-		callback (obj); 
+		obj.description = conditionTag.getAttribute("text");
+		callback (obj);
 	}else{
 		callback ({error:true, errorString:"XML request failed. no responseXML"});
 	}

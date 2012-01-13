@@ -64,13 +64,13 @@ var MiniIcons = //Fix Up for weatherParser.js but also enables standardisation o
 function findChild (element, nodeName)
 {
 	var child;
-	
+
 	for (child = element.firstChild; child != null; child = child.nextSibling)
 	{
 		if (child.nodeName == nodeName)
 			return child;
 	}
-	
+
 	return null;
 }
 
@@ -94,12 +94,12 @@ function trimWhiteSpace (string)
 //		time:	time 24 hours(nn:nn)
 //		sunset:	time 24 hours (nn:nn)
 //		sunrise: time 24 hours (nn:nn)
-		
+
 function fetchWeatherData (callback, zip)
 {
 	//var url = 'http://apple.accuweather.com/adcbin/apple/Apple_Weather_Data.asp?zipcode=';
 	var url = 'http://wu.apple.com/adcbin/apple/Apple_Weather_Data.asp?zipcode=';
-	
+
 	if (window.timerInterval != 300000)
 		window.timerInterval = 300000; // 5 minutes
 
@@ -110,7 +110,7 @@ function fetchWeatherData (callback, zip)
 	xml_request.setRequestHeader("Cache-Control", "no-cache");
 	xml_request.setRequestHeader("wx", "385");
 	xml_request.send(null);
-	
+
 	return xml_request;
 }
 
@@ -125,14 +125,14 @@ function parseTimeString(string)
 	var obj = null;
 	try {
 		var array = string.match (/\d{1,2}/g);
-		
+
 		obj = {hour:parseInt(array[0], 10), minute:parseInt(array[1],10)};
 	}
 	catch (ex)
 	{
 		// ignore
 	}
-	
+
 	return obj;
 }
 
@@ -148,10 +148,10 @@ function xml_loaded (event, request, callback)
 		var obj = {error:false, errorString:null};
 		var adc_Database = findChild (request.responseXML, "adc_Database");
 		if (adc_Database == null) {callback(constructError("no <adc_Database>")); return;}
-		
+
 		var CurrentConditions = findChild (adc_Database, "CurrentConditions");
 		if (CurrentConditions == null) {callback(constructError("no <CurrentConditions>")); return;}
-		
+
 		var tag = findChild (CurrentConditions, "Time");
 		if (tag != null)
 			obj.time = parseTimeString (tag.firstChild.data);
@@ -165,22 +165,22 @@ function xml_loaded (event, request, callback)
 		tag = findChild (CurrentConditions, "Temperature");
 		if (tag == null) {callback(constructError("no <Temperature>")); return;}
 		obj.temp = parseInt (tag.firstChild.data);
-		
+
 		tag = findChild (CurrentConditions, "RealFeel");
 		if (tag == null) {callback(constructError("no <RealFeel>")); return;}
 		obj.realFeel = parseInt (tag.firstChild.data);
-		
+
 		tag = findChild (CurrentConditions, "WeatherText");
 		if (tag == null)
 			obj.description = null;
 		else
 			obj.description = trimWhiteSpace(tag.firstChild.data);
-					
+
 		tag = findChild (CurrentConditions, "WeatherIcon");
 		if (tag == null) {callback(constructError("no <WeatherIcon>")); return;}
 		obj.icon = parseInt (tag.firstChild.data, 10);
 		obj.icon -= 1; //Accuweather starts at 1
-		
+
 		obj.sunset = null;
 		obj.sunrise = null;
 		var Planets = findChild (adc_Database, "Planets");
@@ -191,7 +191,7 @@ function xml_loaded (event, request, callback)
 			{
 				var rise = tag.getAttribute("rise");
 				var set = tag.getAttribute("set");
-				
+
 				if (rise != null && set != null)
 				{
 					obj.sunset = parseTimeString (set);
@@ -199,11 +199,11 @@ function xml_loaded (event, request, callback)
 				}
 			}
 		}
-		
-		
-		
-		callback (obj); 
-		
+
+
+
+		callback (obj);
+
 	}
 	else
 	{
@@ -225,7 +225,7 @@ function validateWeatherLocation (location, callback)
 {
 	//var url = 'http://apple.accuweather.com/adcbin/apple/Apple_find_city.asp?location=';
 	var url = 'http://wu.apple.com/adcbin/apple/Apple_find_city.asp?location=';
-	
+
 	var xml_request = new XMLHttpRequest();
 	xml_request.onload = function(e) {xml_validateloaded(e, xml_request, callback);}
 	xml_request.overrideMimeType("text/xml");
@@ -241,10 +241,10 @@ function xml_validateloaded (event, request, callback)
 		var obj = {error:false, errorString:null, cities:new Array, refine:false};
 		var adc_Database = findChild (request.responseXML, "adc_Database");
 		if (adc_Database == null) {callback(constructError("no <adc_Database>")); return;}
-		
+
 		var CityList = findChild (adc_Database, "CityList");
 		if (CityList == null) {callback(constructError("no <CityList>")); return;}
-		
+
 		if (CityList.getAttribute('extra_cities') == '1')
 			obj.refine = true;
 
@@ -255,14 +255,14 @@ function xml_validateloaded (event, request, callback)
 				var city = child.getAttribute("city");
 				var state = child.getAttribute("state");
 				var zip = child.getAttribute("postal");
-				
+
 				if (city && state && zip)
 				{
 					obj.cities[obj.cities.length] = {name:city, state:state, zip:zip};
 				}
 			}
 		}
-		
+
 		callback (obj);
 	}
 	else

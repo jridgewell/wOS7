@@ -8,23 +8,23 @@ var useRealFeel = false;
 
 var enableWallpaper = true;
 
-var enableLockScreen =	false; 
+var enableLockScreen =	false;
 
-var stylesheetWall = 'split_wim66mod'; 
+var stylesheetWall = 'split_wim66mod';
 
-var stylesheetLock = 'split'; 
+var stylesheetLock = 'split';
 
-var iconSetWall = 'spils'; 
+var iconSetWall = 'spils';
 
 var iconExtWall = ".png";
 
-var iconSetLock = 'mau'; 
+var iconSetLock = 'mau';
 
 var iconExtLock = '.png';
 
-var source = 'yahooWeather'; 
+var source = 'yahooWeather';
 
-var updateInterval = 25; 
+var updateInterval = 25;
 
 var postal;
 
@@ -62,7 +62,7 @@ if(iconSet == null || iconSet == 'null' || iconSet == ""){
 
 }
 
-	var headID = document.getElementsByTagName("head")[0];	       
+	var headID = document.getElementsByTagName("head")[0];
 
 	var styleNode = document.createElement('link');
 
@@ -86,7 +86,7 @@ if(iconSet == null || iconSet == 'null' || iconSet == ""){
 
 function onLoad(){
 
-	if (enabled == true){ 
+	if (enabled == true){
 
 	if (demoMode == true){
 
@@ -98,9 +98,9 @@ function onLoad(){
 
 		document.getElementById("temp").innerText="100º";
 
-		
 
-	}else{ 
+
+	}else{
 
 	validateWeatherLocation(escape(locale).replace(/^%u/g, "%"), setPostal);
 
@@ -128,7 +128,7 @@ function convertTemp(num)
 
 function setPostal(obj){
 
-	
+
 
 	if (obj.error == false){
 
@@ -154,7 +154,7 @@ function dealWithWeather(obj){
 
 	if (obj.error == false){
 
-		
+
 
 		if(useRealFeel == true){
 
@@ -168,23 +168,23 @@ function dealWithWeather(obj){
 
 				var Conditions = ["thunderstorm","rain","rain","thunderstorm","thunderstorm","rain","rain","snow","snow","rain","snow","rain","rain","snow","snow","snow","snow","snow","snow","fog","fog","fog","fog","cloud","cloud","cloud","cloud","cloud","cloud","cloud","cloud","sun","sun","moon","sun","rain","sun","thunderstorm","thunderstorm","thunderstorm","thunderstorm","snow","snow","snow","cloud","thunderstorm","snow","thunderstorm","blank"];
 
-		document.getElementById("animationFrame").src="Animations/"+Conditions[obj.icon]+".html"; 
+		document.getElementById("animationFrame").src="Animations/"+Conditions[obj.icon]+".html";
 
-		
+
 
 	}else{
 
-				document.getElementById("WeatherContainer").className = "errorWeatherDataFetch";       
+				document.getElementById("WeatherContainer").className = "errorWeatherDataFetch";
 
 	}
 
-	
 
-	
+
+
 
 }
 
-function weatherRefresherTemp(){ 
+function weatherRefresherTemp(){
 
 	fetchWeatherData(dealWithWeather,postal);
 
@@ -206,7 +206,7 @@ function findChild (element, nodeName)
 
 	var child;
 
-	
+
 
 	for (child = element.firstChild; child != null; child = child.nextSibling)
 
@@ -218,7 +218,7 @@ function findChild (element, nodeName)
 
 	}
 
-	
+
 
 	return null;
 
@@ -230,7 +230,7 @@ function fetchWeatherData (callback, zip)
 
 	url="http://weather.yahooapis.com/forecastrss?u=f&p=";
 
-	
+
 
 	var xml_request = new XMLHttpRequest();
 
@@ -242,9 +242,9 @@ function fetchWeatherData (callback, zip)
 
 	xml_request.setRequestHeader("Cache-Control", "no-cache");
 
-	xml_request.send(null); 
+	xml_request.send(null);
 
-	
+
 
 	return xml_request;
 
@@ -266,7 +266,7 @@ function xml_loaded (event, request, callback)
 
 		obj.realFeel = findChild(effectiveRoot, "yweather:wind").getAttribute("chill");
 
-		
+
 
 		conditionTag = findChild(findChild(effectiveRoot, "item"), "yweather:condition");
 
@@ -274,9 +274,9 @@ function xml_loaded (event, request, callback)
 
 		obj.icon = conditionTag.getAttribute("code");
 
-		obj.description = conditionTag.getAttribute("text"); 
+		obj.description = conditionTag.getAttribute("text");
 
-		callback (obj); 
+		callback (obj);
 
 	}else{
 
@@ -292,7 +292,7 @@ function validateWeatherLocation (location, callback)
 
 	var obj = {error:false, errorString:null, cities: new Array};
 
-	obj.cities[0] = {zip: location}; 
+	obj.cities[0] = {zip: location};
 
 	callback (obj);
 

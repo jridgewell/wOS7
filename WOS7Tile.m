@@ -1,11 +1,3 @@
-/*
- 
- wOS7, Windows Phone 7 Theme
- 
- Wyndwarrior, 2011. Designed for DreamBoard
- 
- */
-
 #import "WOS7Tile.h"
 
 @implementation WOS7Tile
@@ -19,23 +11,23 @@
         id app = [[[WOS7 sharedInstance] applications] objectAtIndex:index];
         appIndex = index;
         self.leafIdentifier = [app leafIdentifier];
-        
-        
+
+
         //background image
         UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, frame.size.width, frame.size.height)];
         bgImageView.image = [UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/Background.png"];
         [self addSubview:bgImageView];
         [bgImageView release];
-        
+
         //check if tile has an info.plist
         if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/Info.plist", leafIdentifier]]){
             //load our plist
             NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/Info.plist", leafIdentifier]];
-            
+
             //check if uses html
             if([dict objectForKey:@"usesHTML"] && [[dict objectForKey:@"usesHTML"] isEqualToString:@"YES"]){
                 if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/%@", leafIdentifier, [dict objectForKey:@"widgetFile"]]]){
-                    
+
                     //load the html
                     UIWebDocumentView *webView = [[UIWebDocumentView alloc] initWithFrame:CGRectMake(0,0,frame.size.width, frame.size.height)];
                     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/%@", leafIdentifier, [dict objectForKey:@"widgetFile"]]]]];
@@ -64,7 +56,7 @@
             //custom name
             if([dict objectForKey:@"displayName"])
                 appDisplayLabel.text = [dict objectForKey:@"displayName"];
-            
+
             [self addSubview:appDisplayLabel];
             [appDisplayLabel release];
             [dict release];
@@ -73,7 +65,7 @@
         {
             NSArray *splited = [[[app application] path] componentsSeparatedByString: @"/"];
             tileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(27.5,27.5, 60, 60)];
-            
+
             //if this is an app store app, it will have a large itunesartwork
             if([[splited objectAtIndex:1] isEqualToString:@"private"]){
                 tileImageView.frame = CGRectMake(-17.5,-17.5, 150, 150);
@@ -83,14 +75,14 @@
             else{
                 tileImageView.image = [WOS7 maskImage:[app getIconImage:2] withMask:[UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/IconMask.png"]];
                 [self addSubview:tileImageView];
-                
+
                 UIImageView *over = [[UIImageView alloc] initWithFrame:CGRectMake(27.5,27.5, 60, 60)];
                 over.image = [UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/IconOverlay.png"];
                 [self addSubview:over];
                 [over release];
             }
             [tileImageView release];
-            
+
             //name label
             UILabel *appDisplayLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.5,98,105,14)];
             appDisplayLabel.font = [UIFont boldSystemFontOfSize:13];
@@ -100,26 +92,26 @@
             [self addSubview:appDisplayLabel];
             [appDisplayLabel release];
         }
-        
+
         UIButton *launchButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [launchButton addTarget:self action:@selector(launch) forControlEvents:UIControlEventTouchUpInside];
         if(frame.size.width==115)
             [launchButton setImage:[UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/TileOverlay.png"] forState:UIControlStateNormal];
         self.tag = index;
-        UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didHold:)];    
+        UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didHold:)];
         [launchButton addGestureRecognizer:recognizer];
         [recognizer release];
         [self addSubview:launchButton];
         [launchButton release];
-        
+
         [self updateBadge];
-        
+
         self.clipsToBounds = YES;
 	}
 	return self;
 }
 
-- (void)didHold:(UILongPressGestureRecognizer *)sender { 
+- (void)didHold:(UILongPressGestureRecognizer *)sender {
     NSLog(@"Recieved Hold:%d", sender.state);
     if (sender.state == 1)[[WOS7 sharedInstance] didHold:self];
 }
