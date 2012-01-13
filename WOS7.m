@@ -38,11 +38,11 @@ static WOS7* sharedInstance;
         [mainView addSubview:tileScrollView];
         
         //add background
-        if([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Library/wOS7/Background.png"])
+        if([[NSFileManager defaultManager] fileExistsAtPath:@LIBRARY_DIR"/Background.png"])
         {
             UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,480)];
             bgView.tag = 100;
-            bgView.image = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Background.png"];
+            bgView.image = [UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Background.png"];
             [mainView insertSubview:bgView atIndex:0];
             [bgView release];
         }
@@ -64,7 +64,7 @@ static WOS7* sharedInstance;
         //add the arrow
         toggleInterface = [[UIButton alloc] initWithFrame:CGRectMake(254,60,66,66)];
         [toggleInterface addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
-        [toggleInterface setImage:[UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Images/Arrow.png"] forState:UIControlStateNormal];
+        [toggleInterface setImage:[UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/Arrow.png"] forState:UIControlStateNormal];
         [mainView addSubview:toggleInterface];
         [toggleInterface release];
         toggled = YES;
@@ -88,7 +88,7 @@ static WOS7* sharedInstance;
 
 -(void)updateTiles{
     
-    NSArray *tilesArray = [[NSArray alloc] initWithContentsOfFile:@"/var/mobile/Library/wOS7/Tiles.plist"];
+    NSArray *tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
     
     //remove old tiles
     for(id app in tileScrollView.subviews)
@@ -101,8 +101,8 @@ static WOS7* sharedInstance;
         
         //see if this tile is large
         BOOL isLarge = NO;
-        if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/Info.plist", bundleId]]){
-            NSDictionary *info = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/Info.plist", bundleId]];
+        if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/Info.plist", bundleId]]){
+            NSDictionary *info = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/Info.plist", bundleId]];
             if([[info allKeys] containsObject:@"isLargeTile"])
                 isLarge = [[info valueForKey:@"isLargeTile"] isEqualToString:@"YES"];
             [info release];
@@ -253,7 +253,7 @@ static WOS7* sharedInstance;
         [actionSheet showInView:window];
         [actionSheet release];
     }else if([sender isKindOfClass:[WOS7ListApp class]]){
-        NSArray *tilesArray = [[NSArray alloc] initWithContentsOfFile:@"/var/mobile/Library/wOS7/Tiles.plist"];
+        NSArray *tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
         if(![tilesArray containsObject:[[applications objectAtIndex:[sender tag]] leafIdentifier]]){
             UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Pin to Start Menu",nil];
             [actionSheet showInView:window];
@@ -266,7 +266,7 @@ static WOS7* sharedInstance;
 {
     NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
     NSString *leafIdentifier = [actionSheet title];
-    NSMutableArray *ray = [[NSMutableArray alloc] initWithContentsOfFile:@"/var/mobile/Library/wOS7/Tiles.plist"];
+    NSMutableArray *ray = [[NSMutableArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
     if([title isEqualToString:@"Unpin"])[ray removeObject:leafIdentifier];
     else if([title isEqualToString:@"Move Up"]){
         int i = [ray indexOfObject:leafIdentifier];
@@ -281,7 +281,7 @@ static WOS7* sharedInstance;
     }else if([title isEqualToString:@"Pin to Start Menu"])
         [ray addObject:leafIdentifier];
 
-	[ray writeToFile:@"/var/mobile/Library/wOS7/Tiles.plist" atomically:NO];
+	[ray writeToFile:@LIBRARY_DIR"/Tiles.plist" atomically:NO];
     [ray release];
     
     [self updateTiles];

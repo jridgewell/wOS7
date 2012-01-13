@@ -21,17 +21,17 @@
         NSString *name = [app displayName];
         
         UIImageView *background = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 40, 40)];
-        background.image = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Images/Background.png"];
+        background.image = [UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/Background.png"];
         [self addSubview:background];
         [background release];
         
         UIImageView *imgView;
-        if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/MiniTile.png", leafIdentifier]]){
+        if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/MiniTile.png", leafIdentifier]]){
             imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 40, 40)];
-            imgView.image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Library/wOS7/Tiles/%@/MiniTile.png", leafIdentifier]];
+            imgView.image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@LIBRARY_DIR"/Tiles/%@/MiniTile.png", leafIdentifier]];
         }else{
             imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-5,-5, 49, 49)];
-            imgView.image = [WOS7 maskImage:[app getIconImage:2] withMask:[UIImage imageWithContentsOfFile:@"/var/mobile/Library/wOS7/Images/IconMask.png"]];
+            imgView.image = [WOS7 maskImage:[app getIconImage:2] withMask:[UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/IconMask.png"]];
         }
         [self addSubview:imgView];
         [imgView release];

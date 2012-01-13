@@ -11,6 +11,8 @@
 #import "WOS7ListApp.h"
 #import "DreamBoard.h"
 
+#define LIBRARY_DIR "/var/mobile/Library/wOS7"
+
 @interface WOS7 : NSObject <UIActionSheetDelegate, UIScrollViewDelegate>
 {
 	UIWindow *window;
