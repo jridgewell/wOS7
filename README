@@ -10,7 +10,7 @@ Please read!
    is given.
 2. OS7 was compiled with theos, which can be
    found at:
-     https://github.com/DHowett/theos
+	https://github.com/DHowett/theos
 3. There is no liability or responsibility
    for this code. It may crash, brick,
    destroy or damage any device and is
@@ -22,13 +22,13 @@ Please read!
 Setup
 ==========================================
 1. Install theos:
-    (http://iphonedevwiki.net/index.php/Theos/Getting_Started#On_Mac_OS_X_or_Linux)
+	(http://iphonedevwiki.net/index.php/Theos/Getting_Started#On_Mac_OS_X_or_Linux)
 2. Install required headers:
-      1. cd $THEOS/include
-      2. rm *
-      3. git clone https://github.com/rpetrich/iphoneheaders.git .
-      4. Copy Snow Leopard's IOSurfaceAPI.h:
-         cp /System/Library/Frameworks/IOSurface.framework/Headers/IOSurfaceAPI.h $THEOS/include/IOSurface/
-         OR
-         cp /Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/IOSurface.framework/Headers/IOSurfaceAPI.h $THEOS/include/IOSurface/
+	1. cd $THEOS/include
+	2. rm *
+	3. git clone https://github.com/rpetrich/iphoneheaders.git .
+	4. Copy Snow Leopard's IOSurfaceAPI.h:
+		cp /System/Library/Frameworks/IOSurface.framework/Headers/IOSurfaceAPI.h $THEOS/include/IOSurface/
+		OR
+		cp /Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/IOSurface.framework/Headers/IOSurfaceAPI.h $THEOS/include/IOSurface/
 3. make

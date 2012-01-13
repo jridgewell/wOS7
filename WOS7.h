@@ -18,11 +18,11 @@
 
 	BOOL toggled;
 }
-@property(nonatomic, readonly) NSMutableArray* applications;
-@property(nonatomic, readonly) UIView* mainView;
+@property(nonatomic, readonly)NSMutableArray* applications;
+@property(nonatomic, readonly)UIView* mainView;
 
 +(WOS7*)sharedInstance;
-+(UIImage*) maskImage: (UIImage*)image withMask: (UIImage*)maskImage;
++(UIImage*)maskImage: (UIImage*)image withMask: (UIImage*)maskImage;
 
 -(id)initWithWindow: (UIWindow*)_window array: (NSMutableArray*)_apps;
 -(void)toggle;

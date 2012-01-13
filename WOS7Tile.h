@@ -3,13 +3,13 @@
 @interface WOS7Tile : UIView
 {
 	NSString* leafIdentifier;
-    int appIndex;
+	int appIndex;
 
 	UILabel* badgeLabel;
-    UIImageView* tileImageView;
+	UIImageView* tileImageView;
 }
 
-@property (nonatomic, retain) NSString* leafIdentifier;
+@property (nonatomic, retain)NSString* leafIdentifier;
 
 -(id)initWithFrame: (CGRect)frame appIndex: (int)index;
 -(void)updateBadge;
