@@ -249,16 +249,46 @@ static WOS7* sharedInstance;
 }
 
 -(void)didHold: (id)sender {
+	UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier] delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+	actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
 	if ([sender isKindOfClass:[WOS7Tile class]]) {
-		UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Unpin", @"Move Up", @"Move Down", nil];
-		[actionSheet showInView:window];
-		[actionSheet release];
+		[actionSheet addButtonWithTitle:@"Unpin"];
+		[actionSheet addButtonWithTitle:@"Move Up"];
+		[actionSheet addButtonWithTitle:@"Move Down"];
+
 	} else if ([sender isKindOfClass:[WOS7ListApp class]]) {
 		NSArray* tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
 		if (![tilesArray containsObject:[[applications objectAtIndex:[sender tag]] leafIdentifier]]) {
-			UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Pin to Start Menu", nil];
-			[actionSheet showInView:window];
-			[actionSheet release];
+			[actionSheet addButtonWithTitle:@"Pin to Start Menu"];
+		}
+	}
+	actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
+	[actionSheet showInView:window];
+	[actionSheet release];
+}
+
+- (void)willPresentActionSheet: (UIActionSheet*)actionSheet
+{
+	[[actionSheet layer] setBackgroundColor:[UIColor whiteColor].CGColor];
+	[[actionSheet layer] setContents:nil];
+
+	for (id sV in [actionSheet subviews]) {
+		if ([sV isKindOfClass:[UIButton class]]) {
+			[sV setFrame:CGRectMake(16, [sV tag]*40, 294, 35)];
+			[[sV titleLabel] setFont:[UIFont systemFontOfSize:20]];
+			[sV setBackgroundImage:nil forState:UIControlStateNormal];
+			[sV setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+			[sV setTitleShadowColor:nil forState:UIControlStateNormal];
+			[sV setBackgroundImage:nil forState:UIControlStateHighlighted];
+			[sV setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+			[sV setTitleShadowColor:nil forState:UIControlStateHighlighted];
+			[sV setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+		} else {
+			[sV setFrame:CGRectMake(16, 0, 294, 35)];
+			[sV setFont:[UIFont systemFontOfSize:20]];
+			[sV setTextColor:[UIColor blackColor]];
+			[sV setShadowColor:nil];
+			[sV setTextAlignment:UITextAlignmentLeft];
 		}
 	}
 }
