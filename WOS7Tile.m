@@ -108,7 +108,6 @@
 }
 
 - (void)didHold: (UILongPressGestureRecognizer*)sender {
-	NSLog(@"Recieved Hold:%d", sender.state);
 	if (sender.state == 1) {
 		[[WOS7 sharedInstance] didHold:self];
 	}
