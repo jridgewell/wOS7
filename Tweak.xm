@@ -1,6 +1,6 @@
 #import <SpringBoard/SpringBoard.h>
-#import "DreamBoard.h"
-#import "WOS7.h"
+#import "Classes/DreamBoard.h"
+#import "Classes/WOS7.h"
 
 WOS7* wos7;
 
