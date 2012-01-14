@@ -249,7 +249,7 @@ static WOS7* sharedInstance;
 	toggled = YES;
 }
 
--(void)didHold: (id)sender {
+-(void)didHold:(UILongPressGestureRecognizer*)gesture tile:(id)sender {
 	UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier] delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
 	actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
 	if ([sender isKindOfClass:[WOS7Tile class]]) {

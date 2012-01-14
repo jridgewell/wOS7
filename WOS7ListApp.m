@@ -53,7 +53,7 @@
 
 - (void)didHold: (UILongPressGestureRecognizer*)sender {
 	if (sender.state == 1) {
-		[[WOS7 sharedInstance] didHold:self];
+		[[WOS7 sharedInstance] didHold:sender tile:self];
 	}
 }
 

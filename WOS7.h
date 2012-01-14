@@ -34,6 +34,6 @@
 -(void)toggleRight;
 -(void)updateTiles;
 -(void)updateBadge: (NSString*)leafId;
--(void)didHold: (id)sender;
+-(void)didHold:(UILongPressGestureRecognizer*)gesture tile:(id)sender;
 
 @end
