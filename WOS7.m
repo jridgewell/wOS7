@@ -250,81 +250,26 @@ static WOS7* sharedInstance;
 }
 
 -(void)didHold:(UILongPressGestureRecognizer*)gesture tile:(id)sender {
-	UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier] delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-	actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+	CustomActionSheet* actionSheet = [[CustomActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier]
+																		width:270];
+	NSString* buttonLabel;
 	if ([sender isKindOfClass:[WOS7Tile class]]) {
-		[actionSheet addButtonWithTitle:@"Unpin"];
-		[actionSheet addButtonWithTitle:@"Move Up"];
-		[actionSheet addButtonWithTitle:@"Move Down"];
-
+		buttonLabel = @"Unpin, Move Up, Move Down";
 	} else if ([sender isKindOfClass:[WOS7ListApp class]]) {
 		NSArray* tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
 		if (![tilesArray containsObject:[[applications objectAtIndex:[sender tag]] leafIdentifier]]) {
-			[actionSheet addButtonWithTitle:@"Pin to Start Menu"];
+			buttonLabel = @"Pin to Start Menu";
 		}
+		[tilesArray release];
 	}
-	actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
+//	NSArray* buttonLabels = [buttonLabel componentsSeparatedByString:@", "];
+//	for (NSString* label in buttonLabels) {
+	for (NSString* label in [buttonLabel componentsSeparatedByString:@", "]) {
+		[actionSheet addButtonWithTitle:label];
+	}
 	[actionSheet showInView:window];
 	[actionSheet release];
 }
-
-- (void)willPresentActionSheet: (UIActionSheet*)actionSheet
-{
-	[[actionSheet layer] setBackgroundColor:[UIColor whiteColor].CGColor];
-	[[actionSheet layer] setContents:nil];
-
-	for (id sV in [actionSheet subviews]) {
-		if ([sV isKindOfClass:[UIButton class]]) {
-			[sV setFrame:CGRectMake(16, [sV tag]*40, 294, 35)];
-			[[sV titleLabel] setFont:[UIFont systemFontOfSize:20]];
-			[sV setBackgroundImage:nil forState:UIControlStateNormal];
-			[sV setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-			[sV setTitleShadowColor:nil forState:UIControlStateNormal];
-			[sV setBackgroundImage:nil forState:UIControlStateHighlighted];
-			[sV setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-			[sV setTitleShadowColor:nil forState:UIControlStateHighlighted];
-			[sV setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-		} else {
-			[sV setFrame:CGRectMake(16, 0, 294, 35)];
-			[sV setFont:[UIFont systemFontOfSize:20]];
-			[sV setTextColor:[UIColor blackColor]];
-			[sV setShadowColor:nil];
-			[sV setTextAlignment:UITextAlignmentLeft];
-		}
-	}
-}
-
-- (void)actionSheet: (UIActionSheet*)actionSheet didDismissWithButtonIndex: (NSInteger)buttonIndex
-{
-	NSString* title = [actionSheet buttonTitleAtIndex:buttonIndex];
-	NSString* leafIdentifier = [actionSheet title];
-	NSMutableArray* ray = [[NSMutableArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
-	if ([title isEqualToString:@"Unpin"]) {
-		[ray removeObject:leafIdentifier];
-	} else if ([title isEqualToString:@"Move Up"]) {
-		int i = [ray indexOfObject:leafIdentifier];
-		i = (i == 0) ? 0 : i - 1;
-		[ray removeObject:leafIdentifier];
-		[ray insertObject:actionSheet.title atIndex:i];
-	} else if ([title isEqualToString:@"Move Down"]) {
-		int i = [ray indexOfObject:leafIdentifier];
-		i = (i == (int)ray.count - 1) ? (int)ray.count - 1 : i + 1;
-		[ray removeObject:leafIdentifier];
-		[ray insertObject:actionSheet.title atIndex:i];
-	} else if ([title isEqualToString:@"Pin to Start Menu"]) {
-		[ray addObject:leafIdentifier];
-	}
-
-	[ray writeToFile:@LIBRARY_DIR"/Tiles.plist" atomically:NO];
-	[ray release];
-
-	[self updateTiles];
-
-	if ([title isEqualToString:@"Pin to Start Menu"] && !toggled) {
-		[self toggle];
-	}
-}
-
 
 +(WOS7*)sharedInstance {
 	return sharedInstance;

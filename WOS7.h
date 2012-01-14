@@ -1,6 +1,7 @@
 #import <SpringBoard/SpringBoard.h>
 #import "WOS7Tile.h"
 #import "WOS7ListApp.h"
+#import "CustomActionSheet.h"
 #import "TouchView.h"
 #import "DreamBoard.h"
 
