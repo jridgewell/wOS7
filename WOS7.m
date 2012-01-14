@@ -120,7 +120,7 @@ static WOS7* sharedInstance;
 				}
 
 				//if we find our tiles, update it's positioning.
-				[UIView beginAnimations:nil context:nil];
+				[UIView beginAnimations:@"moveTile" context:nil];
 				[UIView setAnimationDuration:.5];
 				[app setFrame:CGRectMake((j % 2 == 0) ? 13 : 136, (123 * (j / 2)) + 75, (isLarge) ? 238 : 115, 115)];
 				[UIView commitAnimations];
@@ -217,7 +217,7 @@ static WOS7* sharedInstance;
 
 -(void)toggleLeft {
 	[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
-	[UIView beginAnimations:nil context:nil];
+	[UIView beginAnimations:@"toggleLeft" context:nil];
 	[UIView setAnimationDuration:.5];
 	subView.frame = CGRectMake(-254,0,574,480);
 	toggleInterface.transform = CGAffineTransformMakeRotation(M_PI);
@@ -234,7 +234,7 @@ static WOS7* sharedInstance;
 
 -(void)toggleRight {
 	[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
-	[UIView beginAnimations:nil context:nil];
+	[UIView beginAnimations:@"toggleRight" context:nil];
 	[UIView setAnimationDuration:.5];
 	subView.frame = CGRectMake(0,0,574,480);
 	toggleInterface.transform = CGAffineTransformMakeRotation(0);
