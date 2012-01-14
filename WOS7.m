@@ -1,6 +1,7 @@
 #import "WOS7.h"
 
-#define BACKGROUND_FADE .30
+#define BACKGROUND_FADE		.30
+#define BACKGROUND_TAG		100
 
 @implementation WOS7
 @synthesize applications, mainView, subView;
@@ -41,7 +42,7 @@ static WOS7* sharedInstance;
 		//add background
 		if ([[NSFileManager defaultManager] fileExistsAtPath:@LIBRARY_DIR"/Background.png"]) {
 			UIImageView* bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-			bgView.tag = 100;
+			bgView.tag = BACKGROUND_TAG;
 			bgView.image = [UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Background.png"];
 			[mainView insertSubview:bgView atIndex:0];
 			[bgView release];
@@ -187,7 +188,7 @@ static WOS7* sharedInstance;
 		scaleLeftMovement = subView.frame.origin.x / -254;
 		subView.center = CGPointMake(subView.center.x + d.x, subView.center.y);
 		toggleInterface.transform = CGAffineTransformMakeRotation(scaleLeftMovement * -1 * M_PI);
-		[[mainView viewWithTag:100] setAlpha:(1 - (scaleLeftMovement * (1 - BACKGROUND_FADE)))];
+		[[mainView viewWithTag:BACKGROUND_TAG] setAlpha:(1 - (scaleLeftMovement * (1 - BACKGROUND_FADE)))];
 	}
 
 	if (recognizer.state == UIGestureRecognizerStateEnded) {
@@ -222,7 +223,7 @@ static WOS7* sharedInstance;
 	toggleInterface.transform = CGAffineTransformMakeRotation(M_PI);
 
 	//fade background
-	[[mainView viewWithTag:100] setAlpha:BACKGROUND_FADE];
+	[[mainView viewWithTag:BACKGROUND_TAG] setAlpha:BACKGROUND_FADE];
 	//allow scrollToTop on status bar tap
 	[tileScrollView setScrollsToTop:NO];
 	[appList setScrollsToTop:YES];
@@ -239,7 +240,7 @@ static WOS7* sharedInstance;
 	toggleInterface.transform = CGAffineTransformMakeRotation(0);
 
 	//fade background
-	[[mainView viewWithTag:100] setAlpha:1];
+	[[mainView viewWithTag:BACKGROUND_TAG] setAlpha:1];
 	//allow scrollToTop on status bar tap
 	[tileScrollView setScrollsToTop:YES];
 	[appList setScrollsToTop:NO];
