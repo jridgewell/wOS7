@@ -24,7 +24,6 @@ static WOS7* sharedInstance;
 		applications =	_apps;
 
 		//create views
-		tileScrollView =	[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 		mainView =		[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 		subView =		[[UIView alloc] initWithFrame:CGRectMake(0, 0, 574, 480)];
 
@@ -34,6 +33,7 @@ static WOS7* sharedInstance;
 		subView.opaque = NO;
 		subView.backgroundColor = [UIColor clearColor];
 
+		tileScrollView =	[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 		appList =		[[UIScrollView alloc] initWithFrame:CGRectMake(320, 0, 254, 480)];
 		[subView addSubview:appList];
 		[subView addSubview:tileScrollView];
