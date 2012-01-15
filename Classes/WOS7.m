@@ -2,8 +2,7 @@
 
 #define BACKGROUND_FADE		.30
 #define BACKGROUND_TAG		100
-#define TOGGLE_FAST			.15
-#define TOGGLE_SLOW			.3
+#define TOGGLE_NORMAL		.3
 
 @implementation WOS7
 @synthesize applications, mainView, subView;
@@ -72,7 +71,7 @@ static WOS7* sharedInstance;
 		[toggleInterface setImage:[UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/Arrow.png"] forState:UIControlStateNormal];
 		[subView addSubview:toggleInterface];
 		[toggleInterface release];
-		toggled = YES;
+		toggled = NO;
 
 		//make sure there are no scrollbars
 		appList.showsVerticalScrollIndicator = NO;
@@ -185,38 +184,41 @@ static WOS7* sharedInstance;
 }
 
 - (void)didPan:(UIPanGestureRecognizer*)recognizer {
-	CGPoint d = [recognizer translationInView:recognizer.view];
-	[recognizer setTranslation:CGPointZero inView:recognizer.view];
-	CGFloat scaleLeftMovement = 0;
+	if (recognizer.state == UIGestureRecognizerStateBegan || recognizer.state == UIGestureRecognizerStateChanged) {
+		CGPoint d = [recognizer translationInView:recognizer.view];
+		[recognizer setTranslation:CGPointZero inView:recognizer.view];
+		CGFloat scaleLeftMovement = 0;
 
-	if (subView.frame.origin.x + d.x >= -254 && subView.frame.origin.x + d.x <= 0) {
-		scaleLeftMovement = subView.frame.origin.x / -254;
-		subView.center = CGPointMake(subView.center.x + d.x, subView.center.y);
-		toggleInterface.transform = CGAffineTransformMakeRotation(scaleLeftMovement * -1 * (CGFloat)M_PI);
-		[[mainView viewWithTag:BACKGROUND_TAG] setAlpha:(1 - (scaleLeftMovement * (1 - (CGFloat)BACKGROUND_FADE)))];
-	}
-
-	if (recognizer.state == UIGestureRecognizerStateEnded) {
+		if (subView.frame.origin.x + d.x >= -254 && subView.frame.origin.x + d.x <= 0) {
+			scaleLeftMovement = subView.frame.origin.x / -254;
+			subView.center = CGPointMake(subView.center.x + d.x, subView.center.y);
+			toggleInterface.transform = CGAffineTransformMakeRotation(scaleLeftMovement * -1 * (CGFloat)M_PI);
+			[[mainView viewWithTag:BACKGROUND_TAG] setAlpha:(1 - (scaleLeftMovement * (1 - (CGFloat)BACKGROUND_FADE)))];
+		}
+	} else if (recognizer.state == UIGestureRecognizerStateEnded) {
 		CGPoint vel = [recognizer velocityInView:recognizer.view];
 		BOOL leftRight = (subView.center.x <= 160); // ([subView width] / 2) - (254 / 2)
+		double speed;
 
 		if (vel.x < -100) {
-			[self toggleLeft:TOGGLE_FAST];
+			speed = fabs(-254 - subView.frame.origin.x) / fabs(vel.x);
+			[self toggleLeft:speed];
 		} else if (vel.x >= 100) {
-			[self toggleRight:TOGGLE_FAST];
+			speed = fabs(subView.frame.origin.x) / vel.x;
+			[self toggleRight:speed];
 		} else if (leftRight) {
-			[self toggleLeft:TOGGLE_FAST];
+			[self toggleLeft:TOGGLE_NORMAL];
 		} else {
-			[self toggleRight:TOGGLE_FAST];
+			[self toggleRight:TOGGLE_NORMAL];
 		}
 	}
 }
 
 - (void)toggle {
 	if (toggled) {
-		[self toggleLeft:TOGGLE_SLOW];
+		[self toggleRight:TOGGLE_NORMAL];
 	} else {
-		[self toggleRight:TOGGLE_SLOW];
+		[self toggleLeft:TOGGLE_NORMAL];
 	}
 }
 
@@ -233,7 +235,7 @@ static WOS7* sharedInstance;
 	[appList setScrollsToTop:YES];
 	[UIView commitAnimations];
 
-	toggled = NO;
+	toggled = YES;
 }
 
 - (void)toggleRight:(double)t {
@@ -249,7 +251,7 @@ static WOS7* sharedInstance;
 	[appList setScrollsToTop:NO];
 	[UIView commitAnimations];
 
-	toggled = YES;
+	toggled = NO;
 }
 
 - (void)didHold:(UILongPressGestureRecognizer*)gesture tile:(id)sender {
@@ -298,7 +300,7 @@ static WOS7* sharedInstance;
 
 	[self updateTiles];
 
-	if ([title isEqualToString:@"Pin to Start Menu"] && !toggled) {
+	if ([title isEqualToString:@"Pin to Start Menu"] && toggled) {
 		[self toggle];
 	}
 }
@@ -307,10 +309,10 @@ static WOS7* sharedInstance;
 	if (!animatingBounce) {
 		CGRect frame = [toggleInterface frame];
 		if (toggled) {
-			frame.origin = CGPointMake((frame.origin.x + 10),
+			frame.origin = CGPointMake((frame.origin.x - 10),
 									   frame.origin.y);
 		} else {
-			frame.origin = CGPointMake((frame.origin.x - 10),
+			frame.origin = CGPointMake((frame.origin.x + 10),
 									   frame.origin.y);
 		}
 
@@ -329,10 +331,10 @@ static WOS7* sharedInstance;
 	if ([animationID isEqualToString:@"scrollBounce"]) {
 		CGRect frame = [toggleInterface frame];
 		if (toggled) {
-			frame.origin = CGPointMake((frame.origin.x - 10),
+			frame.origin = CGPointMake((frame.origin.x + 10),
 									   frame.origin.y);
 		} else {
-			frame.origin = CGPointMake((frame.origin.x + 10),
+			frame.origin = CGPointMake((frame.origin.x - 10),
 									   frame.origin.y);
 		}
 
