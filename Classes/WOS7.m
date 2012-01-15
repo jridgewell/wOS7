@@ -252,19 +252,18 @@ static WOS7* sharedInstance;
 -(void)didHold:(UILongPressGestureRecognizer*)gesture tile:(id)sender {
 	CustomActionSheet* actionSheet = [[CustomActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier]
 																		width:270];
-	NSString* buttonLabel;
+	NSString* buttonLabels;
 	if ([sender isKindOfClass:[WOS7Tile class]]) {
-		buttonLabel = @"Unpin, Move Up, Move Down";
+		buttonLabels = @"Unpin, Move Up, Move Down";
 	} else if ([sender isKindOfClass:[WOS7ListApp class]]) {
 		NSArray* tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
 		if (![tilesArray containsObject:[[applications objectAtIndex:[sender tag]] leafIdentifier]]) {
-			buttonLabel = @"Pin to Start Menu";
+			buttonLabels = @"Pin to Start Menu";
 		}
 		[tilesArray release];
 	}
-//	NSArray* buttonLabels = [buttonLabel componentsSeparatedByString:@", "];
-//	for (NSString* label in buttonLabels) {
-	for (NSString* label in [buttonLabel componentsSeparatedByString:@", "]) {
+	buttonLabels = [[buttonLabels autorelease] stringByAppendingString:@", Cancel"];
+	for (NSString* label in [buttonLabels componentsSeparatedByString:@", "]) {
 		[actionSheet addButtonWithTitle:label];
 	}
 	[actionSheet showInView:window];
