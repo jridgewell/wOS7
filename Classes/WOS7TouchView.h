@@ -1,5 +1,3 @@
-#import "WOS7.h"
-
 @interface WOS7TouchView : UIView {
 	id delegate;
 }
