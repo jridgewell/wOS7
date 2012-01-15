@@ -4,6 +4,10 @@
 
 WOS7* wos7;
 
+@interface SBApplicationIcon (warning)
+	- (NSString*) leafIdentifier;
+@end
+
 %hook SBApplicationIcon
 -(void)setBadge: (NSString*)badge {
 	%orig(badge);

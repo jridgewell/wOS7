@@ -1,7 +1,11 @@
 #import "WOS7.h"
 
-@interface TouchView : UIView {}
+@interface TouchView : UIView {
+	id delegate;
+}
+@property(nonatomic, retain) id delegate;
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+- (TouchView*)initWithFrame:(CGRect)rect delegate:(id)touchDelegate;
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 
 @end
