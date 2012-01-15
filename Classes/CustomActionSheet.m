@@ -117,24 +117,24 @@
 	[label setBackgroundColor:[self backgroundColor]];
 	[label setFont:[self font]];
 
-	float height = [label frame].size.height;
-	for (UIButton* button in buttons) {
-		height += [button frame].size.height;
-	}
-
-	UIView* actionSheet = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self width], height)];
+	UIView* actionSheet = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self width], 0)];
 	[actionSheet setOpaque:YES];
 	[actionSheet setBackgroundColor:[self backgroundColor]];
 	[actionSheet setTag:ACTION_SHEET_TAG];
 
 	[actionSheet addSubview:label];
+	float height = [label frame].size.height;
 	for (UIButton* button in buttons) {
 		CGRect frame = [button frame];
-		frame.origin.x += [label frame].size.height;
-		[button setFrame:frame];
+		height += frame.size.height;
+		[button setFrame:CGRectMake(frame.origin.x,
+									(frame.origin.y + [label frame].size.height),
+									[self width],
+									frame.size.height)];
 		[actionSheet addSubview:button];
 	}
 	[label release];
+	[actionSheet setFrame:CGRectMake(0, 40, [self width], height)];
 
 	TouchView* overlay = [[TouchView alloc] initWithFrame:[view frame] delegate:self];
 	[overlay setOpaque:NO];
