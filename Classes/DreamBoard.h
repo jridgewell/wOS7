@@ -6,19 +6,19 @@
 
 +(DreamBoard*)sharedInstance;
 
--(void)hideSwitcher;
--(void)showSwitcher;
--(void)toggleSwitcher;
+- (void)hideSwitcher;
+- (void)showSwitcher;
+- (void)toggleSwitcher;
 
--(void)startEditing;
--(void)stopEditing;
+- (void)startEditing;
+- (void)stopEditing;
 
--(void)loadTheme: (NSString*)theme;
--(void)unloadTheme;
--(void)showAllExcept: (UIView*)_view;
--(void)hideAllExcept: (UIView*)view;
+- (void)loadTheme:(NSString*)theme;
+- (void)unloadTheme;
+- (void)showAllExcept:(UIView*)_view;
+- (void)hideAllExcept:(UIView*)view;
 
--(NSString*)currentTheme;
--(void)save: (NSString*)theme;
+- (NSString*)currentTheme;
+- (void)save:(NSString*)theme;
 
 @end

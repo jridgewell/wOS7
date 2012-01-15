@@ -160,7 +160,7 @@ function xml_loaded (event, request, callback)
 
 		tag = findChild (CurrentConditions, "City");
 		if (tag == null) {callback(constructError("no <City>")); return;}
-		obj.city =  trimWhiteSpace(tag.firstChild.data.toString()).toLowerCase();
+		obj.city = trimWhiteSpace(tag.firstChild.data.toString()).toLowerCase();
 
 		tag = findChild (CurrentConditions, "Temperature");
 		if (tag == null) {callback(constructError("no <Temperature>")); return;}

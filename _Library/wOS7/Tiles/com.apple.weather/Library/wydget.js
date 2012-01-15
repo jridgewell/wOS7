@@ -48,11 +48,11 @@ function _updateTime(){
 	}
 
 	for(var i = 0; i<_timePaddedHour.length; i++){
-		_timePaddedHour[i].innerHTML =	_day.getHours()==0?12:(_day.getHours()>=10?(_day.getHours()>12?((_day.getHours()-12)>=10?(_day.getHours()-12):("0"+(_day.getHours()-12))):_day.getHours()):"0"+_day.getHours());
+		_timePaddedHour[i].innerHTML = _day.getHours()==0?12:(_day.getHours()>=10?(_day.getHours()>12?((_day.getHours()-12)>=10?(_day.getHours()-12):("0"+(_day.getHours()-12))):_day.getHours()):"0"+_day.getHours());
 	}
 
 	for(var i = 0; i<_timePadded24Hour.length; i++){
-		_timePadded24Hour[i].innerHTML =  _day.getHours()>=10?_day.getHours():("0"+_day.getHours());
+		_timePadded24Hour[i].innerHTML = _day.getHours()>=10?_day.getHours():("0"+_day.getHours());
 	}
 
 	for(var i = 0; i<_timeMin.length; i++){

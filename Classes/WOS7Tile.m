@@ -4,7 +4,7 @@
 
 @synthesize leafIdentifier;
 
--(id)initWithFrame: (CGRect)frame appIndex: (int)i {
+- (id)initWithFrame:(CGRect)frame appIndex:(int)i {
 	self = [super initWithFrame:frame];
 	if (self) {
 		id app = [[[WOS7 sharedInstance] applications] objectAtIndex:i];
@@ -59,7 +59,7 @@
 			[appDisplayLabel release];
 			[dict release];
 		} else {
-			NSArray* splited = [[[app application] path] componentsSeparatedByString: @"/"];
+			NSArray* splited = [[[app application] path] componentsSeparatedByString:@"/"];
 			tileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(28, 28, 60, 60)];
 
 			//if this is an app store app, it will have a large itunesartwork
@@ -107,18 +107,18 @@
 	return self;
 }
 
-- (void)didHold: (UILongPressGestureRecognizer*)sender {
+- (void)didHold:(UILongPressGestureRecognizer*)sender {
 	if (sender.state == 1) {
 		[[WOS7 sharedInstance] didHold:sender tile:self];
 	}
 }
 
--(void)dealloc {
+- (void)dealloc {
 	[leafIdentifier release];
 	[super dealloc];
 }
 
--(void)updateBadge {
+- (void)updateBadge {
 	int num = (int)[(SBApplicationIcon*)[[[WOS7 sharedInstance] applications] objectAtIndex:appIndex] badgeValue];
 	if (num == 0 && !badgeLabel) {
 		return;
@@ -156,7 +156,7 @@
 	}
 }
 
--(void)launch {
+- (void)launch {
 	[(SBApplicationIcon*)[[[WOS7 sharedInstance] applications] objectAtIndex:appIndex] launch];
 }
 

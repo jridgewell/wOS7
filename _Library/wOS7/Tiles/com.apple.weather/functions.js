@@ -8,7 +8,7 @@ var useRealFeel = false;
 
 var enableWallpaper = true;
 
-var enableLockScreen =	false;
+var enableLockScreen = false;
 
 var stylesheetWall = 'split_wim66mod';
 

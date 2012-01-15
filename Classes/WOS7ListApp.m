@@ -4,7 +4,7 @@
 
 @implementation WOS7ListApp
 
--(id)initWithFrame: (CGRect)frame index: (int)i {
+- (id)initWithFrame:(CGRect)frame index:(int)i {
 	self = [super initWithFrame:frame];
 
 	if (self) {
@@ -51,13 +51,13 @@
 	return self;
 }
 
-- (void)didHold: (UILongPressGestureRecognizer*)sender {
+- (void)didHold:(UILongPressGestureRecognizer*)sender {
 	if (sender.state == 1) {
 		[[WOS7 sharedInstance] didHold:sender tile:self];
 	}
 }
 
--(void)launch: (id)sender {
+- (void)launch:(id)sender {
 	[(SBApplicationIcon*)[[[WOS7 sharedInstance] applications] objectAtIndex:[(UIView*)sender tag]] launch];
 }
 

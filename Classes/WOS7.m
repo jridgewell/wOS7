@@ -7,25 +7,25 @@
 @synthesize applications, mainView, subView;
 static WOS7* sharedInstance;
 
--(void)updateBadge: (NSString*)leafId {
+- (void)updateBadge:(NSString*)leafId {
 	for(id app in tileScrollView.subviews)
 		if ([app isKindOfClass:[WOS7Tile class]] && [[app leafIdentifier] isEqualToString:leafId]) {
 			[app updateBadge];
 		}
 }
 
--(id)initWithWindow: (UIWindow*)_window array: (NSMutableArray*)_apps {
+- (id)initWithWindow:(UIWindow*)_window array:(NSMutableArray*)_apps {
 
 	self = [super init];
 	sharedInstance = self;
 	if (self) {
 		[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:nil];
-		window =			_window;
-		applications =	_apps;
+		window = _window;
+		applications = _apps;
 
 		//create views
-		mainView =		[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-		subView =		[[UIView alloc] initWithFrame:CGRectMake(0, 0, 574, 480)];
+		mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+		subView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 574, 480)];
 
 		mainView.opaque = YES;
 		mainView.backgroundColor = [UIColor blackColor];
@@ -33,9 +33,9 @@ static WOS7* sharedInstance;
 		subView.opaque = NO;
 		subView.backgroundColor = [UIColor clearColor];
 
-		tileScrollView =	[[WOS7ScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) target:@selector(scrolledBeyondBottom:) parent:self];
+		tileScrollView = [[WOS7ScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) target:@selector(scrolledBeyondBottom:) parent:self];
 		[tileScrollView setDelegate:tileScrollView];
-		appList =		[[WOS7ScrollView alloc] initWithFrame:CGRectMake(320, 0, 254, 480) target:@selector(scrolledBeyondBottom:) parent:self];
+		appList = [[WOS7ScrollView alloc] initWithFrame:CGRectMake(320, 0, 254, 480) target:@selector(scrolledBeyondBottom:) parent:self];
 		[appList setDelegate:appList];
 		[subView addSubview:appList];
 		[subView addSubview:tileScrollView];
@@ -89,7 +89,7 @@ static WOS7* sharedInstance;
 	return self;
 }
 
--(void)updateTiles {
+- (void)updateTiles {
 
 	NSArray* tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
 
@@ -172,7 +172,7 @@ static WOS7* sharedInstance;
 }
 
 
--(void)dealloc {
+- (void)dealloc {
 	[tileScrollView release];
 	[appList release];
 	[subView release];
@@ -182,7 +182,7 @@ static WOS7* sharedInstance;
 	[super dealloc];
 }
 
--(void)didPan: (UIPanGestureRecognizer*)recognizer {
+- (void)didPan:(UIPanGestureRecognizer*)recognizer {
 	CGPoint d = [recognizer translationInView:recognizer.view];
 	[recognizer setTranslation:CGPointZero inView:recognizer.view];
 	CGFloat scaleLeftMovement = 0;
@@ -210,7 +210,7 @@ static WOS7* sharedInstance;
 	}
 }
 
--(void)toggle {
+- (void)toggle {
 	if (toggled) {
 		[self toggleLeft];
 	} else {
@@ -218,7 +218,7 @@ static WOS7* sharedInstance;
 	}
 }
 
--(void)toggleLeft {
+- (void)toggleLeft {
 	[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
 	[UIView beginAnimations:@"toggleLeft" context:nil];
 	[UIView setAnimationDuration:.3];
@@ -235,7 +235,7 @@ static WOS7* sharedInstance;
 	toggled = NO;
 }
 
--(void)toggleRight {
+- (void)toggleRight {
 	[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
 	[UIView beginAnimations:@"toggleRight" context:nil];
 	[UIView setAnimationDuration:.3];
@@ -252,7 +252,7 @@ static WOS7* sharedInstance;
 	toggled = YES;
 }
 
--(void)didHold:(UILongPressGestureRecognizer*)gesture tile:(id)sender {
+- (void)didHold:(UILongPressGestureRecognizer*)gesture tile:(id)sender {
 	WOS7CustomActionSheet* actionSheet = [[WOS7CustomActionSheet alloc] initWithTitle:[[applications objectAtIndex:[(UIView*)sender tag]] leafIdentifier]
 																	 delegate:self
 																		width:270];
@@ -352,7 +352,7 @@ static WOS7* sharedInstance;
 	return sharedInstance;
 }
 
-+(UIImage*)maskImage: (UIImage*)image withMask: (UIImage*)maskImage {
++(UIImage*)maskImage:(UIImage*)image withMask:(UIImage*)maskImage {
 
 	CGImageRef maskRef = maskImage.CGImage;
 
