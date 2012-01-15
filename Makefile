@@ -1,5 +1,7 @@
-GO_EASY_ON_ME = 1
+# GO_EASY_ON_ME = 1
 THEOS_BUILD_DIR = build
+ARCHS = armv7
+DEBUG = 1
 
 include /framework/makefiles/common.mk
 
