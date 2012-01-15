@@ -45,7 +45,6 @@
 		210B4E2D14C23CCA00988110 /* WOS7ListApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WOS7ListApp.m; path = Classes/WOS7ListApp.m; sourceTree = "<group>"; };
 		210B4E2E14C23CCA00988110 /* WOS7Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WOS7Tile.h; path = Classes/WOS7Tile.h; sourceTree = "<group>"; };
 		210B4E2F14C23CCA00988110 /* WOS7Tile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WOS7Tile.m; path = Classes/WOS7Tile.m; sourceTree = "<group>"; };
-		2191B68114C1557B009EF527 /* WOS72.mbak */ = {isa = PBXFileReference; lastKnownFileType = text; path = WOS72.mbak; sourceTree = "<group>"; };
 		2191B68914C236A0009EF527 /* wOS7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wOS7.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2191B6A214C23715009EF527 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		2191B6A414C2372F009EF527 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -134,7 +133,6 @@
 				210B4E2914C23CCA00988110 /* TouchView.m */,
 				210B4E2A14C23CCA00988110 /* WOS7.h */,
 				210B4E2B14C23CCA00988110 /* WOS7.m */,
-				2191B68114C1557B009EF527 /* WOS72.mbak */,
 				210B4E2C14C23CCA00988110 /* WOS7ListApp.h */,
 				210B4E2D14C23CCA00988110 /* WOS7ListApp.m */,
 				210B4E2E14C23CCA00988110 /* WOS7Tile.h */,
