@@ -6,45 +6,101 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		210B4E5314C2405500988110 /* Theos */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 210B4E5414C2405500988110 /* Build configuration list for PBXAggregateTarget "Theos" */;
+			buildPhases = (
+				210B4E5714C2431000988110 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Theos;
+			productName = wOS7Theos;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		210B4E3014C23CCA00988110 /* CustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B4E2614C23CCA00988110 /* CustomActionSheet.m */; };
+		210B4E3114C23CCA00988110 /* TouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B4E2914C23CCA00988110 /* TouchView.m */; };
+		210B4E3214C23CCA00988110 /* WOS7.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B4E2B14C23CCA00988110 /* WOS7.m */; };
+		210B4E3314C23CCA00988110 /* WOS7ListApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B4E2D14C23CCA00988110 /* WOS7ListApp.m */; };
+		210B4E3414C23CCA00988110 /* WOS7Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B4E2F14C23CCA00988110 /* WOS7Tile.m */; };
+		2191B6A314C23715009EF527 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2191B6A214C23715009EF527 /* Foundation.framework */; };
+		2191B6A514C2372F009EF527 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2191B6A414C2372F009EF527 /* UIKit.framework */; };
+		2191B6A714C2373C009EF527 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2191B6A614C2373C009EF527 /* CoreGraphics.framework */; };
+		2191B6A914C23745009EF527 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2191B6A814C23745009EF527 /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
-		80DB366413AAF80300605710 /* WOS7ListApp.h */ = {isa = PBXFileReference; path = WOS7ListApp.h; sourceTree = "<group>"; };
-		80DB366513AAF80300605710 /* WOS7ListApp.m */ = {isa = PBXFileReference; path = WOS7ListApp.m; sourceTree = "<group>"; };
-		80DB366613AAF80300605710 /* DreamBoard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DreamBoard.h; sourceTree = "<group>"; };
-		80DB366713AAF80300605710 /* WOS7.h */ = {isa = PBXFileReference; path = WOS7.h; sourceTree = "<group>"; };
-		80DB366813AAF80300605710 /* WOS7.m */ = {isa = PBXFileReference; path = WOS7.m; sourceTree = "<group>"; };
-		80DB366913AAF80300605710 /* WOS7Tile.h */ = {isa = PBXFileReference; path = WOS7Tile.h; sourceTree = "<group>"; };
-		80DB366A13AAF80300605710 /* WOS7Tile.m */ = {isa = PBXFileReference; path = WOS7Tile.m; sourceTree = "<group>"; };
-		80DB366B13AAF80F00605710 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		80DB366C13AAF80F00605710 /* ReadMe */ = {isa = PBXFileReference; path = ReadMe; sourceTree = "<group>"; };
-		80DB366D13AAF80F00605710 /* Tweak.xm */ = {isa = PBXFileReference; lastKnownFileType = text; path = Tweak.xm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		80DB366E13AAF81500605710 /* _DreamBoardTheme */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _DreamBoardTheme; sourceTree = "<group>"; };
-		80DB366F13AAF81500605710 /* _Library */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _Library; sourceTree = "<group>"; };
+		210B4E2514C23CCA00988110 /* CustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomActionSheet.h; path = Classes/CustomActionSheet.h; sourceTree = "<group>"; };
+		210B4E2614C23CCA00988110 /* CustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomActionSheet.m; path = Classes/CustomActionSheet.m; sourceTree = "<group>"; };
+		210B4E2714C23CCA00988110 /* DreamBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DreamBoard.h; path = Classes/DreamBoard.h; sourceTree = "<group>"; };
+		210B4E2814C23CCA00988110 /* TouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchView.h; path = Classes/TouchView.h; sourceTree = "<group>"; };
+		210B4E2914C23CCA00988110 /* TouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TouchView.m; path = Classes/TouchView.m; sourceTree = "<group>"; };
+		210B4E2A14C23CCA00988110 /* WOS7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WOS7.h; path = Classes/WOS7.h; sourceTree = "<group>"; };
+		210B4E2B14C23CCA00988110 /* WOS7.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WOS7.m; path = Classes/WOS7.m; sourceTree = "<group>"; };
+		210B4E2C14C23CCA00988110 /* WOS7ListApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WOS7ListApp.h; path = Classes/WOS7ListApp.h; sourceTree = "<group>"; };
+		210B4E2D14C23CCA00988110 /* WOS7ListApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WOS7ListApp.m; path = Classes/WOS7ListApp.m; sourceTree = "<group>"; };
+		210B4E2E14C23CCA00988110 /* WOS7Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WOS7Tile.h; path = Classes/WOS7Tile.h; sourceTree = "<group>"; };
+		210B4E2F14C23CCA00988110 /* WOS7Tile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WOS7Tile.m; path = Classes/WOS7Tile.m; sourceTree = "<group>"; };
+		2191B68114C1557B009EF527 /* WOS72.mbak */ = {isa = PBXFileReference; lastKnownFileType = text; path = WOS72.mbak; sourceTree = "<group>"; };
+		2191B68914C236A0009EF527 /* wOS7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wOS7.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2191B6A214C23715009EF527 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2191B6A414C2372F009EF527 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		2191B6A614C2373C009EF527 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		2191B6A814C23745009EF527 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		80DB366B13AAF80F00605710 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
+		80DB366C13AAF80F00605710 /* ReadMe */ = {isa = PBXFileReference; lastKnownFileType = text; name = ReadMe; path = ../ReadMe; sourceTree = "<group>"; };
+		80DB366D13AAF80F00605710 /* Tweak.xm */ = {isa = PBXFileReference; lastKnownFileType = text; name = Tweak.xm; path = ../Tweak.xm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		80DB366E13AAF81500605710 /* _DreamBoardTheme */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _DreamBoardTheme; path = ../_DreamBoardTheme; sourceTree = "<group>"; };
+		80DB366F13AAF81500605710 /* _Library */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _Library; path = ../_Library; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		2191B68614C236A0009EF527 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2191B6A914C23745009EF527 /* QuartzCore.framework in Frameworks */,
+				2191B6A714C2373C009EF527 /* CoreGraphics.framework in Frameworks */,
+				2191B6A514C2372F009EF527 /* UIKit.framework in Frameworks */,
+				2191B6A314C23715009EF527 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
-		80DB365513AAF7BF00605710 = {
+		2191B68A14C236A0009EF527 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2191B68914C236A0009EF527 /* wOS7.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2191B68C14C236A0009EF527 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2191B6A614C2373C009EF527 /* CoreGraphics.framework */,
+				2191B6A214C23715009EF527 /* Foundation.framework */,
+				2191B6A814C23745009EF527 /* QuartzCore.framework */,
+				2191B6A414C2372F009EF527 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2191B69314C236A0009EF527 /* wOS7 */ = {
 			isa = PBXGroup;
 			children = (
 				80DB366113AAF7DE00605710 /* Classes */,
-				80DB366313AAF7E400605710 /* Resources */,
+				2191B69414C236A0009EF527 /* Supporting Files */,
 			);
+			path = wOS7;
 			sourceTree = "<group>";
 		};
-		80DB366113AAF7DE00605710 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				80DB366613AAF80300605710 /* DreamBoard.h */,
-				80DB366713AAF80300605710 /* WOS7.h */,
-				80DB366813AAF80300605710 /* WOS7.m */,
-				80DB366413AAF80300605710 /* WOS7ListApp.h */,
-				80DB366513AAF80300605710 /* WOS7ListApp.m */,
-				80DB366913AAF80300605710 /* WOS7Tile.h */,
-				80DB366A13AAF80300605710 /* WOS7Tile.m */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
-		80DB366313AAF7E400605710 /* Resources */ = {
+		2191B69414C236A0009EF527 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				80DB366E13AAF81500605710 /* _DreamBoardTheme */,
@@ -53,10 +109,59 @@
 				80DB366C13AAF80F00605710 /* ReadMe */,
 				80DB366D13AAF80F00605710 /* Tweak.xm */,
 			);
-			name = Resources;
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		80DB365513AAF7BF00605710 = {
+			isa = PBXGroup;
+			children = (
+				2191B69314C236A0009EF527 /* wOS7 */,
+				2191B68C14C236A0009EF527 /* Frameworks */,
+				2191B68A14C236A0009EF527 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		80DB366113AAF7DE00605710 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				210B4E2514C23CCA00988110 /* CustomActionSheet.h */,
+				210B4E2614C23CCA00988110 /* CustomActionSheet.m */,
+				210B4E2714C23CCA00988110 /* DreamBoard.h */,
+				210B4E2814C23CCA00988110 /* TouchView.h */,
+				210B4E2914C23CCA00988110 /* TouchView.m */,
+				210B4E2A14C23CCA00988110 /* WOS7.h */,
+				210B4E2B14C23CCA00988110 /* WOS7.m */,
+				2191B68114C1557B009EF527 /* WOS72.mbak */,
+				210B4E2C14C23CCA00988110 /* WOS7ListApp.h */,
+				210B4E2D14C23CCA00988110 /* WOS7ListApp.m */,
+				210B4E2E14C23CCA00988110 /* WOS7Tile.h */,
+				210B4E2F14C23CCA00988110 /* WOS7Tile.m */,
+			);
+			name = Classes;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2191B68814C236A0009EF527 /* wOS7 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2191B69F14C236A0009EF527 /* Build configuration list for PBXNativeTarget "wOS7" */;
+			buildPhases = (
+				2191B68514C236A0009EF527 /* Sources */,
+				2191B68614C236A0009EF527 /* Frameworks */,
+				2191B68714C236A0009EF527 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = wOS7;
+			productName = wOS7;
+			productReference = 2191B68914C236A0009EF527 /* wOS7.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		80DB365713AAF7BF00605710 /* Project object */ = {
@@ -73,29 +178,244 @@
 				en,
 			);
 			mainGroup = 80DB365513AAF7BF00605710;
+			productRefGroup = 2191B68A14C236A0009EF527 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				2191B68814C236A0009EF527 /* wOS7 */,
+				210B4E5314C2405500988110 /* Theos */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		2191B68714C236A0009EF527 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		210B4E5714C2431000988110 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "source ${HOME}/.profile\ncd ${PROJECT_DIR}\nmake package install\nscriptExitStatus=$?\necho \"DONE with make: (exitStatus=${scriptExitStatus})\\n\\n\"\nexit \"${scriptExitStatus}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2191B68514C236A0009EF527 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				210B4E3014C23CCA00988110 /* CustomActionSheet.m in Sources */,
+				210B4E3114C23CCA00988110 /* TouchView.m in Sources */,
+				210B4E3214C23CCA00988110 /* WOS7.m in Sources */,
+				210B4E3314C23CCA00988110 /* WOS7ListApp.m in Sources */,
+				210B4E3414C23CCA00988110 /* WOS7Tile.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
 /* Begin XCBuildConfiguration section */
+		210B4E5514C2405500988110 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*][arch=*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/opt/theos/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		210B4E5614C2405500988110 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*][arch=*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/opt/theos/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2191B6A014C236A0009EF527 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "wOS7/wOS7-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/opt/theos/include/**";
+				INFOPLIST_FILE = "wOS7/wOS7-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2191B6A114C236A0009EF527 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "wOS7/wOS7-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/opt/theos/include/**";
+				INFOPLIST_FILE = "wOS7/wOS7-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		80DB365C13AAF7BF00605710 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VALUE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 			};
 			name = Debug;
 		};
 		80DB365D13AAF7BF00605710 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VALUE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		210B4E5414C2405500988110 /* Build configuration list for PBXAggregateTarget "Theos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210B4E5514C2405500988110 /* Debug */,
+				210B4E5614C2405500988110 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2191B69F14C236A0009EF527 /* Build configuration list for PBXNativeTarget "wOS7" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2191B6A014C236A0009EF527 /* Debug */,
+				2191B6A114C236A0009EF527 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		80DB365A13AAF7BF00605710 /* Build configuration list for PBXProject "wOS7" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
