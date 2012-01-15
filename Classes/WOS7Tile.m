@@ -44,7 +44,7 @@
 			}
 
 			//name label
-			UILabel* appDisplayLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.5, 98, 105, 14)];
+			UILabel* appDisplayLabel = [[UILabel alloc] initWithFrame:CGRectMake(6, 98, 105, 14)];
 			appDisplayLabel.font = [UIFont boldSystemFontOfSize:13];
 			appDisplayLabel.textColor = [UIColor whiteColor];
 			appDisplayLabel.text = [app displayName];
@@ -60,18 +60,18 @@
 			[dict release];
 		} else {
 			NSArray* splited = [[[app application] path] componentsSeparatedByString: @"/"];
-			tileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(27.5, 27.5, 60, 60)];
+			tileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(28, 28, 60, 60)];
 
 			//if this is an app store app, it will have a large itunesartwork
 			if ([[splited objectAtIndex:1] isEqualToString:@"private"]) {
-				tileImageView.frame = CGRectMake(-17.5, -17.5, 150, 150);
+				tileImageView.frame = CGRectMake(-17, -17, 150, 150);
 				tileImageView.image = [WOS7 maskImage:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@iTunesArtwork", [[[app application] path] substringWithRange:NSMakeRange(0, 70)]]] withMask:[UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/BigIconMask.png"]];
 				[self addSubview:tileImageView];
 			} else {
 				tileImageView.image = [WOS7 maskImage:[app getIconImage:2] withMask:[UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/IconMask.png"]];
 				[self addSubview:tileImageView];
 
-				UIImageView* over = [[UIImageView alloc] initWithFrame:CGRectMake(27.5, 27.5, 60, 60)];
+				UIImageView* over = [[UIImageView alloc] initWithFrame:CGRectMake(28, 28, 60, 60)];
 				over.image = [UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/IconOverlay.png"];
 				[self addSubview:over];
 				[over release];
@@ -79,7 +79,7 @@
 			[tileImageView release];
 
 			//name label
-			UILabel* appDisplayLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.5, 98, 105, 14)];
+			UILabel* appDisplayLabel = [[UILabel alloc] initWithFrame:CGRectMake(6, 98, 105, 14)];
 			appDisplayLabel.font = [UIFont boldSystemFontOfSize:13];
 			appDisplayLabel.textColor = [UIColor whiteColor];
 			appDisplayLabel.text = [app displayName];
