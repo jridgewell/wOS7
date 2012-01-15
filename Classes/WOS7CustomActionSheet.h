@@ -1,6 +1,6 @@
 #import "WOS7.h"
 
-@interface CustomActionSheet : UIView {
+@interface WOS7CustomActionSheet : UIView {
 	UIColor* backgroundColor;
 	NSMutableArray* buttons;
 	CGFloat buttonPaddingX;

@@ -1,8 +1,8 @@
 #import <SpringBoard/SpringBoard.h>
 #import "WOS7Tile.h"
 #import "WOS7ListApp.h"
-#import "CustomActionSheet.h"
-#import "TouchView.h"
+#import "WOS7CustomActionSheet.h"
+#import "WOS7TouchView.h"
 #import "DreamBoard.h"
 
 #define LIBRARY_DIR "/var/mobile/Library/wOS7"

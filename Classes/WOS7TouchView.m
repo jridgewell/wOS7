@@ -1,11 +1,11 @@
-#import "TouchView.h"
+#import "WOS7TouchView.h"
 
-@implementation TouchView
+@implementation WOS7TouchView
 
 @synthesize delegate;
 
-- (TouchView*)initWithFrame:(CGRect)rect delegate:(id)touchDelegate {
-	self = (TouchView*)[super initWithFrame:rect];
+- (WOS7TouchView*)initWithFrame:(CGRect)rect delegate:(id)touchDelegate {
+	self = (WOS7TouchView*)[super initWithFrame:rect];
 	if (self) {
 		[self setDelegate:touchDelegate];
 	}

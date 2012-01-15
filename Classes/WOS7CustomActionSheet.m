@@ -1,16 +1,16 @@
-#import "CustomActionSheet.h"
+#import "WOS7CustomActionSheet.h"
 
 #define OVERLAY_TAG 9782
 #define ACTION_SHEET_TAG 9783
 
-@interface CustomActionSheet (Private)
+@interface WOS7CustomActionSheet (Private)
 
 - (void)animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context;
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event;
 
 @end
 
-@implementation CustomActionSheet (Private)
+@implementation WOS7CustomActionSheet (Private)
 
 - (void)animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
 	[[[self superView] viewWithTag:ACTION_SHEET_TAG] removeFromSuperview];
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation CustomActionSheet
+@implementation WOS7CustomActionSheet
 
 @synthesize backgroundColor;
 @synthesize buttonPaddingX;
@@ -150,7 +150,10 @@
 	[label setFont:[self titleFont]];
 
 	CGFloat yLoc = point.y;
-	UIView* actionSheet = [[UIView alloc] initWithFrame:CGRectMake(0, yLoc, [self width], 0)];
+	UIView* actionSheet = [[UIView alloc] initWithFrame:CGRectMake((([[self superView] frame].size.width - [self width]) / 2),
+																   yLoc,
+																   [self width],
+																   0)];
 	[actionSheet setOpaque:YES];
 	[actionSheet setBackgroundColor:[self backgroundColor]];
 	[actionSheet setTag:ACTION_SHEET_TAG];
@@ -169,7 +172,7 @@
 	}
 	[label release];
 
-	TouchView* overlay = [[TouchView alloc] initWithFrame:[view frame] delegate:self];
+	WOS7TouchView* overlay = [[WOS7TouchView alloc] initWithFrame:[view frame] delegate:self];
 	[overlay setOpaque:NO];
 	[overlay setAlpha:0];
 	[overlay setBackgroundColor:[self fadeColor]];
@@ -183,7 +186,7 @@
 		yLoc -= y;
 	}
 	[UIView beginAnimations:@"showActionSheet" context:nil];
-	[actionSheet setFrame:CGRectMake(0, yLoc, [self width], y)];
+	[actionSheet setFrame:CGRectMake([actionSheet frame].origin.x, yLoc, [self width], y)];
 	[overlay setAlpha:[self fadeAlpha]];
 	[UIView commitAnimations];
 

@@ -250,7 +250,7 @@ static WOS7* sharedInstance;
 }
 
 -(void)didHold:(UILongPressGestureRecognizer*)gesture tile:(id)sender {
-	CustomActionSheet* actionSheet = [[CustomActionSheet alloc] initWithTitle:[[applications objectAtIndex:[(UIView*)sender tag]] leafIdentifier]
+	WOS7CustomActionSheet* actionSheet = [[WOS7CustomActionSheet alloc] initWithTitle:[[applications objectAtIndex:[(UIView*)sender tag]] leafIdentifier]
 																	 delegate:self
 																		width:270];
 	NSString* buttonLabels;
