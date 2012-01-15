@@ -4,11 +4,11 @@
 
 @implementation WOS7ListApp
 
--(id)initWithFrame: (CGRect)frame index: (int)index {
+-(id)initWithFrame: (CGRect)frame index: (int)i {
 	self = [super initWithFrame:frame];
 
 	if (self) {
-		id app = [[[WOS7 sharedInstance] applications] objectAtIndex:index];
+		id app = [[[WOS7 sharedInstance] applications] objectAtIndex:i];
 		NSString* leafIdentifier = [app leafIdentifier];
 		NSString* name = [app displayName];
 
@@ -38,8 +38,8 @@
 
 		UIButton* btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
 		[btn addTarget:self action:@selector(launch:) forControlEvents:UIControlEventTouchUpInside];
-		self.tag = index;
-		btn.tag = index;
+		self.tag = i;
+		btn.tag = i;
 		UILongPressGestureRecognizer*  recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didHold:)];
 		[btn addGestureRecognizer:recognizer];
 		[recognizer release];

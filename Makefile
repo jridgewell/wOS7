@@ -9,6 +9,8 @@ TWEAK_NAME = WOS7
 WOS7_FILES = Tweak.xm
 WOS7_FRAMEWORKS = Foundation UIKit CoreGraphics QuartzCore
 WOS7_OBJC_FILES = $(wildcard Classes/*.m)
+WOS7_OBJCFLAGS = -Wswitch -Wshadow -Wmissing-braces -Wreturn-type -Wparentheses -Wmissing-field-initializers -Wsign-compare -Wunused-function -Wunused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wundeclared-selector -Wmissing-prototypes
+#WOS7_OBJCFLAGS += -Wshorten-64-to-32
 
 include /framework/makefiles/tweak.mk
 

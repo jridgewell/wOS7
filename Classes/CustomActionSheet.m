@@ -105,13 +105,13 @@
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
 	[actionSheet setFrame:frame];
-	[overlay setAlpha:.00];
+	[overlay setAlpha:0];
 	[UIView commitAnimations];
 
 	[[self delegate] dismissActionSheet:self withButtonIndex:[buttons indexOfObject:sender]];
 }
 
-- (id)initWithTitle:(NSString*)titleString delegate:(id)actionDelegate width:(float)viewWidth {
+- (id)initWithTitle:(NSString*)titleString delegate:(id)actionDelegate width:(CGFloat)viewWidth {
 	self = [super init];
     if (self) {
 		[self setTitle:titleString];
@@ -122,7 +122,7 @@
 		[self setBackgroundColor:[UIColor whiteColor]];
 		[self setButtonPaddingX:15];
 		[self setButtonPaddingY:7];
-		[self setFadeAlpha:.60];
+		[self setFadeAlpha:(CGFloat).60];
 		[self setFadeColor:[UIColor blackColor]];
 		[self setFont:[UIFont systemFontOfSize:18]];
 		[self setFontColor:[UIColor blackColor]];
@@ -149,7 +149,7 @@
 	[label setBackgroundColor:[UIColor clearColor]];
 	[label setFont:[self titleFont]];
 
-	float yLoc = point.y;
+	CGFloat yLoc = point.y;
 	UIView* actionSheet = [[UIView alloc] initWithFrame:CGRectMake(0, yLoc, [self width], 0)];
 	[actionSheet setOpaque:YES];
 	[actionSheet setBackgroundColor:[self backgroundColor]];
@@ -159,7 +159,7 @@
 	[actionSheet addSubview:label];
 
 	CGRect frame = [label frame];
-	float y = (frame.origin.y + frame.size.height);
+	CGFloat y = (frame.origin.y + frame.size.height);
 	for (UIButton* button in buttons) {
 		frame = [button frame];
 		frame.origin = CGPointMake(0, y);
@@ -171,7 +171,7 @@
 
 	TouchView* overlay = [[TouchView alloc] initWithFrame:[view frame] delegate:self];
 	[overlay setOpaque:NO];
-	[overlay setAlpha:.00];
+	[overlay setAlpha:0];
 	[overlay setBackgroundColor:[self fadeColor]];
 	[overlay setUserInteractionEnabled:YES];
 	[overlay setTag:OVERLAY_TAG];

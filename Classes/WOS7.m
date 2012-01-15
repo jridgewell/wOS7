@@ -97,8 +97,8 @@ static WOS7* sharedInstance;
 			[app removeFromSuperview];
 		}
 
-	int i = 0, j = 0;
-	for(; i < (int)tilesArray.count; i++) {
+	int j = 0;
+	for(int i = 0; i < (int)tilesArray.count; i++) {
 		NSString* bundleId = [tilesArray objectAtIndex:i];
 
 		//see if this tile is large
@@ -138,12 +138,12 @@ static WOS7* sharedInstance;
 		WOS7Tile* tile = nil;
 
 		//find the corresponding SBApplication
-		for(int i = 0; i < (int)applications.count; i++)
-			if ([[[applications objectAtIndex:i] leafIdentifier] isEqualToString:bundleId]) {
+		for(int a = 0; a < (int)applications.count; a++)
+			if ([[[applications objectAtIndex:a] leafIdentifier] isEqualToString:bundleId]) {
 				if (isLarge && j % 2 != 0) {
 					j++;
 				}
-				tile = [[WOS7Tile alloc] initWithFrame:CGRectMake((j % 2 == 0) ? 13 : 136, (123 * (j / 2)) + 75, (isLarge) ? 238 : 115, 115) appIndex:i];
+				tile = [[WOS7Tile alloc] initWithFrame:CGRectMake((j % 2 == 0) ? 13 : 136, (123 * (j / 2)) + 75, (isLarge) ? 238 : 115, 115) appIndex:a];
 				break;
 			}
 
@@ -182,13 +182,13 @@ static WOS7* sharedInstance;
 -(void)didPan: (UIPanGestureRecognizer*)recognizer {
 	CGPoint d = [recognizer translationInView:recognizer.view];
 	[recognizer setTranslation:CGPointZero inView:recognizer.view];
-	float scaleLeftMovement = 0;
+	CGFloat scaleLeftMovement = 0;
 
 	if (subView.frame.origin.x + d.x >= -254 && subView.frame.origin.x + d.x <= 0) {
 		scaleLeftMovement = subView.frame.origin.x / -254;
 		subView.center = CGPointMake(subView.center.x + d.x, subView.center.y);
-		toggleInterface.transform = CGAffineTransformMakeRotation(scaleLeftMovement * -1 * M_PI);
-		[[mainView viewWithTag:BACKGROUND_TAG] setAlpha:(1 - (scaleLeftMovement * (1 - BACKGROUND_FADE)))];
+		toggleInterface.transform = CGAffineTransformMakeRotation(scaleLeftMovement * -1 * (CGFloat)M_PI);
+		[[mainView viewWithTag:BACKGROUND_TAG] setAlpha:(1 - (scaleLeftMovement * (1 - (CGFloat)BACKGROUND_FADE)))];
 	}
 
 	if (recognizer.state == UIGestureRecognizerStateEnded) {
@@ -220,10 +220,10 @@ static WOS7* sharedInstance;
 	[UIView beginAnimations:@"toggleLeft" context:nil];
 	[UIView setAnimationDuration:.5];
 	subView.frame = CGRectMake(-254,0,574,480);
-	toggleInterface.transform = CGAffineTransformMakeRotation(M_PI);
+	toggleInterface.transform = CGAffineTransformMakeRotation((CGFloat)M_PI);
 
 	//fade background
-	[[mainView viewWithTag:BACKGROUND_TAG] setAlpha:BACKGROUND_FADE];
+	[[mainView viewWithTag:BACKGROUND_TAG] setAlpha:(CGFloat)BACKGROUND_FADE];
 	//allow scrollToTop on status bar tap
 	[tileScrollView setScrollsToTop:NO];
 	[appList setScrollsToTop:YES];

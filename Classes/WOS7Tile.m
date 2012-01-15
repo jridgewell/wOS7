@@ -4,11 +4,11 @@
 
 @synthesize leafIdentifier;
 
--(id)initWithFrame: (CGRect)frame appIndex: (int)index {
+-(id)initWithFrame: (CGRect)frame appIndex: (int)i {
 	self = [super initWithFrame:frame];
 	if (self) {
-		id app = [[[WOS7 sharedInstance] applications] objectAtIndex:index];
-		appIndex = index;
+		id app = [[[WOS7 sharedInstance] applications] objectAtIndex:i];
+		appIndex = i;
 		self.leafIdentifier = [app leafIdentifier];
 
 
@@ -93,7 +93,7 @@
 		if (frame.size.width==115) {
 			[launchButton setImage:[UIImage imageWithContentsOfFile:@LIBRARY_DIR"/Images/TileOverlay.png"] forState:UIControlStateNormal];
 		}
-		self.tag = index;
+		self.tag = i;
 		UILongPressGestureRecognizer* recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didHold:)];
 		[launchButton addGestureRecognizer:recognizer];
 		[recognizer release];
