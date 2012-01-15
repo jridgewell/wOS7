@@ -30,6 +30,7 @@
 		2191B6A514C2372F009EF527 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2191B6A414C2372F009EF527 /* UIKit.framework */; };
 		2191B6A714C2373C009EF527 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2191B6A614C2373C009EF527 /* CoreGraphics.framework */; };
 		2191B6A914C23745009EF527 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2191B6A814C23745009EF527 /* QuartzCore.framework */; };
+		21BD8F2E14C26C7000305ACE /* wOS7 in Resources */ = {isa = PBXBuildFile; fileRef = 21BD8F2D14C26C7000305ACE /* wOS7 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		2191B6A414C2372F009EF527 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		2191B6A614C2373C009EF527 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		2191B6A814C23745009EF527 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		21BD8F2D14C26C7000305ACE /* wOS7 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = wOS7; sourceTree = "<group>"; };
 		80DB366B13AAF80F00605710 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
 		80DB366C13AAF80F00605710 /* ReadMe */ = {isa = PBXFileReference; lastKnownFileType = text; name = ReadMe; path = ../ReadMe; sourceTree = "<group>"; };
 		80DB366D13AAF80F00605710 /* Tweak.xm */ = {isa = PBXFileReference; lastKnownFileType = text; name = Tweak.xm; path = ../Tweak.xm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -108,6 +110,7 @@
 				80DB366B13AAF80F00605710 /* Makefile */,
 				80DB366C13AAF80F00605710 /* ReadMe */,
 				80DB366D13AAF80F00605710 /* Tweak.xm */,
+				21BD8F2D14C26C7000305ACE /* wOS7 */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21BD8F2E14C26C7000305ACE /* wOS7 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
