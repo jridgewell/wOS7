@@ -33,8 +33,10 @@ static WOS7* sharedInstance;
 		subView.opaque = NO;
 		subView.backgroundColor = [UIColor clearColor];
 
-		tileScrollView =	[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-		appList =		[[UIScrollView alloc] initWithFrame:CGRectMake(320, 0, 254, 480)];
+		tileScrollView =	[[WOS7ScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) target:@selector(scrolledBeyondBottom:) parent:self];
+		[tileScrollView setDelegate:tileScrollView];
+		appList =		[[WOS7ScrollView alloc] initWithFrame:CGRectMake(320, 0, 254, 480) target:@selector(scrolledBeyondBottom:) parent:self];
+		[appList setDelegate:appList];
 		[subView addSubview:appList];
 		[subView addSubview:tileScrollView];
 		[mainView addSubview:subView];
@@ -300,6 +302,51 @@ static WOS7* sharedInstance;
 		[self toggle];
 	}
 }
+
+- (void)scrolledBeyondBottom:(UIScrollView*)scrollView {
+	if (!animatingBounce) {
+		CGRect frame = [toggleInterface frame];
+		if (toggled) {
+			frame.origin = CGPointMake((frame.origin.x + 10),
+									   frame.origin.y);
+		} else {
+			frame.origin = CGPointMake((frame.origin.x - 10),
+									   frame.origin.y);
+		}
+
+		[UIView beginAnimations:@"scrollBounce" context:nil];
+		animatingBounce = YES;
+		[UIView setAnimationDuration:.5];
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+		[toggleInterface setFrame:frame];
+		[UIView commitAnimations];
+	}
+}
+
+- (void)animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
+	CMLog(@"%i", animatingBounce)
+	if ([animationID isEqualToString:@"scrollBounce"]) {
+		CGRect frame = [toggleInterface frame];
+		if (toggled) {
+			frame.origin = CGPointMake((frame.origin.x - 10),
+									   frame.origin.y);
+		} else {
+			frame.origin = CGPointMake((frame.origin.x + 10),
+									   frame.origin.y);
+		}
+
+		[UIView beginAnimations:@"scrollBounceBack" context:nil];
+		[UIView setAnimationDuration:.5];
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+		[toggleInterface setFrame:frame];
+		[UIView commitAnimations];
+	} else if ([animationID isEqualToString:@"scrollBounceBack"]) {
+		animatingBounce = NO;
+	}
+}
+
 
 +(WOS7*)sharedInstance {
 	return sharedInstance;
