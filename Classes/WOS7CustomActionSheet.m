@@ -94,10 +94,6 @@
 	UIView* actionSheet = [[self superView] viewWithTag:ACTION_SHEET_TAG];
 	UIView* overlay = [[self superView] viewWithTag:OVERLAY_TAG];
 
-	MARK
-	CMLog(@"%@", actionSheet);
-	CMLog(@"%@", overlay);
-
 	CGRect frame = actionSheet.frame;
 	frame.size = CGSizeMake(frame.size.width, 0);
 
