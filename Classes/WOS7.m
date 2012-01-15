@@ -2,6 +2,8 @@
 
 #define BACKGROUND_FADE		.30
 #define BACKGROUND_TAG		100
+#define TOGGLE_FAST			.15
+#define TOGGLE_SLOW			.3
 
 @implementation WOS7
 @synthesize applications, mainView, subView;
@@ -199,29 +201,28 @@ static WOS7* sharedInstance;
 		BOOL leftRight = (subView.center.x <= 160); // ([subView width] / 2) - (254 / 2)
 
 		if (vel.x < -100) {
-			[self toggleLeft];
+			[self toggleLeft:TOGGLE_FAST];
 		} else if (vel.x >= 100) {
-			[self toggleRight];
+			[self toggleRight:TOGGLE_FAST];
 		} else if (leftRight) {
-			[self toggleLeft];
+			[self toggleLeft:TOGGLE_FAST];
 		} else {
-			[self toggleRight];
+			[self toggleRight:TOGGLE_FAST];
 		}
 	}
 }
 
 - (void)toggle {
 	if (toggled) {
-		[self toggleLeft];
+		[self toggleLeft:TOGGLE_SLOW];
 	} else {
-		[self toggleRight];
+		[self toggleRight:TOGGLE_SLOW];
 	}
 }
 
-- (void)toggleLeft {
-	[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
+- (void)toggleLeft:(double)t {
 	[UIView beginAnimations:@"toggleLeft" context:nil];
-	[UIView setAnimationDuration:.3];
+	[UIView setAnimationDuration:t];
 	subView.frame = CGRectMake(-254,0,574,480);
 	toggleInterface.transform = CGAffineTransformMakeRotation((CGFloat)M_PI);
 
@@ -235,10 +236,9 @@ static WOS7* sharedInstance;
 	toggled = NO;
 }
 
-- (void)toggleRight {
-	[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
+- (void)toggleRight:(double)t {
 	[UIView beginAnimations:@"toggleRight" context:nil];
-	[UIView setAnimationDuration:.3];
+	[UIView setAnimationDuration:t];
 	subView.frame = CGRectMake(0,0,574,480);
 	toggleInterface.transform = CGAffineTransformMakeRotation(0);
 
@@ -316,7 +316,7 @@ static WOS7* sharedInstance;
 
 		[UIView beginAnimations:@"scrollBounce" context:nil];
 		animatingBounce = YES;
-		[UIView setAnimationDuration:.5];
+		[UIView setAnimationDuration:.3];
 		[UIView setAnimationDelegate:self];
 		[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
 		[toggleInterface setFrame:frame];
@@ -337,7 +337,7 @@ static WOS7* sharedInstance;
 		}
 
 		[UIView beginAnimations:@"scrollBounceBack" context:nil];
-		[UIView setAnimationDuration:.5];
+		[UIView setAnimationDuration:.3];
 		[UIView setAnimationDelegate:self];
 		[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
 		[toggleInterface setFrame:frame];

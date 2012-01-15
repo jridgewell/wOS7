@@ -33,8 +33,8 @@
 
 - (id)initWithWindow:(UIWindow*)_window array:(NSMutableArray*)_apps;
 - (void)toggle;
-- (void)toggleLeft;
-- (void)toggleRight;
+- (void)toggleLeft:(double)t;
+- (void)toggleRight:(double)t;
 - (void)updateTiles;
 - (void)updateBadge:(NSString*)leafId;
 - (void)didPan:(UIPanGestureRecognizer*)recognizer;
