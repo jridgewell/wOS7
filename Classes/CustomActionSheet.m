@@ -130,7 +130,6 @@
 		[self setTitleFontColor:[UIColor grayColor]];
 		[self setTitlePaddingX:5];
 		[self setTitlePaddingY:5];
-		[self setWidth:320];
     }
 
     return self;
