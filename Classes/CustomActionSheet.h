@@ -3,10 +3,10 @@
 @interface CustomActionSheet : UIView {
 	UIColor* backgroundColor;
 	NSMutableArray* buttons;
-	float buttonPaddingX;
-	float buttonPaddingy;
+	CGFloat buttonPaddingX;
+	CGFloat buttonPaddingy;
 	id delegate;
-	float fadeAlpha;
+	CGFloat fadeAlpha;
 	UIColor* fadeColor;
 	UIFont* font;
 	UIColor* fontColor;
@@ -15,16 +15,16 @@
 	NSString* title;
 	UIFont* titleFont;
 	UIColor* titleFontColor;
-	float titlePaddingX;
-	float titlePaddingy;
-	float width;
+	CGFloat titlePaddingX;
+	CGFloat titlePaddingy;
+	CGFloat width;
 }
 
 @property(nonatomic, retain) UIColor* backgroundColor;
-@property(nonatomic) float buttonPaddingX;
-@property(nonatomic) float buttonPaddingY;
+@property(nonatomic) CGFloat buttonPaddingX;
+@property(nonatomic) CGFloat buttonPaddingY;
 @property(nonatomic, retain) id delegate;
-@property(nonatomic) float fadeAlpha;
+@property(nonatomic) CGFloat fadeAlpha;
 @property(nonatomic, retain) UIColor* fadeColor;
 @property(nonatomic, retain) UIFont* font;
 @property(nonatomic, retain) UIColor* fontColor;
@@ -33,9 +33,9 @@
 @property(nonatomic, retain) NSString* title;
 @property(nonatomic, retain) UIFont* titleFont;
 @property(nonatomic, retain) UIColor* titleFontColor;
-@property(nonatomic) float titlePaddingX;
-@property(nonatomic) float titlePaddingY;
-@property(nonatomic) float width;
+@property(nonatomic) CGFloat titlePaddingX;
+@property(nonatomic) CGFloat titlePaddingY;
+@property(nonatomic) CGFloat width;
 
 - (NSInteger)addButtonWithTitle:(NSString*)titleString;
 - (NSString*)buttonTitleAtIndex:(NSInteger)buttonIndex;
