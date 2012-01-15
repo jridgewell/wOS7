@@ -97,6 +97,7 @@ static WOS7* sharedInstance;
 			[app removeFromSuperview];
 		}
 
+	int a = 0;
 	int j = 0;
 	for(int i = 0; i < (int)tilesArray.count; i++) {
 		NSString* bundleId = [tilesArray objectAtIndex:i];
@@ -138,7 +139,7 @@ static WOS7* sharedInstance;
 		WOS7Tile* tile = nil;
 
 		//find the corresponding SBApplication
-		for(int a = 0; a < (int)applications.count; a++)
+		for(; a < (int)applications.count; a++)
 			if ([[[applications objectAtIndex:a] leafIdentifier] isEqualToString:bundleId]) {
 				if (isLarge && j % 2 != 0) {
 					j++;
@@ -163,7 +164,7 @@ static WOS7* sharedInstance;
 	end:
 		// this is here so that the compiler doesn't yell at me for
 		// having a label at the end
-		j = j;
+		a = 0;
 	}
 	[tileScrollView setContentSize:CGSizeMake(320, (123 * ((j + 1) / 2)) + 75)];
 }
