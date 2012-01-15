@@ -267,12 +267,37 @@ static WOS7* sharedInstance;
 	for (NSString* label in [buttonLabels componentsSeparatedByString:@", "]) {
 		[actionSheet addButtonWithTitle:label];
 	}
-	[actionSheet showInView:window];
+	[actionSheet showInView:window atPoint:[gesture locationInView:window]];
 	[actionSheet release];
 }
 
-- (void)dismissWithButton:(id)sender {
-	NSLog([NSString stringWithFormat:@"%@", [(UIButton*)sender titleForState:UIControlStateNormal]]);
+- (void)dismissActionSheet:(id)actionSheet withButtonIndex:(NSInteger)buttonIndex {
+	NSString* title = [actionSheet buttonTitleAtIndex:buttonIndex];
+	NSString* leafIdentifier = [actionSheet title];
+
+	NSMutableArray* ray = [[NSMutableArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
+	if ([title isEqualToString:@"Unpin"]) {
+		[ray removeObject:leafIdentifier];
+	} else if ([title isEqualToString:@"Move Up"]) {
+		int i = [ray indexOfObject:leafIdentifier];
+		int newI = (i == 0) ? 0 : i - 1;
+		[ray exchangeObjectAtIndex:i withObjectAtIndex:newI];
+	} else if ([title isEqualToString:@"Move Down"]) {
+		int i = [ray indexOfObject:leafIdentifier];
+		int newI = (i == (int)ray.count - 1) ? (int)ray.count - 1 : i + 1;
+		[ray exchangeObjectAtIndex:i withObjectAtIndex:newI];
+	} else if ([title isEqualToString:@"Pin to Start Menu"]) {
+		[ray addObject:leafIdentifier];
+	}
+
+	[ray writeToFile:@LIBRARY_DIR"/Tiles.plist" atomically:NO];
+	[ray release];
+
+	[self updateTiles];
+
+	if ([title isEqualToString:@"Pin to Start Menu"] && !toggled) {
+		[self toggle];
+	}
 }
 
 +(WOS7*)sharedInstance {
