@@ -219,7 +219,7 @@ static WOS7* sharedInstance;
 -(void)toggleLeft {
 	[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
 	[UIView beginAnimations:@"toggleLeft" context:nil];
-	[UIView setAnimationDuration:.5];
+	[UIView setAnimationDuration:.3];
 	subView.frame = CGRectMake(-254,0,574,480);
 	toggleInterface.transform = CGAffineTransformMakeRotation((CGFloat)M_PI);
 
@@ -236,7 +236,7 @@ static WOS7* sharedInstance;
 -(void)toggleRight {
 	[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:mainView];
 	[UIView beginAnimations:@"toggleRight" context:nil];
-	[UIView setAnimationDuration:.5];
+	[UIView setAnimationDuration:.3];
 	subView.frame = CGRectMake(0,0,574,480);
 	toggleInterface.transform = CGAffineTransformMakeRotation(0);
 
