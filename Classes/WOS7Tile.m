@@ -119,7 +119,7 @@
 }
 
 -(void)updateBadge {
-	int num = (int)[[[[WOS7 sharedInstance] applications] objectAtIndex:appIndex] badgeValue];
+	int num = (int)[(SBApplicationIcon*)[[[WOS7 sharedInstance] applications] objectAtIndex:appIndex] badgeValue];
 	if (num == 0 && !badgeLabel) {
 		return;
 	}

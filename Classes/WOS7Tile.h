@@ -12,6 +12,7 @@
 @property (nonatomic, retain)NSString* leafIdentifier;
 
 -(id)initWithFrame: (CGRect)frame appIndex: (int)index;
+- (void)didHold: (UILongPressGestureRecognizer*)sender;
 -(void)updateBadge;
 -(void)launch;
 

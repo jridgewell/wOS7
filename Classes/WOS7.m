@@ -250,7 +250,7 @@ static WOS7* sharedInstance;
 }
 
 -(void)didHold:(UILongPressGestureRecognizer*)gesture tile:(id)sender {
-	CustomActionSheet* actionSheet = [[CustomActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier]
+	CustomActionSheet* actionSheet = [[CustomActionSheet alloc] initWithTitle:[[applications objectAtIndex:[(UIView*)sender tag]] leafIdentifier]
 																	 delegate:self
 																		width:270];
 	NSString* buttonLabels;
@@ -258,7 +258,7 @@ static WOS7* sharedInstance;
 		buttonLabels = @"Unpin, Move Up, Move Down";
 	} else if ([sender isKindOfClass:[WOS7ListApp class]]) {
 		NSArray* tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];
-		if (![tilesArray containsObject:[[applications objectAtIndex:[sender tag]] leafIdentifier]]) {
+		if (![tilesArray containsObject:[[applications objectAtIndex:[(UIView*)sender tag]] leafIdentifier]]) {
 			buttonLabels = @"Pin to Start Menu";
 		}
 		[tilesArray release];
