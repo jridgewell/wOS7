@@ -251,6 +251,7 @@ static WOS7* sharedInstance;
 
 -(void)didHold:(UILongPressGestureRecognizer*)gesture tile:(id)sender {
 	CustomActionSheet* actionSheet = [[CustomActionSheet alloc] initWithTitle:[[applications objectAtIndex:[sender tag]] leafIdentifier]
+																	 delegate:self
 																		width:270];
 	NSString* buttonLabels;
 	if ([sender isKindOfClass:[WOS7Tile class]]) {
@@ -268,6 +269,10 @@ static WOS7* sharedInstance;
 	}
 	[actionSheet showInView:window];
 	[actionSheet release];
+}
+
+- (void)dismissWithButton:(id)sender {
+	NSLog([NSString stringWithFormat:@"%@", [(UIButton*)sender titleForState:UIControlStateNormal]]);
 }
 
 +(WOS7*)sharedInstance {

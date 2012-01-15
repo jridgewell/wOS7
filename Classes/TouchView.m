@@ -15,7 +15,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[[[self delegate] sharedInstance] touchesBegan:touches withEvent:event];
+	[[self delegate] touchesBegan:touches withEvent:event];
 }
 
 @end
