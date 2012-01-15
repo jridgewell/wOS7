@@ -16,19 +16,19 @@ ifneq ($(CLANG),)
 	export TARGET_LD=$(CLANG)
 endif
 
-include /framework/makefiles/common.mk
+include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = WOS7
 WOS7_FILES = Tweak.xm
 WOS7_FRAMEWORKS = Foundation UIKit CoreGraphics QuartzCore
 WOS7_OBJC_FILES = $(wildcard Classes/*.m)
-WOS7_OBJCFLAGS = -isystem /framework/include -Wswitch -Wshadow -Wmissing-braces -Wreturn-type -Wparentheses -Wmissing-field-initializers -Wsign-compare -Wunused-function -Wunused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wundeclared-selector -Wmissing-prototypes -Wshorten-64-to-32 -Wno-trigraphs
+WOS7_OBJCFLAGS = -isystem $(THEOS)/include -Wswitch -Wshadow -Wmissing-braces -Wreturn-type -Wparentheses -Wmissing-field-initializers -Wsign-compare -Wunused-function -Wunused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wundeclared-selector -Wmissing-prototypes -Wshorten-64-to-32 -Wno-trigraphs
 
 ifneq ($(CLANG),)
 	WOS7_OBJCFLAGS += -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits
 endif
 
-include /framework/makefiles/tweak.mk
+include $(THEOS)/makefiles/tweak.mk
 
 update:
 	$(ECHO_NOTHING)mkdir -p "$(THEOS_PROJECT_DIR)/layout/var/mobile/Library/DreamBoard/" $(ECHO_END)
