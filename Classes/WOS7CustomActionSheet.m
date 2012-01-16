@@ -1,34 +1,26 @@
 #import "WOS7CustomActionSheet.h"
 
-#define OVERLAY_TAG 9782
-#define ACTION_SHEET_TAG 9783
-
 @interface WOS7CustomActionSheet (Private)
-
 - (void)animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context;
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event;
-
 @end
 
 @implementation WOS7CustomActionSheet (Private)
-
 - (void)animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
-	[[[self superView] viewWithTag:ACTION_SHEET_TAG] removeFromSuperview];
-	[[[self superView] viewWithTag:OVERLAY_TAG] removeFromSuperview];
+	[actionSheet removeFromSuperview];
+	[overlay removeFromSuperview];
 }
-
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
 	UITouch* touch = [touches anyObject];
-
-	if ([touch view] == [[self superView] viewWithTag:OVERLAY_TAG]) {
+	if ([touch view] == overlay) {
 		[[buttons objectAtIndex:[self numberOfButtons] - 1] sendActionsForControlEvents:UIControlEventTouchUpInside];
 	}
 }
-
 @end
 
 @implementation WOS7CustomActionSheet
 
+@synthesize actionSheet;
 @synthesize backgroundColor;
 @synthesize buttonPaddingX;
 @synthesize buttonPaddingY;
@@ -38,6 +30,7 @@
 @synthesize font;
 @synthesize fontColor;
 @synthesize numberOfButtons;
+@synthesize overlay;
 @synthesize superView;
 @synthesize title;
 @synthesize titleFont;
@@ -87,13 +80,13 @@
 	[titleFont release];
 	[titleFontColor release];
 
+	[actionSheet release];
+	[overlay release];
+
 	[super dealloc];
 }
 
 - (void)dismissWithButton:(id)sender {
-	UIView* actionSheet = [[self superView] viewWithTag:ACTION_SHEET_TAG];
-	UIView* overlay = [[self superView] viewWithTag:OVERLAY_TAG];
-
 	CGRect frame = actionSheet.frame;
 	frame.size = CGSizeMake(frame.size.width, 0);
 
@@ -146,13 +139,12 @@
 	[label setFont:[self titleFont]];
 
 	CGFloat yLoc = point.y;
-	UIView* actionSheet = [[UIView alloc] initWithFrame:CGRectMake((([[self superView] frame].size.width - [self width]) / 2),
-																   yLoc,
-																   [self width],
-																   0)];
+	actionSheet = [[UIView alloc] initWithFrame:CGRectMake((([[self superView] frame].size.width - [self width]) / 2),
+														   yLoc,
+														   [self width],
+														   0)];
 	[actionSheet setOpaque:YES];
 	[actionSheet setBackgroundColor:[self backgroundColor]];
-	[actionSheet setTag:ACTION_SHEET_TAG];
 	[actionSheet setClipsToBounds:YES];
 
 	[actionSheet addSubview:label];
@@ -168,12 +160,11 @@
 	}
 	[label release];
 
-	WOS7TouchView* overlay = [[WOS7TouchView alloc] initWithFrame:[view frame] delegate:self];
+	overlay = [[WOS7TouchView alloc] initWithFrame:[view frame] delegate:self];
 	[overlay setOpaque:NO];
 	[overlay setAlpha:0];
 	[overlay setBackgroundColor:[self fadeColor]];
 	[overlay setUserInteractionEnabled:YES];
-	[overlay setTag:OVERLAY_TAG];
 
 	[view addSubview:overlay];
 	[view addSubview:actionSheet];

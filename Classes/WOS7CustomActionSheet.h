@@ -1,6 +1,8 @@
 #import "WOS7.h"
+#import "WOS7TouchView.h"
 
 @interface WOS7CustomActionSheet : UIView {
+	UIView* actionSheet;
 	UIColor* backgroundColor;
 	NSMutableArray* buttons;
 	CGFloat buttonPaddingX;
@@ -11,6 +13,7 @@
 	UIFont* font;
 	UIColor* fontColor;
 	NSInteger numberOfButtons;
+	WOS7TouchView* overlay;
 	UIView* superView;
 	NSString* title;
 	UIFont* titleFont;
@@ -20,6 +23,7 @@
 	CGFloat width;
 }
 
+@property(nonatomic, readonly) UIView* actionSheet;
 @property(nonatomic, retain) UIColor* backgroundColor;
 @property(nonatomic) CGFloat buttonPaddingX;
 @property(nonatomic) CGFloat buttonPaddingY;
@@ -29,6 +33,7 @@
 @property(nonatomic, retain) UIFont* font;
 @property(nonatomic, retain) UIColor* fontColor;
 @property(nonatomic, readonly) NSInteger numberOfButtons;
+@property(nonatomic, readonly) WOS7TouchView* overlay;
 @property(nonatomic, retain) UIView* superView;
 @property(nonatomic, retain) NSString* title;
 @property(nonatomic, retain) UIFont* titleFont;
