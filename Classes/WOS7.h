@@ -8,7 +8,7 @@
 
 #define LIBRARY_DIR "/var/mobile/Library/wOS7"
 
-@interface WOS7 : NSObject <UIActionSheetDelegate, UIScrollViewDelegate>
+@interface WOS7 : NSObject <UIScrollViewDelegate>
 {
 	UIWindow* window;
 	UIView* mainView;
