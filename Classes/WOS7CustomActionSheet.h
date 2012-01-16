@@ -1,4 +1,7 @@
-#import "WOS7.h"
+#import <UIKit/UITouch.h>
+#import <UIKit/UIFont.h>
+#import <UIKit/UILabel.h>
+#import <UIKit/UIButton.h>
 #import "WOS7TouchView.h"
 
 @interface WOS7CustomActionSheet : UIView {

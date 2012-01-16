@@ -2,6 +2,7 @@
 
 @interface WOS7CustomActionSheet (Private)
 - (void)animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context;
+- (void)dismissActionSheet:(id)actionSheet withButtonIndex:(NSInteger)buttonIndex;
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event;
 @end
 
@@ -9,6 +10,8 @@
 - (void)animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
 	[actionSheet removeFromSuperview];
 	[overlay removeFromSuperview];
+}
+- (void)dismissActionSheet:(id)actionSheet withButtonIndex:(NSInteger)buttonIndex {
 }
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
 	UITouch* touch = [touches anyObject];
@@ -54,7 +57,7 @@
 	[button setTitleColor:[self fontColor] forState:UIControlStateNormal];
 	[button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 	[[button titleLabel] setFont:[self font]];
-	[button addTarget:self action:@selector(dismissWithButton:) forEvents:UIControlEventTouchUpInside];
+	[button addTarget:self action:@selector(dismissWithButton:) forControlEvents:UIControlEventTouchUpInside];
 	[buttons addObject:button];
 	numberOfButtons = [buttons count];
 
@@ -97,7 +100,9 @@
 	[overlay setAlpha:0];
 	[UIView commitAnimations];
 
-	[[self delegate] dismissActionSheet:self withButtonIndex:[buttons indexOfObject:sender]];
+	if ([[self delegate] respondsToSelector:@selector(dismissActionSheet:withButtonIndex:)]) {
+		[[self delegate] dismissActionSheet:self withButtonIndex:[buttons indexOfObject:sender]];
+	}
 }
 
 - (id)initWithTitle:(NSString*)titleString delegate:(id)actionDelegate width:(CGFloat)viewWidth {
