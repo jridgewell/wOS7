@@ -13,7 +13,7 @@
 	return self;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event
 {
 	[[self delegate] touchesBegan:touches withEvent:event];
 }
