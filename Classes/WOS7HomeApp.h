@@ -1,6 +1,6 @@
 #import "WOS7.h"
 
-@interface WOS7Tile : UIView
+@interface WOS7HomeApp : UIView
 {
 	NSString* leafIdentifier;
 	int appIndex;

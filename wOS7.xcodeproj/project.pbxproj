@@ -25,7 +25,7 @@
 		210B4E3114C23CCA00988110 /* WOS7TouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B4E2914C23CCA00988110 /* WOS7TouchView.m */; };
 		210B4E3214C23CCA00988110 /* WOS7.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B4E2B14C23CCA00988110 /* WOS7.m */; };
 		210B4E3314C23CCA00988110 /* WOS7ListApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B4E2D14C23CCA00988110 /* WOS7ListApp.m */; };
-		210B4E3414C23CCA00988110 /* WOS7Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B4E2F14C23CCA00988110 /* WOS7Tile.m */; };
+		210B4E3414C23CCA00988110 /* WOS7HomeApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B4E2F14C23CCA00988110 /* WOS7HomeApp.m */; };
 		2191B6A314C23715009EF527 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2191B6A214C23715009EF527 /* Foundation.framework */; };
 		2191B6A514C2372F009EF527 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2191B6A414C2372F009EF527 /* UIKit.framework */; };
 		2191B6A714C2373C009EF527 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2191B6A614C2373C009EF527 /* CoreGraphics.framework */; };
@@ -41,10 +41,10 @@
 		210B4E2914C23CCA00988110 /* WOS7TouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WOS7TouchView.m; path = Classes/WOS7TouchView.m; sourceTree = "<group>"; };
 		210B4E2A14C23CCA00988110 /* WOS7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WOS7.h; path = Classes/WOS7.h; sourceTree = "<group>"; };
 		210B4E2B14C23CCA00988110 /* WOS7.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WOS7.m; path = Classes/WOS7.m; sourceTree = "<group>"; };
-		210B4E2C14C23CCA00988110 /* WOS7ListApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WOS7ListApp.h; path = Classes/WOS7ListApp.h; sourceTree = "<group>"; };
+		210B4E2C14C23CCA00988110 /* WOS7ListApp.h */ = {isa = PBXFileReference; fileEncoding = 4; name = WOS7ListApp.h; path = Classes/WOS7ListApp.h; sourceTree = "<group>"; };
 		210B4E2D14C23CCA00988110 /* WOS7ListApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WOS7ListApp.m; path = Classes/WOS7ListApp.m; sourceTree = "<group>"; };
-		210B4E2E14C23CCA00988110 /* WOS7Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WOS7Tile.h; path = Classes/WOS7Tile.h; sourceTree = "<group>"; };
-		210B4E2F14C23CCA00988110 /* WOS7Tile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WOS7Tile.m; path = Classes/WOS7Tile.m; sourceTree = "<group>"; };
+		210B4E2E14C23CCA00988110 /* WOS7HomeApp.h */ = {isa = PBXFileReference; fileEncoding = 4; name = WOS7HomeApp.h; path = Classes/WOS7HomeApp.h; sourceTree = "<group>"; };
+		210B4E2F14C23CCA00988110 /* WOS7HomeApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WOS7HomeApp.m; path = Classes/WOS7HomeApp.m; sourceTree = "<group>"; };
 		2191B68914C236A0009EF527 /* wOS7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wOS7.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2191B6A214C23715009EF527 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		2191B6A414C2372F009EF527 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -133,8 +133,8 @@
 				210B4E2614C23CCA00988110 /* WOS7CustomActionSheet.m */,
 				210B4E2C14C23CCA00988110 /* WOS7ListApp.h */,
 				210B4E2D14C23CCA00988110 /* WOS7ListApp.m */,
-				210B4E2E14C23CCA00988110 /* WOS7Tile.h */,
-				210B4E2F14C23CCA00988110 /* WOS7Tile.m */,
+				210B4E2E14C23CCA00988110 /* WOS7HomeApp.h */,
+				210B4E2F14C23CCA00988110 /* WOS7HomeApp.m */,
 				210B4E2814C23CCA00988110 /* WOS7TouchView.h */,
 				210B4E2914C23CCA00988110 /* WOS7TouchView.m */,
 			);
@@ -225,7 +225,7 @@
 				210B4E3114C23CCA00988110 /* WOS7TouchView.m in Sources */,
 				210B4E3214C23CCA00988110 /* WOS7.m in Sources */,
 				210B4E3314C23CCA00988110 /* WOS7ListApp.m in Sources */,
-				210B4E3414C23CCA00988110 /* WOS7Tile.m in Sources */,
+				210B4E3414C23CCA00988110 /* WOS7HomeApp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

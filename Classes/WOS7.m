@@ -10,7 +10,7 @@ static WOS7* sharedInstance;
 
 - (void)updateBadge:(NSString*)leafId {
 	for(id app in tileScrollView.subviews)
-		if ([app isKindOfClass:[WOS7Tile class]] && [[app leafIdentifier] isEqualToString:leafId]) {
+		if ([app isKindOfClass:[WOS7HomeApp class]] && [[app leafIdentifier] isEqualToString:leafId]) {
 			[app updateBadge];
 		}
 }
@@ -96,7 +96,7 @@ static WOS7* sharedInstance;
 
 	//remove old tiles
 	for(id app in tileScrollView.subviews)
-		if ([app isKindOfClass:[WOS7Tile class]] && ![tilesArray containsObject:[app leafIdentifier]]) {
+		if ([app isKindOfClass:[WOS7HomeApp class]] && ![tilesArray containsObject:[app leafIdentifier]]) {
 			[app removeFromSuperview];
 		}
 
@@ -117,7 +117,7 @@ static WOS7* sharedInstance;
 
 		//find our tile, if it's there
 		for (id app in tileScrollView.subviews)
-			if ([app isKindOfClass:[WOS7Tile class]] && [[app leafIdentifier] isEqualToString:bundleId]) {
+			if ([app isKindOfClass:[WOS7HomeApp class]] && [[app leafIdentifier] isEqualToString:bundleId]) {
 
 				if (isLarge && j % 2 != 0) {
 					j++;
@@ -139,7 +139,7 @@ static WOS7* sharedInstance;
 			}
 
 		//we didn't find our tile, so let's add it.
-		WOS7Tile* tile = nil;
+		WOS7HomeApp* tile = nil;
 
 		//find the corresponding SBApplication
 		for(; a < (int)applications.count; a++)
@@ -147,7 +147,7 @@ static WOS7* sharedInstance;
 				if (isLarge && j % 2 != 0) {
 					j++;
 				}
-				tile = [[WOS7Tile alloc] initWithFrame:CGRectMake((j % 2 == 0) ? 13 : 136, (123 * (j / 2)) + 75, (isLarge) ? 238 : 115, 115) appIndex:a];
+				tile = [[WOS7HomeApp alloc] initWithFrame:CGRectMake((j % 2 == 0) ? 13 : 136, (123 * (j / 2)) + 75, (isLarge) ? 238 : 115, 115) appIndex:a];
 				break;
 			}
 
@@ -266,7 +266,7 @@ static WOS7* sharedInstance;
 																	 delegate:self
 																		width:270];
 	NSString* buttonLabels;
-	if ([sender isKindOfClass:[WOS7Tile class]]) {
+	if ([sender isKindOfClass:[WOS7HomeApp class]]) {
 		buttonLabels = @"Unpin, Move Up, Move Down";
 	} else if ([sender isKindOfClass:[WOS7ListApp class]]) {
 		NSArray* tilesArray = [[NSArray alloc] initWithContentsOfFile:@LIBRARY_DIR"/Tiles.plist"];

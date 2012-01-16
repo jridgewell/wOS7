@@ -1,6 +1,6 @@
-#import "WOS7Tile.h"
+#import "WOS7HomeApp.h"
 
-@implementation WOS7Tile
+@implementation WOS7HomeApp
 
 @synthesize leafIdentifier;
 
