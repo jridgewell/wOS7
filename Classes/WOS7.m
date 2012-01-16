@@ -72,6 +72,7 @@ static WOS7* sharedInstance;
 		[subView addSubview:toggleInterface];
 		[toggleInterface release];
 		toggled = NO;
+		isAnimatingBounce = NO;
 
 		//make sure there are no scrollbars
 		appList.showsVerticalScrollIndicator = NO;
@@ -124,10 +125,10 @@ static WOS7* sharedInstance;
 				}
 
 				//if we find our tiles, update it's positioning.
-				[UIView beginAnimations:@"moveTile" context:nil];
-				[UIView setAnimationDuration:.5];
-				[app setFrame:CGRectMake((j % 2 == 0) ? 13 : 136, (123 * (j / 2)) + 75, (isLarge) ? 238 : 115, 115)];
-				[UIView commitAnimations];
+				[UIView animateWithDuration:.5
+								 animations:^{
+									 [app setFrame:CGRectMake((j % 2 == 0) ? 13 : 136, (123 * (j / 2)) + 75, (isLarge) ? 238 : 115, 115)];
+								 }];
 
 				if (isLarge) {
 					j += 2;
@@ -200,10 +201,10 @@ static WOS7* sharedInstance;
 		BOOL leftRight = (subView.center.x <= 160); // ([subView width] / 2) - (254 / 2)
 		double speed;
 
-		if (vel.x < -100) {
+		if (vel.x < -500) {
 			speed = fabs(-254 - subView.frame.origin.x) / fabs(vel.x);
 			[self toggleLeft:speed];
-		} else if (vel.x >= 100) {
+		} else if (vel.x >= 500) {
 			speed = fabs(subView.frame.origin.x) / vel.x;
 			[self toggleRight:speed];
 		} else if (leftRight) {
@@ -223,33 +224,41 @@ static WOS7* sharedInstance;
 }
 
 - (void)toggleLeft:(double)t {
-	[UIView beginAnimations:@"toggleLeft" context:nil];
-	[UIView setAnimationDuration:t];
-	subView.frame = CGRectMake(-254,0,574,480);
-	toggleInterface.transform = CGAffineTransformMakeRotation((CGFloat)M_PI);
-
-	//fade background
-	[[mainView viewWithTag:BACKGROUND_TAG] setAlpha:(CGFloat)BACKGROUND_FADE];
-	//allow scrollToTop on status bar tap
-	[tileScrollView setScrollsToTop:NO];
-	[appList setScrollsToTop:YES];
-	[UIView commitAnimations];
+	[UIView animateWithDuration:t
+						  delay:0
+						options:(UIViewAnimationOptionAllowUserInteraction |
+								 UIViewAnimationOptionBeginFromCurrentState |
+								 UIViewAnimationOptionAllowAnimatedContent |
+								 UIViewAnimationCurveEaseOut)
+					 animations:^{
+						 subView.frame = CGRectMake(-254,0,574,480);
+						 toggleInterface.transform = CGAffineTransformMakeRotation((CGFloat)M_PI);
+						 [[mainView viewWithTag:BACKGROUND_TAG] setAlpha:(CGFloat)BACKGROUND_FADE];
+					 }
+					 completion:^(BOOL finished) {
+						 [tileScrollView setScrollsToTop:NO];
+						 [appList setScrollsToTop:YES];
+					 }];
 
 	toggled = YES;
 }
 
 - (void)toggleRight:(double)t {
-	[UIView beginAnimations:@"toggleRight" context:nil];
-	[UIView setAnimationDuration:t];
-	subView.frame = CGRectMake(0,0,574,480);
-	toggleInterface.transform = CGAffineTransformMakeRotation(0);
-
-	//fade background
-	[[mainView viewWithTag:BACKGROUND_TAG] setAlpha:1];
-	//allow scrollToTop on status bar tap
-	[tileScrollView setScrollsToTop:YES];
-	[appList setScrollsToTop:NO];
-	[UIView commitAnimations];
+	[UIView animateWithDuration:t
+						  delay:0
+						options:(UIViewAnimationOptionAllowUserInteraction |
+								 UIViewAnimationOptionBeginFromCurrentState |
+								 UIViewAnimationOptionAllowAnimatedContent |
+								 UIViewAnimationCurveEaseOut)
+					 animations:^{
+						 subView.frame = CGRectMake(0,0,574,480);
+						 toggleInterface.transform = CGAffineTransformMakeRotation(0);
+						 [[mainView viewWithTag:BACKGROUND_TAG] setAlpha:1];
+					 }
+					 completion:^(BOOL finished) {
+						 [tileScrollView setScrollsToTop:YES];
+						 [appList setScrollsToTop:NO];
+					 }];
 
 	toggled = NO;
 }
@@ -305,50 +314,39 @@ static WOS7* sharedInstance;
 	}
 }
 
-- (void)scrolledBeyondBottom:(UIScrollView*)scrollView {
-	if (!animatingBounce) {
+- (void)scrollViewDidScroll:(UIScrollView*)scrollView {
+	if(!isAnimatingBounce && [scrollView contentOffset].y >= ([scrollView contentSize].height - [scrollView frame].size.height)) {
+		isAnimatingBounce = YES;
 		CGRect frame = [toggleInterface frame];
+		CGRect newFrame = frame;
 		if (toggled) {
-			frame.origin = CGPointMake((frame.origin.x - 10),
+			newFrame.origin = CGPointMake((frame.origin.x - 10),
 									   frame.origin.y);
 		} else {
-			frame.origin = CGPointMake((frame.origin.x + 10),
+			newFrame.origin = CGPointMake((frame.origin.x + 10),
 									   frame.origin.y);
 		}
 
-		[UIView beginAnimations:@"scrollBounce" context:nil];
-		animatingBounce = YES;
-		[UIView setAnimationDuration:.3];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
-		[toggleInterface setFrame:frame];
-		[UIView commitAnimations];
+		[UIView animateWithDuration:.3
+						 animations:^{
+							 [toggleInterface setFrame:newFrame];
+						 }
+						 completion:^(BOOL finished) {
+							 [UIView animateWithDuration:.3
+											  animations:^{
+												  [toggleInterface setFrame:frame];
+											  } completion:^(BOOL done) {
+											  }];
+						 }];
 	}
 }
 
-- (void)animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
-	CMLog(@"%i", animatingBounce)
-	if ([animationID isEqualToString:@"scrollBounce"]) {
-		CGRect frame = [toggleInterface frame];
-		if (toggled) {
-			frame.origin = CGPointMake((frame.origin.x + 10),
-									   frame.origin.y);
-		} else {
-			frame.origin = CGPointMake((frame.origin.x - 10),
-									   frame.origin.y);
-		}
-
-		[UIView beginAnimations:@"scrollBounceBack" context:nil];
-		[UIView setAnimationDuration:.3];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
-		[toggleInterface setFrame:frame];
-		[UIView commitAnimations];
-	} else if ([animationID isEqualToString:@"scrollBounceBack"]) {
-		animatingBounce = NO;
+- (void)scrollViewDidEndDragging:(UIScrollView*)scrollView willDecelerate:(BOOL)decelerate {
+	CMLog(@"scrollViewDidEndDragging:willDecelerate:, %i", isAnimatingBounce)
+	if (isAnimatingBounce) {
+		isAnimatingBounce = NO;
 	}
 }
-
 
 +(WOS7*)sharedInstance {
 	return sharedInstance;
