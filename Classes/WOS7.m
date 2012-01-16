@@ -20,7 +20,6 @@ static WOS7* sharedInstance;
 	self = [super init];
 	sharedInstance = self;
 	if (self) {
-		[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:nil];
 		window = _window;
 		applications = _apps;
 
@@ -180,7 +179,6 @@ static WOS7* sharedInstance;
 	[subView release];
 	[mainView removeFromSuperview];
 	[mainView release];
-	[[objc_getClass("DreamBoard") sharedInstance] showAllExcept:nil];
 	[super dealloc];
 }
 
