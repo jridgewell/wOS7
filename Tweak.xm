@@ -66,14 +66,14 @@ WOS7* wos7;
 
 - (void)toggleSwitcher {
 	if (wos7) {
-		CGRect frame = wos7.mainView.frame;
-
 		//animate our mainview sliding up
 		if (wos7.mainView.frame.origin.y==0) {
-			[UIView beginAnimations:nil context:nil];
-			[UIView setAnimationDuration:.25];
-			wos7.mainView.frame = CGRectMake(frame.origin.x, -93, frame.size.width, frame.size.height);
-			[UIView commitAnimations];
+			[UIView animateWithDuration:.25 animations:^{
+				wos7.mainView.frame = CGRectMake(wos7.mainView.frame.origin.x,
+												 -93,
+												 wos7.mainView.frame.size.width,
+												 wos7.mainView.frame.size.height);
+			}];
 			[[objc_getClass("DreamBoard") sharedInstance] showAllExcept:nil];
 		} else {
 			//otherwise hide it
@@ -86,13 +86,13 @@ WOS7* wos7;
 
 -(void)hideSwitcher {
 	if (wos7) {
-		CGRect frame = wos7.mainView.frame;
-
 		//animate our mainview sliding down
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationDuration:.25];
-		wos7.mainView.frame = CGRectMake(frame.origin.x, 0, frame.size.width, frame.size.height);
-		[UIView commitAnimations];
+		[UIView animateWithDuration:.25 animations:^{
+			wos7.mainView.frame = CGRectMake(wos7.mainView.frame.origin.x,
+											 0,
+											 wos7.mainView.frame.size.width,
+											 wos7.mainView.frame.size.height);
+		}];
 		[[objc_getClass("DreamBoard") sharedInstance] hideAllExcept:wos7.mainView];
 	} else {
 		%orig;

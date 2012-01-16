@@ -1,7 +1,6 @@
 #import <SpringBoard/SpringBoard.h>
 #import "WOS7CustomActionSheet.h"
 #import "WOS7ListApp.h"
-#import "WOS7ScrollView.h"
 #import "WOS7Tile.h"
 #import "WOS7TouchView.h"
 #import "DreamBoard.h"
@@ -13,15 +12,15 @@
 	UIWindow* window;
 	UIView* mainView;
 	UIView* subView;
-	WOS7ScrollView* tileScrollView;
-	WOS7ScrollView* appList;
+	UIScrollView* tileScrollView;
+	UIScrollView* appList;
 
 	UIButton* toggleInterface;
 
 	NSMutableArray* applications;
 
 	BOOL toggled;
-	BOOL animatingBounce;
+	BOOL isAnimatingBounce;
 }
 
 @property(nonatomic, readonly)NSMutableArray* applications;
@@ -40,6 +39,7 @@
 - (void)didPan:(UIPanGestureRecognizer*)recognizer;
 - (void)didHold:(UILongPressGestureRecognizer*)gesture tile:(id)sender;
 - (void)dismissActionSheet:(id)actionSheet withButtonIndex:(NSInteger)buttonIndex;
-- (void)scrolledBeyondBottom:(UIScrollView*)scrollView;
+- (void)scrollViewDidEndDragging:(UIScrollView*)scrollView willDecelerate:(BOOL)decelerate;
+- (void)scrollViewDidScroll:(UIScrollView*)scrollView;
 
 @end

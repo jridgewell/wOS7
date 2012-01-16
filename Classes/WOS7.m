@@ -34,10 +34,10 @@ static WOS7* sharedInstance;
 		subView.opaque = NO;
 		subView.backgroundColor = [UIColor clearColor];
 
-		tileScrollView = [[WOS7ScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) target:@selector(scrolledBeyondBottom:) parent:self];
-		[tileScrollView setDelegate:tileScrollView];
-		appList = [[WOS7ScrollView alloc] initWithFrame:CGRectMake(320, 0, 254, 480) target:@selector(scrolledBeyondBottom:) parent:self];
-		[appList setDelegate:appList];
+		tileScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+		[tileScrollView setDelegate:self];
+		appList = [[UIScrollView alloc] initWithFrame:CGRectMake(320, 0, 254, 480)];
+		[appList setDelegate:self];
 		[subView addSubview:appList];
 		[subView addSubview:tileScrollView];
 		[mainView addSubview:subView];
